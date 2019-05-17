@@ -1,0 +1,12 @@
+// Use Marengo Bootstrap Theme
+$image-path: '../node_modules/@simpl/marengo-bootstrap/dist/images/';
+$font-path: '../node_modules/@simpl/marengo-bootstrap/dist/fonts/';
+$icon-font-path: '../node_modules/@simpl/marengo-bootstrap/dist/fonts/';
+@import '@simpl/marengo-bootstrap/src/variants/simpl-marengo-bootstrap';
+
+// Import component styles for SiMPL Marengo components
+@import '@simpl/marengo-ng/simpl-marengo-ng';
+
+// Import Marengo icons
+$font-path: '../node_modules/@simpl/marengo-icons/dist/fonts/';
+@import '@simpl/marengo-icons/dist/style/simpl-marengo-icons.scss';  // sass-lint:disable-line clean-import-paths

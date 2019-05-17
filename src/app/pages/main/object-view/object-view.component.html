@@ -1,0 +1,37 @@
+<main class="page-work-area">
+  <si-navbar-secondary [items]="secondaryNavItems"></si-navbar-secondary>
+
+  <si-status-bar [items]="statusItems" class="hidden-xs hidden-sm"></si-status-bar>
+  <div class="container-fluid">
+    <aside class="col-md-2 hidden-xs hidden-sm">
+      <si-tree-view
+        [trees]="treeViewItems"
+        enableLog="false"
+        enableDataField1="false"
+        enableStatePipe="false"
+        enableMenuButton="false"
+        (loadChildren)="loadChildren($event)"
+        (treeItemClicked)="treeItemClicked($event)">
+      </si-tree-view>
+    </aside>
+    <main class="col col-md-10 vertical-line">
+      <si-breadcrumb [items]="breadcrumbItems"></si-breadcrumb>
+      <si-search-bar placeholder="Search"></si-search-bar>
+      <ng-container *ngIf="(currencies | async)?.length" #currencyList>
+        <ul *ngFor="let currency of currencies | async" class="list-group">
+          <li class="list-group-item col-md-1">{{currency.rank}}</li>
+          <li class="list-group-item col-md-5">{{currency.name}}</li>
+          <li class="list-group-item col-md-5">USD {{currency.price_usd}}</li>
+          <li class="list-group-item col-md-1">{{currency.percent_change_24h}} %</li>
+        </ul>
+      </ng-container>
+
+      <si-empty-list *ngIf="!(currencies | async)"
+        icon="marengo-technical-operator"
+        title="No items"
+        content="No content to show here">
+        <button class="btn btn-primary">Explore</button>
+      </si-empty-list>
+    </main>
+  </div>
+</main>

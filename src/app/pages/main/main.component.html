@@ -1,0 +1,14 @@
+<div class="page-frame page-fixed">
+  <div class="page-head">
+    <si-navbar-primary [primaryItems]="primaryLinks" settingsLink="about" [account]="{title: 'John Milton', image: 'https://secure.gravatar.com/avatar/xxx'}"
+    [accountItems]="[
+      {title: 'Logout', link: 'logout'}
+    ]"></si-navbar-primary>
+  </div>
+  <div class="page-work">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="page-footer">
+    <si-footer copyright="Siemens 2019" [links]="footerLinks"></si-footer>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+image: node:dubnium-alpine
+
+variables:
+  npm_config_registry: https://devops.bt.siemens.com/artifactory/api/npm/npm-all
+  npm_config_sass_binary_site: https://devops.bt.siemens.com/artifactory/simple/libs-external/npmBinaries/node-sass
+  npm_config_chromedriver_cdnurl: https://devops.bt.siemens.com/artifactory/simple/libs-external/npmBinaries/chromedriver
+  SELENIUM_URL: http://selenium__standalone-chrome:4444/wd/hub
+
+test:
+  stage: test
+  services:
+    - selenium/standalone-chrome:3.11.0
+  script:
+    - npm install
+    - npm run lint
+    - npm run lint:sass
+    - npm run lint:editorconfig
+    - npm run test -- --progress=false --code-coverage
+    - npm run e2e -- --host=$(hostname -i)
+    - npm run build:prod -- --progress=false
+  coverage: '/Statements\s*:\s*(\d+\.?\d+)\%/'
+  artifacts:
+    expire_in: 3h
+    paths:
+      - dist/
+  tags:
+    - DOCKER
+
+pages:
+  stage: deploy
+  script:
+    - mv dist/marengo-test public/
+  dependencies:
+    - test
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+  tags:
+    - DOCKER

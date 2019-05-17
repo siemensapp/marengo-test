@@ -1,0 +1,92 @@
+<main class="page-work-area">
+  <div class="container">
+    <h1>Bootstrap widgets</h1>
+    <p>Showcase for the Bootstrap elements provided by
+      <a href="https://valor-software.com/ngx-bootstrap/#/getting-started">ngx-bootstrap</a>.
+    </p>
+
+    <!-- Accordion -->
+    <h2>Accordion</h2><br>
+    <accordion>
+      <accordion-group heading="Grouped content" [isOpen]=true>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+          mollit anim id est laborum.
+        </p>
+      </accordion-group>
+      <accordion-group heading="More grouped content">
+        <p>You won't believe what's in the next group</p>
+      </accordion-group>
+      <accordion-group heading="Even grouped content">
+        <p>Clickbait</p>
+      </accordion-group>
+    </accordion>
+    <hr>
+
+    <!-- Buttons -->
+    <h2 id="buttons">Buttons</h2><br>
+    <button type="button" class="btn btn-default">Default</button>
+    <button type="button" class="btn btn-default" disabled>Default</button>
+    <button type="button" class="btn btn-primary">Primary</button>
+    <button type="button" class="btn btn-success">Success</button>
+    <button type="button" class="btn btn-info">Info</button>
+    <button type="button" class="btn btn-warning">Warning</button>
+    <button type="button" class="btn btn-danger">Danger</button>
+    <button type="button" class="btn btn-link">Link</button>
+    <button type="button" class="btn btn-primary" disabled>Disabled</button>
+
+    <h3>Dropdown</h3>
+    <div class="btn-group" dropdown>
+      <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+        aria-controls="dropdown-basic">
+        Button dropdown <span class="caret"></span>
+      </button>
+
+      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+          role="menu" aria-labelledby="button-basic">
+        <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+        <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+        <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+        <li class="divider dropdown-divider"></li>
+        <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a> </li>
+      </ul>
+    </div>
+    <hr>
+
+    <!-- Tab -->
+    <h2>Tabs</h2><br>
+    <tabset>
+      <tab heading="Lorem Ipsum">
+        <div class="well">
+          <h3>Lorem Ipsum (El Classico)</h3>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+          mollit anim id est laborum.
+        </div>
+      </tab>
+      <tab heading="Startupsum">
+        <div class="well">
+          <h3>Startupsum</h3>
+          Freemium virality business model canvas social media alpha customer assets gamification incubator backing.
+          Stock facebook handshake hypotheses business-to-consumer. Influencer non-disclosure agreement MVP stock equity
+          channels leverage scrum project focus marketing traction responsive web design. Graphical user interface supply chain
+          validation angel investor iPhone business-to-business niche market churn rate influencer buyer launch party stock
+          direct mailing.
+        </div>
+      </tab>
+      <tab heading="Lorem Hipsum">
+        <div class="well">
+          <h3>Lorem Hipsum</h3>
+          Lorem hipsum dolor amet small batch freegan poke flexitarian drinking vinegar retro woke lyft green juice cloud
+          bread hella banjo fingerstache lomo portland. Vegan tofu distillery yuccie poke 8-bit, food truck pug leggings
+          austin deep v woke four dollar toast everyday carry freegan.
+        </div>
+      </tab>
+    </tabset>
+  </div>
+</main>

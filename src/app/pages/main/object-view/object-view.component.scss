@@ -1,0 +1,14 @@
+$color-grey: #808080;
+
+.vertical-line {
+  border-left: 1px solid $color-grey;
+}
+
+.empty-list-spacer {
+  height: 600px;
+}
+
+.container-fluid {
+  display: flex;
+  height: calc(100% - 150px);
+}

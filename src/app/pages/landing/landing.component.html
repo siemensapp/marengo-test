@@ -1,0 +1,16 @@
+<si-landing-page
+  title="{{ 'APP.NAME' | translate }}"
+  subtitle="{{ 'APP.CLAIM' | translate }}"
+  [links]="[
+    {title: 'Corporate information', href: 'http://www.siemens.com/corp/en/index/corporate_info.htm'},
+    {title: 'Privacy policy', href: 'http://www.siemens.com/corp/en/index/privacy.htm'},
+    {title: 'Terms of use', href: 'http://www.siemens.com/corp/en/index/terms_of_use.htm'}
+  ]"
+  
+>
+  <button type="submit" class="btn btn-primary" style="width: 100%;"
+    routerLink="/main/field-service/workers">
+    Enter
+  </button>
+</si-landing-page>
+

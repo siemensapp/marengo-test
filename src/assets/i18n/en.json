@@ -1,0 +1,17 @@
+{
+  "APP": {
+    "NAME": "Marengo Demo App",
+    "CLAIM": "Dive in into the wonderful world of Marengo"
+  },
+  "LANGUAGE": {
+    "EN": "English",
+    "DE": "Deutsch",
+    "FR": "Français"
+  },
+  "WIDGETS": {
+    "EVENTS": "Events",
+    "ANSWER": "Answer",
+    "DEVICE_STATUS": "Device status"
+  }
+}
+
