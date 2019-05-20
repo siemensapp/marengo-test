@@ -1,4 +1,16 @@
 <main class="page-work-area">
   <si-navbar-secondary [items]="secondaryNavItems"></si-navbar-secondary>
+
+  <!-- <router-outlet name="fieldServiceOutlet"></router-outlet> -->
+
+  <div class="flex-container" style="display:flex; flex-direction: row; height: 93%">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="container map-container">
+      <app-esri-map [center]="mapCenter" [basemap]="basemapType" [zoom]="mapZoomLevel"
+        (mapLoadedEvent)="mapLoadedEvent($event)">
+      </app-esri-map>
+    </div>
+  </div>
 </main>
-<router-outlet></router-outlet>

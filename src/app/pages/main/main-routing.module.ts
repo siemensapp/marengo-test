@@ -6,6 +6,7 @@ import { AboutComponent } from './about/about.component';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { ObjectViewComponent } from './object-view/object-view.component';
 import { ContentFrameComponent } from './field-service/content-frame/content-frame.component';
+import { WorkersComponent } from './field-service/workers/workers.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,13 @@ const routes: Routes = [
       },
       {
         path: 'field-service',
-        component: ContentFrameComponent
+        component: ContentFrameComponent,
+        children: [
+          // {path: '',pathMatch: 'full', redirectTo: 'workers', outlet: 'fieldServiceOutlet'},
+          // {path: 'workers', component: WorkersComponent, outlet: "fieldServiceOutlet"} 
+          {path: '',pathMatch: 'full', redirectTo: 'workers'},
+          {path: 'workers', component: WorkersComponent} 
+        ]
       },
       {
         path: '**',

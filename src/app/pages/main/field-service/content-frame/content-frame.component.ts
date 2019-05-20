@@ -8,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
 export class ContentFrameComponent implements OnInit {
 
   secondaryNavItems = [
-    {title: '+ Asignación', link: '/jbkb'},
+    {title: 'Trabajadores', link: 'workers'},
+    {title: '+ Asignación', link: 'assignment '},
     {title: '+ Field Service', link: '/v hv h'},
     {title: 'Cronograma', link: '/hjhv'},
   ]
+
+  mapCenter = [-74, 4.2];
+  basemapType = 'topo';
+  mapZoomLevel = 6;
+
+  // See app.component.html
+  mapLoadedEvent(status: boolean) {
+    console.log('The map loaded: ' + status);
+  }
 
   
   constructor() { }

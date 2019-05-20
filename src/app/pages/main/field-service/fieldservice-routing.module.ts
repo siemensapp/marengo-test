@@ -7,8 +7,8 @@ import { WorkersComponent } from './workers/workers.component';
 
 const routes: Routes = [
     { path: 'field-service', component: ContentFrameComponent, children: [
-        {path: '', pathMatch: 'full', redirectTo: 'workers'},
-        {path: '/workers', component: WorkersComponent} 
+        {path: '', pathMatch: 'full', redirectTo: 'workers', outlet: "fieldServiceOutlet"},
+        {path: 'workers', component: WorkersComponent, outlet: "fieldServiceOutlet"} 
     ]}
 ];
 
