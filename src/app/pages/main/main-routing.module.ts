@@ -9,6 +9,7 @@ import { ContentFrameComponent } from './field-service/content-frame/content-fra
 import { WorkersComponent } from './field-service/workers/workers.component';
 import { EditarEspecialistaComponent } from './field-service/editar-especialista/editar-especialista.component';
 import { AsignacionComponent } from './field-service/asignacion/asignacion.component';
+import { EspecialistaComponent } from './field-service/especialista/especialista.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
           {path: '',pathMatch: 'full', redirectTo: 'workers'},
           {path: 'workers', component: WorkersComponent},
           {path: 'formularioEdicionEspecialista', component: EditarEspecialistaComponent},
-          {path: 'formularioAsignacion', component: AsignacionComponent}
+          {path: 'formularioAsignacion', component: AsignacionComponent},
+          {path: 'formularioEspecialista', component: EspecialistaComponent}
         ]
       },
       {

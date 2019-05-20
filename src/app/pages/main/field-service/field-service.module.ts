@@ -15,9 +15,10 @@ import { WorkersComponent } from './workers/workers.component';
 import { EsriMapComponent } from './esri-map/esri-map.component';
 import { EditarEspecialistaComponent } from './editar-especialista/editar-especialista.component';
 import { AsignacionComponent } from './asignacion/asignacion.component';
+import { EspecialistaComponent } from './especialista/especialista.component';
 
 @NgModule({
-  declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent, EditarEspecialistaComponent, AsignacionComponent],
+  declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent, EditarEspecialistaComponent, AsignacionComponent, EspecialistaComponent],
   imports: [
     CommonModule,
     // Ngx Bootstrap
