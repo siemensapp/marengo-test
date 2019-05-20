@@ -7,6 +7,8 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { ObjectViewComponent } from './object-view/object-view.component';
 import { ContentFrameComponent } from './field-service/content-frame/content-frame.component';
 import { WorkersComponent } from './field-service/workers/workers.component';
+import { EditarEspecialistaComponent } from './field-service/editar-especialista/editar-especialista.component';
+import { AsignacionComponent } from './field-service/asignacion/asignacion.component';
 
 const routes: Routes = [
   {
@@ -32,7 +34,9 @@ const routes: Routes = [
           // {path: '',pathMatch: 'full', redirectTo: 'workers', outlet: 'fieldServiceOutlet'},
           // {path: 'workers', component: WorkersComponent, outlet: "fieldServiceOutlet"} 
           {path: '',pathMatch: 'full', redirectTo: 'workers'},
-          {path: 'workers', component: WorkersComponent} 
+          {path: 'workers', component: WorkersComponent},
+          {path: 'formularioEdicionEspecialista', component: EditarEspecialistaComponent},
+          {path: 'formularioAsignacion', component: AsignacionComponent}
         ]
       },
       {

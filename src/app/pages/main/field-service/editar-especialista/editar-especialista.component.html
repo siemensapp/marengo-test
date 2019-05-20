@@ -1,0 +1,90 @@
+<div id="animacion">
+  <div id="titulo">
+    <p>Editar a {{infoEspecialista['NombreE'].split(" ")[0]}}</p>
+    <br>
+  </div>
+  <form id="formulario">
+  <div id="subirVerFoto">
+    <div id="campoFoto"><img id="campoImagen" src="data:image/png;base64,{{infoEspecialista['FotoBase64']}}"/></div>
+    <input type="file" id="fileInput" name="fileInput" />
+    <input type="button" id="subirFoto" value="Subir Imagen" (click)="subirArchivo()" />
+  </div>
+  <div id="IdNombreTecnica">
+      <div class="headers">
+          <div class="styledInput">
+            <input type="number" class="campos" placeholder=" " value="{{infoEspecialista['IdEspecialista']}}" readonly/>
+            <label>Id Especialista</label>
+          </div>
+        </div>
+        <div class="headers">
+          <div class="styledInput">
+            <input type="text" class="campos" placeholder=" " value="{{infoEspecialista['NombreE']}}"/>
+            <label>Nombre</label>
+          </div>
+        </div>
+        <div class="headers">
+          <div class="styledInput">
+            <input type="number" class="campos" maxlength="10" placeholder=" " value="{{infoEspecialista['Celular']}}"/>
+            <label>Celular</label>
+          </div>
+        </div>
+        <div class="headers">Tecnica</div>
+        <select id="comboTecnica">
+          <option value=1>VFD</option>
+          <option value=2>BT</option>
+          <option value=3>AUT</option>
+          <option value=4>AOS</option>
+          <option value=5>MOT</option>
+        </select>
+  </div>
+  <div id="demasDatos">
+      <div id="primeraLinea">
+        <div id="headerFecha">
+          <div class="styledInput">
+            <input type="date" name="fechaNacimiento" id="fechaN" placeholder="Fecha Nacimiento" value="{{infoEspecialista['FechaNacimiento'].split('T')[0]}}">
+          </div>
+        </div>
+        <div id=headerCeCo>
+          <div class="styledInput">
+            <input type="text" id="CeCo" placeholder=" " autocomplete="off" value="{{infoEspecialista['CeCo']}}"/>
+            <label>CeCo</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="segundaLinea">
+        <div id=headerGID>
+          <div class="styledInput">
+            <input type="text" id="GID" placeholder=" " autocomplete="off" value="{{infoEspecialista['GID']}}"/>
+            <label>GID</label>
+          </div>
+        </div>
+        <div id="headerCedula">
+          <div class="styledInput">
+            <input type="number" name="cedula" id="cedulaC" placeholder=" " autocomplete="off" value="{{infoEspecialista['CedulaCiudadania']}}">
+            <label>Cedula Cuidadania</label>
+          </div>
+        </div>
+      </div>
+      <div id="terceraLinea">
+        <div id="headerLugarE">
+          <div class="styledInput">
+            <input type="text" name="lugar" id="lugarE" placeholder=" " autocomplete="off" value="{{infoEspecialista['LugarExpedicion']}}">
+            <label>Lugar Expedicion C.C.</label>
+          </div>
+        </div>
+        <div id="headerTarjetaIA">
+          <div class="styledInput">
+            <input type="text" name="tarjetaIA" id="tarjetaIA" placeholder=" " autocomplete="off" value="{{infoEspecialista['TarjetaIngresoArgos']}}">
+            <label>Tarjeta Ingreso Argos</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div id="botones">
+  <button (click)="editarEspecialista()" id="enviar">Modificar Especialista</button><br>
+  <button routerLink='/home' id="cancelar">Cancelar</button><br>
+  </div>
+</div>
+<div id="resultadoImagen"></div>

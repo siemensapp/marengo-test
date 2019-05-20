@@ -13,9 +13,11 @@ import { FieldServiceRoutingModule } from './fieldservice-routing.module';
 import { ContentFrameComponent } from './content-frame/content-frame.component';
 import { WorkersComponent } from './workers/workers.component';
 import { EsriMapComponent } from './esri-map/esri-map.component';
+import { EditarEspecialistaComponent } from './editar-especialista/editar-especialista.component';
+import { AsignacionComponent } from './asignacion/asignacion.component';
 
 @NgModule({
-  declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent],
+  declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent, EditarEspecialistaComponent, AsignacionComponent],
   imports: [
     CommonModule,
     // Ngx Bootstrap

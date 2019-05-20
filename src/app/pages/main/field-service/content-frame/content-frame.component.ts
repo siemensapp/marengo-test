@@ -9,7 +9,7 @@ export class ContentFrameComponent implements OnInit {
 
   secondaryNavItems = [
     {title: 'Trabajadores', link: 'workers'},
-    {title: '+ Asignación', link: 'assignment '},
+    {title: '+ Asignación', link: 'formularioAsignacion'},
     {title: '+ Field Service', link: '/v hv h'},
     {title: 'Cronograma', link: '/hjhv'},
   ]

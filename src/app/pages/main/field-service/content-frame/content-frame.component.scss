@@ -1,5 +1,6 @@
 .map-container {
     float: right;
+    overflow-y: hidden;
 }
 
 .container {
@@ -7,4 +8,5 @@
     height: 100%;   
     float: left;
     padding: 0;
+    overflow-y: scroll;
 }
