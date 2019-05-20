@@ -10,6 +10,7 @@ import { WorkersComponent } from './field-service/workers/workers.component';
 import { EditarEspecialistaComponent } from './field-service/editar-especialista/editar-especialista.component';
 import { AsignacionComponent } from './field-service/asignacion/asignacion.component';
 import { EspecialistaComponent } from './field-service/especialista/especialista.component';
+import { CronogramaComponent } from './field-service/cronograma/cronograma.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
           {path: 'workers', component: WorkersComponent},
           {path: 'formularioEdicionEspecialista', component: EditarEspecialistaComponent},
           {path: 'formularioAsignacion', component: AsignacionComponent},
-          {path: 'formularioEspecialista', component: EspecialistaComponent}
+          {path: 'formularioEspecialista', component: EspecialistaComponent},
+          {path: 'cronograma', component: CronogramaComponent}
         ]
       },
       {
