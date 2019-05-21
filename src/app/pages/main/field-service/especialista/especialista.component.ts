@@ -70,7 +70,7 @@ export class EspecialistaComponent implements OnInit {
                        datos4,
                        'success'
                       )
-                      this.router.navigate(['/home']);
+                      this.router.navigate(['/main/field-service']);
                   }
                   else{
                     Swal.fire(

@@ -71,7 +71,7 @@ export class EditarEspecialistaComponent implements OnInit {
                      datos4,
                      'success'
                     )
-                    this.router.navigate(['/home']);
+                    this.router.navigate(['/main/field-service/workers']);
                 }
                 else{
                   Swal.fire(

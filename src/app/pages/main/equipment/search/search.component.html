@@ -1,0 +1,38 @@
+<main class="page-work-area">
+  <div class="container">
+    <div class="space-around">
+      <si-filtered-search [criteria]="[
+    {name: 'company', label: 'Compañia', options: ['Ecopetrol']},
+    {name: 'equipment-type', label: 'Tipo de Equipo', options: ['Arrancadores', 'Motores', 'Automatización', 'Variadores', 'Interruptores']},
+    {name: 'MLFB'}
+  ]" [showIcon]="true" placeholder="Buscar ..." submitText="Presione Enter o Click..." (doSearch)="logEvent($event)">
+      </si-filtered-search>
+    </div>
+
+    <ng-container *ngIf="resultados | async as results" id='resultList'>
+      <div class="result-list" style="background-color: gray; color:white">
+          <div>Nombre Empresa</div>
+          <div style="text-align: left">Tipo de Equipo</div>
+          <div>Numero Serial</div>
+          <div></div>
+      </div>
+      <br>
+      <div *ngFor="let result of results" class="result-list">
+        <div>{{result.NombreEmpresa}}</div>
+        <div style="text-align: left">{{translateTipoEquipo(result.TipoEquipo)}}</div>
+        <div>{{result.NumeroSerial}}</div>
+        <div> <a>detalles</a> </div>
+      </div>
+    </ng-container>
+
+    <si-empty-list *ngIf="!(resultados | async) && firstSearch" icon="marengo-search" title="Busca algo"
+      content="Puedes buscar por empresa , tipo de equipo y MLFB">
+    </si-empty-list>
+
+    <si-empty-list *ngIf="!(resultados | async)?.length && !firstSearch" icon="marengo-activation-unconfirmed" title="No items"
+      content="La busqueda no arrojo resultados">
+    </si-empty-list>
+
+    <si-loading-spinner *ngIf="!(resultados | async) && !loading"></si-loading-spinner>
+  </div>
+</main>

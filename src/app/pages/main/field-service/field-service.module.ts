@@ -17,9 +17,12 @@ import { EditarEspecialistaComponent } from './editar-especialista/editar-especi
 import { AsignacionComponent } from './asignacion/asignacion.component';
 import { EspecialistaComponent } from './especialista/especialista.component';
 import { CronogramaComponent } from './cronograma/cronograma.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 
 @NgModule({
-  declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent, EditarEspecialistaComponent, AsignacionComponent, EspecialistaComponent, CronogramaComponent],
+  declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent, EditarEspecialistaComponent, AsignacionComponent, EspecialistaComponent, CronogramaComponent, PerfilComponent, EstadisticasComponent],
   imports: [
     CommonModule,
     // Ngx Bootstrap
@@ -29,7 +32,8 @@ import { CronogramaComponent } from './cronograma/cronograma.component';
     BsDropdownModule.forRoot(),
     // Simpl
     SimplMarengoNgModule,
-    FieldServiceRoutingModule
+    FieldServiceRoutingModule,
+    NgCircleProgressModule.forRoot({})
   ]
 })
 export class FieldServiceModule { }

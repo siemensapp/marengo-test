@@ -52,7 +52,7 @@ export class AsignacionComponent implements OnInit {
                      this.infoUbicacion.split(",")[2],
                      'success'
                     )
-                    this.router.navigate(['/home']);
+                    this.router.navigate(['/main/field-service']);
                 }
                 else if(res == "existe"){
                   Swal.fire(

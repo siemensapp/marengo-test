@@ -1,0 +1,39 @@
+$color-grey: #808080;
+
+.vertical-line {
+  border-left: 1px solid $color-grey;
+}
+
+.space-around {
+    margin: 40px 0;
+}
+
+.result-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid lightgray;
+    color: black;
+    background-color: white;
+}
+
+.result-list div {
+    width: 25%;
+    text-align: center;
+}
+
+.result-list:nth-child(odd) {
+    background-color: lightgray;
+}
+
+// .empty-list-spacer {
+//   height: 600px;
+// }
+
+// .container-fluid {
+//   display: flex;
+//   height: calc(100% - 150px);
+// }
+
+

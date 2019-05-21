@@ -34,6 +34,14 @@ export class DataRetrieverService {
     })
   }
 
+  postData( url: string, dataToSend: string ) {
+    return new Promise( resolve => {
+      this.http.post( url, JSON.parse(dataToSend) ).map( result => result).subscribe(dataReceived => {
+        resolve(dataReceived);
+      })
+    })
+  }
+
   obtenerUbicacion(coordenadas: string){
     this.infoSource.next(coordenadas);
     let aux = this.infoSource.value.split(",");

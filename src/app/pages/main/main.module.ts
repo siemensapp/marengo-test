@@ -15,13 +15,15 @@ import { SharedModule } from '../../shared';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { FieldServiceModule } from './field-service/field-service.module';
 import { FieldServiceRoutingModule } from './field-service/fieldservice-routing.module';
+import { SearchComponent } from './equipment/search/search.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     AboutComponent,
     ObjectViewComponent,
-    WidgetsComponent
+    WidgetsComponent,
+    SearchComponent
   ],
   imports: [
     // Angular

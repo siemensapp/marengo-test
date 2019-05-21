@@ -12,7 +12,7 @@ export class MainComponent {
     },
     {
       title: 'Consulta Equipos',
-      link: 'objectView'
+      link: 'consultaEquipos'
     }
   ];
 

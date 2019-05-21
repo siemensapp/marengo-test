@@ -12,6 +12,10 @@ import { AsignacionComponent } from './field-service/asignacion/asignacion.compo
 import { EspecialistaComponent } from './field-service/especialista/especialista.component';
 import { CronogramaComponent } from './field-service/cronograma/cronograma.component';
 
+import { SearchComponent } from './equipment/search/search.component';
+import { PerfilComponent } from './field-service/perfil/perfil.component';
+import { EstadisticasComponent } from './field-service/estadisticas/estadisticas.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -30,6 +34,10 @@ const routes: Routes = [
         component: ObjectViewComponent
       },
       {
+        path: 'consultaEquipos',
+        component: SearchComponent
+      },
+      {
         path: 'field-service',
         component: ContentFrameComponent,
         children: [
@@ -40,7 +48,9 @@ const routes: Routes = [
           {path: 'formularioEdicionEspecialista', component: EditarEspecialistaComponent},
           {path: 'formularioAsignacion', component: AsignacionComponent},
           {path: 'formularioEspecialista', component: EspecialistaComponent},
-          {path: 'cronograma', component: CronogramaComponent}
+          {path: 'cronograma', component: CronogramaComponent},
+          {path: 'perfil', component: PerfilComponent},
+          {path: 'estadisticas', component: EstadisticasComponent},
         ]
       },
       {
