@@ -1,0 +1,124 @@
+#animacion {
+    animation-name: deslizar;
+    animation-duration: 0.4s;
+  }
+  
+  @keyframes deslizar {
+    from {
+      width: 30%
+    }
+  
+    to {
+      width: 100%
+    }
+  }
+  
+  #tituloAE {
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+  
+  #filtros {
+    height: 70px;
+    margin-bottom: 3%;
+  }
+  
+  #tFiltros{
+    text-align: center; 
+    margin-bottom: 2%;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  #fecha {
+    width: 40%;
+    height: 25px;
+    margin-left: 8%;
+    margin-bottom: 1%;
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+  
+  }
+  
+  #fecha:hover {
+    border: 2px inset lightgray;
+  }
+  
+  #fecha::-webkit-clear-button {
+    display: none;
+  }
+  
+  
+  #fecha::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  #buscar {
+    margin-left: 5%;
+    height: 23px;
+    width: 40%;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  
+  #buscar:hover {
+    border: 2px inset lightgray;
+  }
+  
+  #headersTablaA {
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  #scrollTabla{
+    height:450px;
+    overflow:auto; 
+  }
+  
+  #tablaAsignacionesEliminadas {
+    margin-top: 3%;
+    margin-left: 0.5%;
+    height: 30px;
+    background-color: whitesmoke;
+    border: 2px inset lightgray;
+    border-radius: 8px;
+    width: 99%;
+  }
+  
+  .borde {
+    border-bottom: 1px ridge gray;
+  }
+  
+  .filas {
+    height: 60px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+  }
+  
+  #volver {
+    margin-top: 4%;
+    margin-left: 25%;
+    width: 50%;
+    height: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+    color: black;
+    background-color: white;
+    border: ridge 1.4px #0F1923;
+    cursor: pointer;
+  }
+  
+  #volver:hover {
+    color: white;
+    background-color: #0F1923;
+    border: ridge 1.1px #0F1923;
+  }

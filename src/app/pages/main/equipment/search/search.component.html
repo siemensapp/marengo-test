@@ -21,7 +21,7 @@
         <div>{{result.NombreEmpresa}}</div>
         <div style="text-align: left">{{translateTipoEquipo(result.TipoEquipo)}}</div>
         <div>{{result.NumeroSerial}}</div>
-        <div> <a>detalles</a> </div>
+        <div> <a [routerLink]="['../', 'detalles', result.NumeroSerial ]">detalles</a> </div>
       </div>
     </ng-container>
 

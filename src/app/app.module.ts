@@ -9,6 +9,8 @@ import { SiLandingPageModule, SimplMarengoNgModule } from '@simpl/marengo-ng';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { SharedModule } from './shared';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 const routes: Routes = [
   {
     path: 'landing',
@@ -46,7 +48,8 @@ export function createTranslateLoader(http: HttpClient) {
         useFactory: (createTranslateLoader),
         deps: [HttpClient]
       }
-    })
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   exports: [RouterModule],
   bootstrap: [AppComponent]

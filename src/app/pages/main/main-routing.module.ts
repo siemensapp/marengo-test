@@ -15,6 +15,9 @@ import { CronogramaComponent } from './field-service/cronograma/cronograma.compo
 import { SearchComponent } from './equipment/search/search.component';
 import { PerfilComponent } from './field-service/perfil/perfil.component';
 import { EstadisticasComponent } from './field-service/estadisticas/estadisticas.component';
+import { AsignacionesEliminadasComponent } from './field-service/asignaciones-eliminadas/asignaciones-eliminadas.component';
+import { DetallesComponent } from './equipment/detalles/detalles.component';
+import { ConsultaContentComponent } from './equipment/consulta-content/consulta-content.component';
 
 const routes: Routes = [
   {
@@ -35,7 +38,12 @@ const routes: Routes = [
       },
       {
         path: 'consultaEquipos',
-        component: SearchComponent
+        component: ConsultaContentComponent,
+        children: [
+          {path: '',pathMatch: 'full', redirectTo: 'busqueda'},
+          {path: 'busqueda', component: SearchComponent},
+          {path: 'detalles/:searchTerm', component: DetallesComponent}
+        ]
       },
       {
         path: 'field-service',
@@ -51,6 +59,7 @@ const routes: Routes = [
           {path: 'cronograma', component: CronogramaComponent},
           {path: 'perfil', component: PerfilComponent},
           {path: 'estadisticas', component: EstadisticasComponent},
+          {path: 'asignacionesEliminadas', component: AsignacionesEliminadasComponent}
         ]
       },
       {

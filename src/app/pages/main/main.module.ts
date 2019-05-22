@@ -16,6 +16,11 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { FieldServiceModule } from './field-service/field-service.module';
 import { FieldServiceRoutingModule } from './field-service/fieldservice-routing.module';
 import { SearchComponent } from './equipment/search/search.component';
+import { DetallesComponent } from './equipment/detalles/detalles.component';
+import { ConsultaContentComponent } from './equipment/consulta-content/consulta-content.component';
+
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +28,9 @@ import { SearchComponent } from './equipment/search/search.component';
     AboutComponent,
     ObjectViewComponent,
     WidgetsComponent,
-    SearchComponent
+    SearchComponent,
+    DetallesComponent,
+    ConsultaContentComponent
   ],
   imports: [
     // Angular
@@ -40,7 +47,8 @@ import { SearchComponent } from './equipment/search/search.component';
     MainRoutingModule,
     // Own Modules
     FieldServiceModule,
-    FieldServiceRoutingModule
+    FieldServiceRoutingModule,
+    TooltipModule.forRoot()
   ],
 })
 export class MainModule {}

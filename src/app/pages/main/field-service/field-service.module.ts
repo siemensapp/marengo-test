@@ -20,9 +20,10 @@ import { CronogramaComponent } from './cronograma/cronograma.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
+import { AsignacionesEliminadasComponent } from './asignaciones-eliminadas/asignaciones-eliminadas.component';
 
 @NgModule({
-  declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent, EditarEspecialistaComponent, AsignacionComponent, EspecialistaComponent, CronogramaComponent, PerfilComponent, EstadisticasComponent],
+  declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent, EditarEspecialistaComponent, AsignacionComponent, EspecialistaComponent, CronogramaComponent, PerfilComponent, EstadisticasComponent, AsignacionesEliminadasComponent],
   imports: [
     CommonModule,
     // Ngx Bootstrap

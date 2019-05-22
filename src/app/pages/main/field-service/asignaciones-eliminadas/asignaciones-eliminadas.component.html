@@ -1,0 +1,31 @@
+<div id="animacion">
+    <div id="tituloAE">ASIGNACIONES ELIMINADAS</div>
+    <hr>
+    <div id="filtros">
+      <div id="tFiltros">Filtros</div>
+      <input placeholder="Buscar por Fecha..." class="textbox-n" type="text" onfocus="(this.type='date')"
+        onblur="(this.type='text')" id="fecha" />
+      <input type="text" id="buscar" autocomplete="off" placeholder="Buscar por Texto...  " />
+    </div>
+    <hr>
+    <div id="scrollTabla">
+      <table id="tablaAsignacionesEliminadas">
+        <tr id="headersTablaA">
+          <th class="borde">Fecha Inicio</th>
+          <th class="borde">Fecha Final.</th>
+          <th class="borde">Lugar Servicio</th>
+          <th class="borde">Sujeto Cancelacion</th>
+          <th class="borde">Razon Cancelacion</th>
+        </tr>
+        <tr *ngFor="let asignacion of resultados">
+          <td class="filas">{{asignacion.FechaInicio.split("T")[0]}}</td>
+          <td class="filas">{{asignacion.FechaFin.split("T")[0]}}</td>
+          <td class="filas">{{asignacion.NombreSitio}}</td>
+          <td class="filas">{{asignacion.SujetoCancelacion}}</td>
+          <td class="filas">{{asignacion.RazonCancelacion}}</td>
+        </tr>
+  
+      </table>
+    </div>
+    <a href="#/main/field-service/cronograma"><input type="button" id="volver" value="Volver Al Cronograma" /></a>
+  </div>
