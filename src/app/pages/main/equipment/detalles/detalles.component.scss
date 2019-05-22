@@ -26,9 +26,9 @@
     padding: 0 5px;
 }
 
-.table-info {
+.table-info, .table-report {
     width: 100%;
-    margin: auto;
+    margin: 0, auto, 10px, auto;
     font-size: 1.1em;
 }
 
@@ -37,5 +37,9 @@
     font-weight: 600;
     text-align: center;
     padding: 0 5px;
+}
+
+.table-report td {
+    text-align: center;
 }
 

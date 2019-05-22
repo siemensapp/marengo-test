@@ -86,7 +86,7 @@
     <div class="section-title">
         control de actividades
     </div>
-    <table class="table-info">
+    <table class="table-report">
         <thead>
             <tr>
                 <th rowspan=2 class="td-title-report">fecha</th>
@@ -103,7 +103,27 @@
                 
               </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="reportes | async as results">
+            <tr *ngFor="let result of results">
+                <td>{{result.FechaEnvio.split("T")[0]}}</td>
+                <td></td>
+                <td>X</td>
+                <td></td>
+                <td>{{result.ActividadesRealizadas}}</td>
+                <td>{{result.NombreColaborador}}</td>
+                <td><a>detalles</a></td>
+              </tr>
+          <!-- <div *ngIf="reportes | async as results">
+            <tr *ngFor="let result of results">
+              <td>{{result.FechaEnvio.split("T")[0]}}</td>
+              <td></td>
+              <td>X</td>
+              <td></td>
+              <td>{{result.ActividadesRealizadas}}</td>
+              <td>{{result.NombreColaborador}}</td>
+              <td><a>detalles</a></td>
+            </tr>
+          </div> -->
           
         </tbody>
       </table>
