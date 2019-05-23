@@ -10,7 +10,6 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 */
-
 import {
   Component,
   OnInit,
@@ -26,7 +25,7 @@ import {
 import {
   DataRetrieverService
 } from '../../services/data-retriever.service';
-import * as env from '../../../../../assets/variables';
+import * as env from '../../../../../assets/js/variables';
 import esri = __esri; // Esri TypeScript Types
 import { stringify } from '@angular/core/src/util';
 

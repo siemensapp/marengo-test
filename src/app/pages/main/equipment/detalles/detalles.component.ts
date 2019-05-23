@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataRetrieverService } from '../../services/data-retriever.service';
 import { Subject } from 'rxjs';
-import * as pdf from '../../../../../assets/createReportPdf';
-import * as env from '../../../../../assets/variables';
+import * as pdf from '../../../../../assets/js/createReportPdf';
+import * as env from '../../../../../assets/js/variables';
 
 @Component({
   selector: 'app-detalles',
@@ -29,6 +29,10 @@ export class DetallesComponent implements OnInit {
       case 4:
         return "Variador";
     }
+  }
+
+  clientLogo() {
+    return "../../../../../assets/images/logos/" + env.empresasLogos[this.cv['NombreEmpresa']] +"-logo.png"
   }
 
   showReport( jsonReport ) {

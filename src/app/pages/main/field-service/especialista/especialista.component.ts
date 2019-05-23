@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import * as env from '../../../../../assets/variables';
+import * as env from '../../../../../assets/js/variables';
 import Swal from 'sweetalert2'; 
 import { Router } from '@angular/router';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as env from '../../../../../assets/variables';
+import * as env from '../../../../../assets/js/variables';
 import { DataRetrieverService } from '../../services/data-retriever.service';
 import { isUndefined } from 'util';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TreeItemFolderState, TreeItem, SiFilteredSearchModule } from '@simpl/marengo-ng';
 import { DataRetrieverService } from '../../services/data-retriever.service';
-import * as env from '../../../../../assets/variables';
+import * as env from '../../../../../assets/js/variables';
 
 import { Subject } from 'rxjs';
 
@@ -14,7 +14,12 @@ export class SearchComponent implements OnInit {
 
   resultados = new Subject();
   firstSearch = new Subject();
-  loading = new Subject();
+  loading;
+  criteria = [
+    {name: 'company', label: 'Compañia', options: ['ACERIAS DE COLOMBIA S.A.S', 'ACERIAS PAZ DEL RIO S.A.', 'CEMENTOS ARGOS S.A.', 'CABLES DE ENERGIA Y TELECOMUNICACIONES S.A.', 'ECOPETROL S.A.', 'T.C.BUEN S.A.', 'PAVCO', 'PRODUCTOS FAMILIA S.A.', 'POSTOBON S.A.', 'SOCIEDAD PORTUARIA REGIONAL DE BUENAVENTURA S.A.']},
+    {name: 'equipment-type', label: 'Tipo de Equipo', options: ['Arrancadores', 'Motores', 'Automatización', 'Variadores', 'Interruptores']},
+    {name: 'MLFB'}
+  ];
 
   translateTipoEquipo( tipo ) {
     switch(tipo) {
@@ -48,7 +53,7 @@ export class SearchComponent implements OnInit {
 
   public logEvent(event) {
     this.resultados.next(null);
-    this.loading.next(true);
+    this.loading = true;
     this.firstSearch.next(false);
     console.log(event);
     var params = {tipo: "", nombre: "", mlfb: ""};
@@ -58,7 +63,7 @@ export class SearchComponent implements OnInit {
       if( x['name'] == 'MLFB' ) params['mlfb'] = x['value'];
     }
     this.dataRetriever.postData(env.url + '/api/getEquipmentsBy/', JSON.stringify(params)).then( data => {
-      this.loading.next(false);
+      this.loading = false;
       this.resultados.next(data);
       console.log(this.resultados)      
     } );
@@ -74,7 +79,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.firstSearch.next(true);
-    this.loading.next(false);
+    this.loading = false;
   }
 
 }

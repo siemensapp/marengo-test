@@ -1,11 +1,7 @@
 <main class="page-work-area">
   <div class="container">
     <div class="space-around">
-      <si-filtered-search [criteria]="[
-    {name: 'company', label: 'Compañia', options: ['Ecopetrol']},
-    {name: 'equipment-type', label: 'Tipo de Equipo', options: ['Arrancadores', 'Motores', 'Automatización', 'Variadores', 'Interruptores']},
-    {name: 'MLFB'}
-  ]" [showIcon]="true" placeholder="Buscar ..." submitText="Presione Enter o Click..." (doSearch)="logEvent($event)">
+      <si-filtered-search [criteria]="criteria" [showIcon]="true" placeholder="Buscar ..." submitText="Presione Enter o Click..." (doSearch)="logEvent($event)">
       </si-filtered-search>
     </div>
 
@@ -25,7 +21,7 @@
       </div>
     </ng-container>
 
-    <si-empty-list *ngIf="!(resultados | async) && firstSearch" icon="marengo-search" title="Busca algo"
+    <si-empty-list *ngIf="!(resultados | async) && firstSearch && !loading" icon="marengo-search" title="Busca algo"
       content="Puedes buscar por empresa , tipo de equipo y MLFB">
     </si-empty-list>
 
@@ -33,6 +29,6 @@
       content="La busqueda no arrojo resultados">
     </si-empty-list>
 
-    <si-loading-spinner *ngIf="!(resultados | async) && !loading"></si-loading-spinner>
+    <si-loading-spinner *ngIf="loading"></si-loading-spinner>
   </div>
 </main>
