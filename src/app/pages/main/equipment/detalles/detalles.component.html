@@ -109,7 +109,7 @@
                 <td></td>
                 <td>{{result.ActividadesRealizadas}}</td>
                 <td>{{result.NombreColaborador}}</td>
-                <td><a>detalles</a></td>
+                <td><a (click)="showReport(result)" >detalles</a></td>
               </tr>
           <!-- <div *ngIf="reportes | async as results">
             <tr *ngFor="let result of results">
