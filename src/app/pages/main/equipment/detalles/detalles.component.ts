@@ -10,21 +10,43 @@ import * as env from '../../../../../assets/variables';
   styleUrls: ['./detalles.component.scss']
 })
 export class DetallesComponent implements OnInit {
-
+  private searchTerm;
   reportes = new Subject();
+  cv;
 
   constructor(private route: ActivatedRoute, private dataRetriever: DataRetrieverService) { }
+  translateTipoEquipo( tipo ) {
+    switch(tipo) {
+      case 0:
+        return "Arrancador suave";
+      case 1:
+        return "Equipo Automatización";
+      case 2:
+        return "Interruptor";
+      case 3:
+        return "Motor";
+      case 4:
+        return "Variador";
+    }
+  }
 
-  setFormData() {
-    let searchTerm = this.route.snapshot.paramMap.get('searchTerm');
-    this.dataRetriever.getData(env.url + '/api/getReportsFromEquipment/' + searchTerm).then( results => {
+  getReportsData() {
+    this.dataRetriever.getData(env.url + '/api/getReportsFromEquipment/' + this.searchTerm).then( results => {
       this.reportes.next(results);
-      console.log(results);
+    });
+  }
+
+  getEquipmentData() {
+    this.dataRetriever.getData(env.url + '/api/getEquipmentBySerial/' + this.searchTerm).then( results => {
+      this.cv = results[0];
+      this.cv['AnnosOperacion'] = this.cv['AñosOperacion'];
     });
   }
 
   ngOnInit() {
-    this.setFormData();
+    this.searchTerm = this.route.snapshot.paramMap.get('searchTerm');
+    this.getEquipmentData();
+    this.getReportsData();
   }
 
 }

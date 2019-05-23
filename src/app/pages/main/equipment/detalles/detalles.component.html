@@ -1,7 +1,7 @@
 <main class="page-work-area">
   <table class="table-logos"  style="width: 100%">
     <td class="td-images"><img src="../../../../../assets/images/logos/Ecopetrol-logo.png" style="width: 100%; height:auto;" ></td>
-    <td class="td-title-header">Ecopetrol S.A.<br>Gestión de Mantenimiento</td>
+    <td class="td-title-header">{{cv && cv.NombreEmpresa}}<br>Gestión de Mantenimiento</td>
     <td class="td-images"><img src="../../../../../assets/images/logos/Siemens-logo.png" style="width: 100%; height:auto;" ></td>
   </table>
 
@@ -12,7 +12,7 @@
   <table class="table-info">
     <tr>
       <td class="td-title-info">cliente</td>
-      <td colspan=5>Etwas zu schreiben</td>
+      <td colspan=5>{{cv && cv.NombreEmpresa}}</td>
     </tr>
     <tr>
         <td class="td-title-info">N° Contrato</td>
@@ -60,27 +60,25 @@
     <table class="table-info">
       <tr>
           <td class="td-title-info">Tipo de Equipo</td>
-          <td>Interruptor</td>
+          <td>{{cv && translateTipoEquipo(cv.TipoEquipo)}}</td>
       </tr>
       <tr>
           <td class="td-title-info">Descripción</td>
-          <td colspan=5 style="padding: 10px 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut gravida magna, vel iaculis sem. Integer ac pharetra diam. Suspendisse potenti. Cras laoreet ultrices sagittis. In semper vulputate tortor ac eleifend. Nullam a condimentum diam. In vehicula tortor vel nunc efficitur aliquet. Etiam id nulla fermentum, malesuada justo vitae, efficitur dui. Pellentesque lacinia ullamcorper pellentesque. Mauris id elit ullamcorper, venenatis lorem sed, fringilla tellus. Aenean a vestibulum sem, vel vulputate lorem.</td>
+          <td colspan=5 style="padding: 10px 0;">{{cv && cv.Descripcion}}</td>
       </tr>
       <tr>
           <td class="td-title-info">N° serial</td>
-          <td>Etwas zu schreiben</td>
+          <td>{{cv && cv.NumeroSerial}}</td>
           <td class="td-title-info">MLFB</td>
-          <td>Etwas zu schreiben</td>
-          <td class="td-title-info">Año</td>
-          <td>Etwas zu schreiben</td>
-      </tr>
-      <tr>
+          <td>{{cv && cv.MLFB}}</td>
           <td class="td-title-info">Fecha producción</td>
-          <td>Etwas zu schreiben</td>
-          <td class="td-title-info">Años operacion</td>
-          <td>Etwas zu schreiben</td>
+          <td>{{cv && cv.FechaProduccion.split("T")[0]}}</td>
+      </tr>
+      <tr>          
+          <td class="td-title-info">Años operación</td>
+          <td>{{cv && cv.AnnosOperacion}}</td>
           <td class="td-title-info">Ciclo de vida</td>
-          <td>Etwas zu schreiben</td>
+          <td colspan=3>{{cv && cv.CicloVida}}</td>
       </tr>
     </table>
     <div class="section-title">
