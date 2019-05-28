@@ -7,15 +7,19 @@
     <div id="infoCliente">
       <div class="headerCliente">
         <div class="styledInput">
-          <input type="text" name="nombreCliente" id="nCliente" autocomplete="off" placeholder=" ">
+          <input list="clientList" type="text" name="nombreCliente" id="nCliente" autocomplete="off" placeholder=" ">
           <label>Cliente</label>
         </div>
+        <datalist id="clientList">
+          <option *ngFor="let client of ResultadosEmpresas">{{client.NombreEmpresa}}</option>
+        </datalist>
       </div>
       <div class="headerPlanta">
         <div class="styledInput">
           <input type="text" name="nombrePlanta" id="nPlanta" autocomplete="off" placeholder=" ">
-          <label>Planta</label>
+          <label>Planta</label>          
         </div>
+        
       </div>
     </div>
     <div class="headerCombo">
@@ -42,6 +46,17 @@
         <option value=8>Disponibilidad FDS</option>
       </select>
     </div>
+    <div class="headerCombo">
+      Seleccionar Tipo de Servicio
+    </div>
+    <div class="espacioCombo">
+      <select class="combo">
+        <option value='P'>Prevención</option>
+        <option value='C'>Correctivo</option>
+        <option value='E'>Emergencia</option>
+      </select>
+    </div>
+    
     <!-- <div id="headerFechas">Fechas de la Asignacion</div> -->
     <div id="fechas">
       <div>

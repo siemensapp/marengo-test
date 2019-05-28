@@ -16,6 +16,9 @@ export class AsignacionComponent implements OnInit {
     finalCoords = [];
     infoUbicacion = "";
     infoCiudad = "";
+    clientCode = null;
+
+
   enviarDatos(){
     var datos1 = document.forms["formulario"].elements[0].value;
     var datos2 = document.forms["formulario"].elements[1].value;
@@ -27,20 +30,22 @@ export class AsignacionComponent implements OnInit {
     var datos8 = document.forms["formulario"].elements[7].value;
     var datos9 = document.forms["formulario"].elements[8].value;
     var datos10 = document.forms["formulario"].elements[9].value;
+    var datos11 = document.forms["formulario"].elements[10].value;
 
     var datos = {"IdEspecialista" : datos3,
                  "IdStatus" : datos4,
                  "NombreCliente" : datos1,
                  "NombrePlanta" : datos2, 
                  "CiudadPlanta" : this.finalCoords[2],
-                 "FechaInicio" : datos5,
-                 "FechaFin" : datos6,
+                 "PCE": datos5,
+                 "FechaInicio" : datos6,
+                 "FechaFin" : datos7,
                  "CoordenadasSitio" : this.finalCoords[0],
                  "NombreSitio" : this.infoUbicacion.split(",")[2],
-                 "NombreContacto" : datos7,
-                 "TelefonoContacto" : datos8,
-                 "EmailContacto" : datos9,
-                 "Descripcion" : datos10
+                 "NombreContacto" : datos8,
+                 "TelefonoContacto" : datos9,
+                 "EmailContacto" : datos10,
+                 "Descripcion" : datos11,
                 };
     console.log(datos);
     this.httpService.post(env.url+'/api/setAssignment', datos).toPromise()
@@ -71,6 +76,7 @@ export class AsignacionComponent implements OnInit {
                  });
   }
   constructor(private httpService: HttpClient, private DataRetriever: DataRetrieverService, private router: Router) { }
+  ResultadosEmpresas : JSON[];
   ResultadosField : JSON[];
   ngOnInit() {
     this.DataRetriever.infoUbicacion.subscribe(infoUbicacion => this.infoUbicacion = infoUbicacion);
@@ -87,7 +93,11 @@ export class AsignacionComponent implements OnInit {
     // document.getElementById("fechaI").setAttribute("value", String(fechaHoy.getFullYear()+"-0"+(fechaHoy.getMonth()+1)+"-"+fechaHoy.getDate()));
       this.DataRetriever.getData(env.url+'/api/allWorkers').then(data => {
       this.ResultadosField = data as JSON[];
-      console.log(this.ResultadosField);
+      })
+
+      this.DataRetriever.getData(env.url + '/api/clientList').then(data => {
+        this.ResultadosEmpresas = data as JSON[];
+        console.log(this.ResultadosEmpresas);
       })
     // this.httpService.get(env.url+'/api/workersList').subscribe(
     //   data => {

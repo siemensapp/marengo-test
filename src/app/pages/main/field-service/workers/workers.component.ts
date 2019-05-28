@@ -4,8 +4,8 @@ import * as env from '../../../../../assets/js/variables';
 import Swal from 'sweetalert2'; 
 import { DataRetrieverService} from '../../services/data-retriever.service';
 import { Router } from '@angular/router';
-// import { SwPush } from '@angular/service-worker';
-// import { PushNotificationService } from '../../pushService/push-notification.service';
+import { SwPush } from '@angular/service-worker';
+import { PushNotificationsService } from '../../services/push-notifications.service';
 
 @Component({
   selector: 'app-workers',
@@ -95,10 +95,10 @@ export class WorkersComponent implements OnInit {
   }
 
   // constructor(private httpService: HttpClient, private dataRetriever: DataRetrieverService, private router: Router, private swPush: SwPush, private pushService: PushNotificationService) { }
-  constructor(private httpService: HttpClient, private dataRetriever: DataRetrieverService, private router: Router) { }
+  constructor(private httpService: HttpClient, private dataRetriever: DataRetrieverService, private router: Router, private swPush: SwPush, private pushService: PushNotificationsService) { }
   Resultados : JSON[];
   ngOnInit() {
-    // this.notificationsCheck();
+    this.notificationsCheck();
     console.log(this);
      var today = new Date().toISOString();
      var fechaHoy = today.split("T")[0];     
@@ -112,14 +112,14 @@ export class WorkersComponent implements OnInit {
     )
   }
 
-  // notificationsCheck() {
-  //   if( this.swPush.isEnabled ) {
-  //     this.swPush.requestSubscription({
-  //       serverPublicKey: this.VAPID_PUBLIC
-  //     }).then( subscription => {
-  //       this.pushService.sendSubscription(subscription);
-  //     }).catch(console.error)
-  //   }
-  // }
+  notificationsCheck() {
+    if( this.swPush.isEnabled ) {
+      this.swPush.requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC
+      }).then( subscription => {
+        this.pushService.sendSubscription(subscription);
+      }).catch(console.error)
+    }
+  }
 
 }
