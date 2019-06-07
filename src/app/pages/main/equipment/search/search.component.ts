@@ -4,6 +4,8 @@ import { DataRetrieverService } from '../../services/data-retriever.service';
 import * as env from '../../../../../assets/js/variables';
 
 import { Subject } from 'rxjs';
+import { ExcelService } from 'src/app/shared/excel.service';
+import * as auxExcel from '../../../../../assets/js/createExcel';
 
 @Component({
   selector: 'app-search',
@@ -20,6 +22,11 @@ export class SearchComponent implements OnInit {
     {name: 'equipment-type', label: 'Tipo de Equipo', options: ['Arrancadores', 'Motores', 'Automatización', 'Variadores', 'Interruptores']},
     {name: 'MLFB'}
   ];
+
+  testExcel() {
+    // this.excelService.exportAsExcelFile( auxExcel.createExcel(JSON.parse(this.infoReporte[0]['HojaTiempo'])) , 'TEST');
+    this.excelService.exportAsExcelFile( auxExcel.createExcel({'key': 'value', 'key2': 'value2'}) , 'TEST');
+  }
 
   translateTipoEquipo( tipo ) {
     switch(tipo) {
@@ -75,7 +82,7 @@ export class SearchComponent implements OnInit {
     new TreeItem('item 3', TreeItemFolderState.Collapsed, undefined, [])
   ];
 
-  constructor( private dataRetriever: DataRetrieverService ) { }
+  constructor( private dataRetriever: DataRetrieverService, private excelService: ExcelService ) { }
 
   ngOnInit() {
     this.firstSearch.next(true);

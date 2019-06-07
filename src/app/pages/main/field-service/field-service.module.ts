@@ -9,7 +9,7 @@ import { SimplMarengoNgModule } from '@simpl/marengo-ng';
 
 import { FieldServiceRoutingModule } from './fieldservice-routing.module';
 
-
+import { ChartsModule } from 'ng2-charts';
 import { ContentFrameComponent } from './content-frame/content-frame.component';
 import { WorkersComponent } from './workers/workers.component';
 import { EsriMapComponent } from './esri-map/esri-map.component';
@@ -21,6 +21,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 import { AsignacionesEliminadasComponent } from './asignaciones-eliminadas/asignaciones-eliminadas.component';
+import { ExcelService } from 'src/app/shared/excel.service';
 
 @NgModule({
   declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent, EditarEspecialistaComponent, AsignacionComponent, EspecialistaComponent, CronogramaComponent, PerfilComponent, EstadisticasComponent, AsignacionesEliminadasComponent],
@@ -33,8 +34,10 @@ import { AsignacionesEliminadasComponent } from './asignaciones-eliminadas/asign
     BsDropdownModule.forRoot(),
     // Simpl
     SimplMarengoNgModule,
+    ChartsModule,
     FieldServiceRoutingModule,
     NgCircleProgressModule.forRoot({})
-  ]
+  ],
+  providers: [ ExcelService ]
 })
 export class FieldServiceModule { }

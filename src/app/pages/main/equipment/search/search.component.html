@@ -23,6 +23,7 @@
 
     <si-empty-list *ngIf="!(resultados | async) && firstSearch && !loading" icon="marengo-search" title="Busca algo"
       content="Puedes buscar por empresa , tipo de equipo y MLFB">
+      <button (click)="testExcel()">Test Excel</button>
     </si-empty-list>
 
     <si-empty-list *ngIf="!(resultados | async)?.length && !firstSearch" icon="marengo-activation-unconfirmed" title="No items"

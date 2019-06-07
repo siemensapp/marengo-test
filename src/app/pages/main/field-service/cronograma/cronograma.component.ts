@@ -1,12 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  HttpClient
+} from '@angular/common/http';
 import * as env from '../../../../../assets/js/variables';
-import Swal from 'sweetalert2'; 
+import Swal from 'sweetalert2';
 import 'rxjs/add/operator/map';
-import { DataRetrieverService } from '../../services/data-retriever.service';
+import {
+  DataRetrieverService
+} from '../../services/data-retriever.service';
 import * as jsPDF from 'jspdf';
-import {saveAs} from 'file-saver';
-import { Parser } from '@angular/compiler/src/ml_parser/parser';
+import {
+  ExcelService
+} from '../../../../shared/excel.service';
+import * as auxExcel from '../../../../../assets/js/createExcel';
 
 @Component({
   selector: 'app-cronograma',
@@ -15,28 +24,28 @@ import { Parser } from '@angular/compiler/src/ml_parser/parser';
 })
 export class CronogramaComponent implements OnInit {
 
-  constructor(private httpService: HttpClient, private dataRetriever: DataRetrieverService) { }
+  constructor(private httpService: HttpClient, private dataRetriever: DataRetrieverService, private excelService: ExcelService) {}
   Asignaciones;
   resultados;
   datos: JSON[];
   infoAsignacion: {};
   infoAsignacion2: {};
   infoReporte: {};
-  daysInMonth (month, year) {
+  daysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
   }
 
-  traerNumeroEspecialistas(){
+  traerNumeroEspecialistas() {
     return new Promise(resolve => {
-      this.httpService.get(env.url + '/api/allWorkers').map( result => result).subscribe(especialistas =>{
+      this.httpService.get(env.url + '/api/allWorkers').map(result => result).subscribe(especialistas => {
         resolve(especialistas);
       })
     })
   }
 
-  traerAsignaciones(fecha : string){
+  traerAsignaciones(fecha: string) {
     return new Promise(resolve => {
-      this.httpService.get(env.url + '/api/getAssignments/'+fecha).map( result => result).subscribe(data =>{
+      this.httpService.get(env.url + '/api/getAssignments/' + fecha).map(result => result).subscribe(data => {
         resolve(data);
         console.log(data);
       })
@@ -44,8 +53,8 @@ export class CronogramaComponent implements OnInit {
   }
 
   menuAsignacion(columna, fila, estiloCelda) {
-    if(estiloCelda.style.backgroundColor !== ""){
-    Swal.fire({
+    if (estiloCelda.style.backgroundColor !== "") {
+      Swal.fire({
         title: "Asignacion",
         showCloseButton: true,
         showCancelButton: true,
@@ -54,173 +63,145 @@ export class CronogramaComponent implements OnInit {
         confirmButtonText: "VER MAS INFORMACION",
         cancelButtonText: "ELIMINAR"
       }).then((result) => {
-          if(result.value){
-              var idEspecialista = <HTMLTableElement> document.getElementById('tablaEspecialistas1');
-              var IdEspecialista = idEspecialista.rows[fila].id;
-              var Fecha = <HTMLInputElement> document.getElementById('fecha');
-              var fecha = Fecha.value+"-"+columna;
-              var url = env.url + '/api/getInfoAssignment/'+IdEspecialista+'/'+fecha;
-              this.dataRetriever.getData(url).then(data => {
-                this.infoAsignacion = data as JSON;
-                var id = this.infoAsignacion[0]['IdAsignacion'];
-                var url2 = env.url + '/api/getReportByAssignment/'+id;
-                this.dataRetriever.getData(url2).then(reportData => {
-                this.infoReporte = reportData as JSON;
-                var status;
-                if(this.infoAsignacion[0]['StatusAsignacion'] == 0){
-                  status = "Asignado - No Aceptado";
-                }
-                if(this.infoAsignacion[0]['StatusAsignacion'] == 1){
-                  status = "Asignación Aceptada";
-                }
-                else if(this.infoAsignacion[0]['StatusAsignacion'] == 2){
-                  status = "Asignación Iniciada";
-                }
-                else{
-                  status = "Asignación Terminada";
-                }
-                var contenido = this.infoAsignacion[0]['NombreE'] + ' (' + this.infoAsignacion[0]['NombreT']+') - '+ this.infoAsignacion[0]['NombreS'] + '<br>'
-                + this.infoAsignacion[0]['NombreSitio'] + '<br><br>'
-                + this.infoAsignacion[0]['FechaInicio'].split("T")[0] + '  <i class="fas fa-long-arrow-alt-right"></i>  ' + this.infoAsignacion[0]['FechaFin'].split("T")[0] + '<br>'
-                + '<p style="font-weight: bold; text-decoration: underline;">' + status + '</p>' + '<br>'
-                + 'Contacto: ' + this.infoAsignacion[0]['NombreContacto'] + ' - ' + this.infoAsignacion[0]['TelefonoContacto'];
-                if(reportData == 'false'){
+        if (result.value) {
+          var idEspecialista = < HTMLTableElement > document.getElementById('tablaEspecialistas1');
+          var IdEspecialista = idEspecialista.rows[fila].id;
+          var Fecha = < HTMLInputElement > document.getElementById('fecha');
+          var fecha = Fecha.value + "-" + columna;
+          var url = env.url + '/api/getInfoAssignment/' + IdEspecialista + '/' + fecha;
+          this.dataRetriever.getData(url).then(data => {
+            this.infoAsignacion = data as JSON;
+            var id = this.infoAsignacion[0]['IdAsignacion'];
+            var url2 = env.url + '/api/getReportByAssignment/' + id;
+            this.dataRetriever.getData(url2).then(reportData => {
+              this.infoReporte = reportData as JSON;
+              var status;
+              if (this.infoAsignacion[0]['StatusAsignacion'] == 0) {
+                status = "Asignado - No Aceptado";
+              }
+              if (this.infoAsignacion[0]['StatusAsignacion'] == 1) {
+                status = "Asignación Aceptada";
+              } else if (this.infoAsignacion[0]['StatusAsignacion'] == 2) {
+                status = "Asignación Iniciada";
+              } else {
+                status = "Asignación Terminada";
+              }
+              var contenido = this.infoAsignacion[0]['NombreE'] + ' (' + this.infoAsignacion[0]['NombreT'] + ') - ' + this.infoAsignacion[0]['NombreS'] + '<br>' +
+                this.infoAsignacion[0]['NombreSitio'] + '<br><br>' +
+                this.infoAsignacion[0]['FechaInicio'].split("T")[0] + '  <i class="fas fa-long-arrow-alt-right"></i>  ' + this.infoAsignacion[0]['FechaFin'].split("T")[0] + '<br>' +
+                '<p style="font-weight: bold; text-decoration: underline;">' + status + '</p>' + '<br>' +
+                'Contacto: ' + this.infoAsignacion[0]['NombreContacto'] + ' - ' + this.infoAsignacion[0]['TelefonoContacto'];
+              if (reportData == 'false') {
                 Swal.fire({
                   title: 'Informacion Asignacion',
                   html: contenido,
                   confirmButtonText: "SALIR",
                   confirmButtonColor: "gray",
-                }) 
-                }
-                else{
-                  Swal.fire({
-                    title:'Informacion Asignacion',
-                    html:contenido,
-                    showCloseButton: true,
-                    showCancelButton: true,
-                    confirmButtonText: "MIRAR REPORTE",
-                    cancelButtonText: "SALIR"
-                  }).then((result => {
-                    if(result.value){
-                      this.crearPDF(this.infoReporte);
-                    }
-                  })) 
-                }
-                
                 })
-              })
-                
-                
-          }
-          else if(String(result.dismiss) == "cancel"){
-              var idEspecialista = <HTMLTableElement> document.getElementById('tablaEspecialistas1');
-              var IdEspecialista = idEspecialista.rows[fila].id;
-              var Fecha = <HTMLInputElement> document.getElementById('fecha');
-              var fecha = Fecha.value+"-"+columna;
-              this.dataRetriever.getData(env.url+'/api/getInfoAssignment/'+IdEspecialista+'/'+fecha).then(data =>{
-                  this.infoAsignacion2 = data as JSON;
-                  console.log(this.infoAsignacion2);
-              Swal.fire({
-                type: "warning",
-                title: "Seguro desea borrar esta asignacion?",
-                html: '<p style="font-family: Verdana, Geneva, Tahoma, sans-serif;">LLenar los siguientes campos</p>'+
-                'Desde <input id="desde" type="date" min="'+this.infoAsignacion2[0]['FechaInicio'].split("T")[0]+'" max="'+this.infoAsignacion2[0]['FechaFin'].split("T")[0]+'"><br><br>Hasta <input id="hasta" type="date" min="'+this.infoAsignacion2[0]['FechaInicio'].split("T")[0]+'" max="'+this.infoAsignacion2[0]['FechaFin'].split("T")[0]+'">' +
+              } else {
+                Swal.fire({
+                  title: 'Informacion Asignacion',
+                  html: contenido,
+                  showCloseButton: true,
+                  showCancelButton: true,
+                  confirmButtonText: "MIRAR REPORTE",
+                  cancelButtonText: "SALIR"
+                }).then((result => {
+                  if (result.value) {
+                    this.crearPDF(this.infoReporte);
+                  }
+                }))
+              }
+
+            })
+          })
+
+
+        } else if (String(result.dismiss) == "cancel") {
+          var idEspecialista = < HTMLTableElement > document.getElementById('tablaEspecialistas1');
+          var IdEspecialista = idEspecialista.rows[fila].id;
+          var Fecha = < HTMLInputElement > document.getElementById('fecha');
+          var fecha = Fecha.value + "-" + columna;
+          this.dataRetriever.getData(env.url + '/api/getInfoAssignment/' + IdEspecialista + '/' + fecha).then(data => {
+            this.infoAsignacion2 = data as JSON;
+            console.log(this.infoAsignacion2);
+            Swal.fire({
+              type: "warning",
+              title: "Seguro desea borrar esta asignacion?",
+              html: '<p style="font-family: Verdana, Geneva, Tahoma, sans-serif;">LLenar los siguientes campos</p>' +
+                'Desde <input id="desde" type="date" min="' + this.infoAsignacion2[0]['FechaInicio'].split("T")[0] + '" max="' + this.infoAsignacion2[0]['FechaFin'].split("T")[0] + '"><br><br>Hasta <input id="hasta" type="date" min="' + this.infoAsignacion2[0]['FechaInicio'].split("T")[0] + '" max="' + this.infoAsignacion2[0]['FechaFin'].split("T")[0] + '">' +
                 '<input id="input1" maxlength="60" placeholder="Sujeto/Entidad Cancelando el Servicio" style="height: 35px; width:80%; margin-top:5%;font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:16px;"><br>' +
                 '<textarea id="input2" maxlength="255" placeholder="Razón Cancelación del Servicio" autocomplete="off" style="height: 60px; width:80%; margin-top:5%;font-family: Verdana, Geneva, Tahoma, sans-serif;"></textarea>',
-                showCloseButton: true,
-                showCancelButton: true,
-                confirmButtonColor: "red",
-                confirmButtonText: "BORRAR",
-                cancelButtonColor: "gray",
-                cancelButtonText: "CANCELAR"
-              }).then((result1) => {
-                if(result1.value){
-                  var sc = <HTMLInputElement> document.getElementById('input1');
-                  var SC = sc.value;
-                  var rc = <HTMLInputElement> document.getElementById('input2');
-                  var RC = rc.value;
-                  var desde = <HTMLInputElement> document.getElementById('desde');
-                  var Desde = desde.value;
-                  var hasta = <HTMLInputElement> document.getElementById('hasta');
-                  var Hasta = hasta.value;
-                  var datos = {
-                            'IdEspecialista': this.infoAsignacion2[0]['IdEspecialista'],
-                             'IdStatus' : this.infoAsignacion2[0]['IdStatus'],
-                             'IdAsignacion' : this.infoAsignacion2[0]['IdAsignacion'],
-                             'NombreCliente' : this.infoAsignacion2[0]['NombreCliente'],
-                             'NombrePlanta' : this.infoAsignacion2[0]['NombrePlanta'],
-                             'CiudadPlanta' : this.infoAsignacion2[0]['CiudadPlanta'],
-                             'FechaInicio' : this.infoAsignacion2[0]['FechaInicio'].split("T")[0],
-                             'FechaFin' : this.infoAsignacion2[0]['FechaFin'].split("T")[0],
-                             'CoordenadasSitio' : this.infoAsignacion2[0]['CoordenadasSitio'],
-                             'CoordenadasEspecialista' : this.infoAsignacion2[0]['CoordenadasEspecialista'],
-                             'NombreSitio' : this.infoAsignacion2[0]['NombreSitio'],
-                             'NombreContacto' : this.infoAsignacion2[0]['NombreContacto'],
-                             'TelefonoContacto' : this.infoAsignacion2[0]['TelefonoContacto'],
-                             'Descripcion' : this.infoAsignacion2[0]['Descripcion'],
-                             'EmailContacto' : this.infoAsignacion2[0]['EmailContacto'],
-                             'SujetoCancelacion' : SC,
-                             'RazonCancelacion' : RC,
-                             'fecha' : fecha,
-                             'Desde' : Desde,
-                             'Hasta' : Hasta
-                            };
+              showCloseButton: true,
+              showCancelButton: true,
+              confirmButtonColor: "red",
+              confirmButtonText: "BORRAR",
+              cancelButtonColor: "gray",
+              cancelButtonText: "CANCELAR"
+            }).then((result1) => {
+              if (result1.value) {
+                var sc = < HTMLInputElement > document.getElementById('input1');
+                var SC = sc.value;
+                var rc = < HTMLInputElement > document.getElementById('input2');
+                var RC = rc.value;
+                var desde = < HTMLInputElement > document.getElementById('desde');
+                var Desde = desde.value;
+                var hasta = < HTMLInputElement > document.getElementById('hasta');
+                var Hasta = hasta.value;
+                var datos = {
+                  'IdEspecialista': this.infoAsignacion2[0]['IdEspecialista'],
+                  'IdStatus': this.infoAsignacion2[0]['IdStatus'],
+                  'IdAsignacion': this.infoAsignacion2[0]['IdAsignacion'],
+                  'NombreCliente': this.infoAsignacion2[0]['NombreCliente'],
+                  'NombrePlanta': this.infoAsignacion2[0]['NombrePlanta'],
+                  'CiudadPlanta': this.infoAsignacion2[0]['CiudadPlanta'],
+                  'FechaInicio': this.infoAsignacion2[0]['FechaInicio'].split("T")[0],
+                  'FechaFin': this.infoAsignacion2[0]['FechaFin'].split("T")[0],
+                  'CoordenadasSitio': this.infoAsignacion2[0]['CoordenadasSitio'],
+                  'CoordenadasEspecialista': this.infoAsignacion2[0]['CoordenadasEspecialista'],
+                  'NombreSitio': this.infoAsignacion2[0]['NombreSitio'],
+                  'NombreContacto': this.infoAsignacion2[0]['NombreContacto'],
+                  'TelefonoContacto': this.infoAsignacion2[0]['TelefonoContacto'],
+                  'Descripcion': this.infoAsignacion2[0]['Descripcion'],
+                  'EmailContacto': this.infoAsignacion2[0]['EmailContacto'],
+                  'SujetoCancelacion': SC,
+                  'RazonCancelacion': RC,
+                  'fecha': fecha,
+                  'Desde': Desde,
+                  'Hasta': Hasta
+                };
                 var url = env.url + '/api/deleteAssignment';
                 this.httpService.post(url, datos).toPromise()
-                .then((res) => {
-                  console.log(res);
-                  if(res == "true"){
-                    Swal.fire(
-                      'Asignacion Borrada',
-                      '',
-                      'success'
-                    ).then(()=> location.reload())
-                  }
-                  else{
-                    Swal.fire(
-                      'Error al borrar asignacion',
-                      'No se pudo completar la accion',
-                      'error'
-                    )
-                  }
-                })
+                  .then((res) => {
+                    console.log(res);
+                    if (res == "true") {
+                      Swal.fire(
+                        'Asignacion Borrada',
+                        '',
+                        'success'
+                      ).then(() => location.reload())
+                    } else {
+                      Swal.fire(
+                        'Error al borrar asignacion',
+                        'No se pudo completar la accion',
+                        'error'
+                      )
+                    }
+                  })
               }
-              });
             });
-          }
+          });
+        }
       });
+    } else {
+      console.log("No existe ninguna asignacion en esta fecha");
     }
-    else{
-        console.log("No existe ninguna asignacion en esta fecha");
-    }
-}
+  }
 
-  crearPDF(reporte: {}){
+  crearPDF(reporte: {}) {
     //EXCEL CON HOJA DE TIEMPO
-    var hojaParaCSV = JSON.parse(this.infoReporte[0]['HojaTiempo']);
-    var {Parser} = require('json2csv');
-    var headers = ['fecha', 'desde', 'hasta', 'descuento', 'servicioSitio', 'entrenamiento', 'tiempoViaje', 'tiempoEspera'];
-    var valores=[];
-    for(var i=0; i<Object.keys(hojaParaCSV).length; i++){
-      var datos = {
-        'fecha': hojaParaCSV[Object.keys(hojaParaCSV)[i]]['fecha'],
-        'desde': hojaParaCSV[Object.keys(hojaParaCSV)[i]]['desde'],
-        'hasta': hojaParaCSV[Object.keys(hojaParaCSV)[i]]['hasta'],
-        'descuento': hojaParaCSV[Object.keys(hojaParaCSV)[i]]['descuento'],
-        'servicioSitio': hojaParaCSV[Object.keys(hojaParaCSV)[i]]['servicioSitio'],
-        'entrenamiento': hojaParaCSV[Object.keys(hojaParaCSV)[i]]['entrenamiento'],
-        'tiempoViaje': hojaParaCSV[Object.keys(hojaParaCSV)[i]]['tiempoViaje'],
-        'tiempoEspera': hojaParaCSV[Object.keys(hojaParaCSV)[i]]['tiempoEspera']
-      }
-      valores.push(datos);
-    }
+    this.excelService.exportAsExcelFile( auxExcel.createExcel(JSON.parse(this.infoReporte[0]['HojaTiempo'])) , 'TEST');
 
-    var json2csvParser = new Parser({headers});
-    var csv = json2csvParser.parse(valores);
-    var csvArreglado = String(csv).replace(/"/g,'');
-    var FileSaver = require('file-saver');
-    var blob = new Blob([csvArreglado], {type: "application/vnd.ms-excel;charset=utf-8"});
-    FileSaver.saveAs(blob, "prueba.xls");
 
     //CREACION DEL PDF
     var doc = new jsPDF();
@@ -255,7 +236,7 @@ export class CronogramaComponent implements OnInit {
     doc.setFontSize(8);
     doc.setFontStyle("normal");
     doc.text(142, 53, "Telefono");
-    doc.rect(140, 50, 60, 10); 
+    doc.rect(140, 50, 60, 10);
     doc.setFontSize(10);
     doc.setFontStyle("bold");
     // doc.text(20, 150, this.infoReporte[0]['NombreCliente']);
@@ -271,7 +252,7 @@ export class CronogramaComponent implements OnInit {
     doc.setFontSize(8);
     doc.setFontStyle("normal");
     doc.text(77, 63, "Colaborador");
-    doc.rect(75, 60, 65, 10);  
+    doc.rect(75, 60, 65, 10);
     doc.setFontSize(10);
     doc.setFontStyle("bold");
     doc.text(87, 67, this.infoReporte[0]['NombreColaborador']);
@@ -279,7 +260,7 @@ export class CronogramaComponent implements OnInit {
     doc.setFontSize(8);
     doc.setFontStyle("normal");
     doc.text(142, 63, "No. De Pedido");
-    doc.rect(140, 60, 60, 10); 
+    doc.rect(140, 60, 60, 10);
     doc.setFontSize(10);
     doc.setFontStyle("bold");
     // doc.text(20, 150, this.infoReporte[0]['NombreColaborador']);
@@ -295,7 +276,7 @@ export class CronogramaComponent implements OnInit {
     doc.setFontSize(8);
     doc.setFontStyle("normal");
     doc.text(142, 73, "No. Orden de Servicio Interna");
-    doc.rect(140, 70, 60, 10); 
+    doc.rect(140, 70, 60, 10);
     doc.setFontSize(10);
     doc.setFontStyle("bold");
     // doc.text(20, 150, this.infoReporte[0]['NombreProyecto']);
@@ -364,7 +345,7 @@ export class CronogramaComponent implements OnInit {
     doc.setFontSize(10);
     doc.setFontStyle("bold");
     doc.text(20, 197, this.infoReporte[0]['EstadoInicial']);
-    
+
     //ACTIVIDADES REALIZADAS
     doc.setFontSize(12);
     doc.setFontStyle("bold");
@@ -416,8 +397,8 @@ export class CronogramaComponent implements OnInit {
     doc.setFontSize(14);
     doc.setFontStyle("bold");
     doc.text(85, 180, "Hoja de Tiempo");
-    doc.setFillColor(173,216,230);
-    doc.setDrawColor(0,0,0);
+    doc.setFillColor(173, 216, 230);
+    doc.setDrawColor(0, 0, 0);
     doc.rect(10, 185, 30, 20, 'FD');
 
     doc.rect(40, 185, 80, 10, 'FD');
@@ -446,15 +427,15 @@ export class CronogramaComponent implements OnInit {
     doc.text(161, 200, "T. de Viaje");
     doc.text(183, 200, "T. de \nEspera");
 
-    doc.setFillColor(255,255,255);
+    doc.setFillColor(255, 255, 255);
 
-    var y=205;
+    var y = 205;
     var hojaDeTiempo = JSON.parse(this.infoReporte[0]['HojaTiempo']);
     Object.keys(hojaDeTiempo).forEach(key => {
-      if(y>220){
+      if (y > 220) {
         doc.insertPage();
-        doc.setFillColor(173,216,230);
-        doc.setDrawColor(0,0,0);
+        doc.setFillColor(173, 216, 230);
+        doc.setDrawColor(0, 0, 0);
         doc.rect(10, 10, 30, 20, 'FD');
 
         doc.rect(40, 10, 80, 10, 'FD');
@@ -482,27 +463,27 @@ export class CronogramaComponent implements OnInit {
         doc.text(161, 25, "T. de Viaje");
         doc.text(183, 25, "T. de \nEspera");
 
-        y=30;
+        y = 30;
       }
       console.log(y);
-      doc.text(13, y+4, hojaDeTiempo[key]['fecha']);
+      doc.text(13, y + 4, hojaDeTiempo[key]['fecha']);
       doc.rect(10, y, 30, 8);
-      doc.text(43, y+4, hojaDeTiempo[key]['desde']);
+      doc.text(43, y + 4, hojaDeTiempo[key]['desde']);
       doc.rect(40, y, 27, 8);
-      doc.text(70, y+4, hojaDeTiempo[key]['hasta']);
+      doc.text(70, y + 4, hojaDeTiempo[key]['hasta']);
       doc.rect(67, y, 27, 8);
-      doc.text(97, y+4, hojaDeTiempo[key]['descuento']);
+      doc.text(97, y + 4, hojaDeTiempo[key]['descuento']);
       doc.rect(94, y, 26, 8);
-      doc.text(123, y+4, hojaDeTiempo[key]['servicioSitio']);
+      doc.text(123, y + 4, hojaDeTiempo[key]['servicioSitio']);
       doc.rect(120, y, 20, 8);
-      doc.text(143, y+4, hojaDeTiempo[key]['entrenamiento']);
+      doc.text(143, y + 4, hojaDeTiempo[key]['entrenamiento']);
       doc.rect(140, y, 20, 8);
-      doc.text(163, y+4, hojaDeTiempo[key]['tiempoViaje']);
+      doc.text(163, y + 4, hojaDeTiempo[key]['tiempoViaje']);
       doc.rect(160, y, 20, 8);
-      doc.text(183, y+4, hojaDeTiempo[key]['tiempoEspera']);
+      doc.text(183, y + 4, hojaDeTiempo[key]['tiempoEspera']);
       doc.rect(180, y, 20, 8);
-      y=y+8;
-    });    
+      y = y + 8;
+    });
 
     //FIRMAS
     doc.setFontSize(10);
@@ -536,27 +517,30 @@ export class CronogramaComponent implements OnInit {
     doc.addImage(this.infoReporte[0]['FirmaCliente'], 165, 250, 40, 25);
 
     //ADJUNTOS
-    doc.insertPage();
-    doc.setFontSize(14);
-    doc.setFontStyle("bold");
-    doc.text(85, 20, "ADJUNTOS");
-    var adjuntosBase64 = this.infoReporte[0]['Adjuntos'].split("data:image");
-    for(var i=0; i<adjuntosBase64.length-1;i++){
-      doc.addImage('data:image'+adjuntosBase64[i+1], 20, 50, 180, 180);
-      if(i==adjuntosBase64.length-2) 
-      break
-      else
+    var adjuntosBase64 = this.infoReporte[0]['Adjuntos'];
+    if (adjuntosBase64 !== null) {
       doc.insertPage();
+      doc.setFontSize(14);
+      doc.setFontStyle("bold");
+      doc.text(85, 20, "ADJUNTOS");
+      adjuntosBase64.split("data:image");
+      for (var i = 0; i < adjuntosBase64.length - 1; i++) {
+        doc.addImage('data:image' + adjuntosBase64[i + 1], 20, 50, 180, 180);
+        if (i == adjuntosBase64.length - 2)
+          break
+        else
+          doc.insertPage();
+      }
     }
 
 
     //CREAR EL PDF
-    doc.save(this.infoReporte[0]['NombreColaborador']+'.pdf');
+    doc.save(this.infoReporte[0]['NombreColaborador'] + '.pdf');
   }
 
 
-  setColor(option:number){
-    switch(option) {
+  setColor(option: number) {
+    switch (option) {
       case 1:
         return '#FF7115';
       case 2:
@@ -573,173 +557,165 @@ export class CronogramaComponent implements OnInit {
         return '#8B8B8B';
       case 8:
         return '#A04B00';
-    } 
+    }
   }
 
-  setFecha(fechaN: string){
+  setFecha(fechaN: string) {
     this.dataRetriever.obtenerFecha(fechaN);
   }
 
   ngOnInit() {
     //Obtener las asignaciones del mes y año de la fecha de HOY 
-    var fechaHoy=new Date().toISOString();
-    var fechaHoyMA=fechaHoy.split("-")[0] + "-" + fechaHoy.split("-")[1];
-    var diasDelMes= new Date(parseInt(fechaHoy.split("-")[0]), parseInt(fechaHoy.split("-")[1]), 0).getDate();    
-    this.setFecha(fechaHoyMA+"-"+"01");
-    var tabla=<HTMLTableElement>document.getElementById("tablaAsignacionesID");
-    tabla.addEventListener("click", (event:any) => {
-       var columna = (<HTMLTableDataCellElement>event.target.attributes[0].ownerElement).cellIndex+1;
-       console.log(columna);
-       var fila = (<HTMLTableRowElement>event.target.attributes[0].ownerElement.parentNode).rowIndex;
-       var estiloCelda = (<HTMLTableCellElement>event.target).attributes[0].ownerElement; 
-       this.menuAsignacion(columna, fila, estiloCelda);
+    var fechaHoy = new Date().toISOString();
+    var fechaHoyMA = fechaHoy.split("-")[0] + "-" + fechaHoy.split("-")[1];
+    var diasDelMes = new Date(parseInt(fechaHoy.split("-")[0]), parseInt(fechaHoy.split("-")[1]), 0).getDate();
+    this.setFecha(fechaHoyMA + "-" + "01");
+    var tabla = < HTMLTableElement > document.getElementById("tablaAsignacionesID");
+    tabla.addEventListener("click", (event: any) => {
+      var columna = ( < HTMLTableDataCellElement > event.target.attributes[0].ownerElement).cellIndex + 1;
+      console.log(columna);
+      var fila = ( < HTMLTableRowElement > event.target.attributes[0].ownerElement.parentNode).rowIndex;
+      var estiloCelda = ( < HTMLTableCellElement > event.target).attributes[0].ownerElement;
+      this.menuAsignacion(columna, fila, estiloCelda);
     });
     var header = tabla.createTHead();
     var row = header.insertRow(0);
-    for(var i=0; i<diasDelMes;i++){
-      if(i<9){
+    for (var i = 0; i < diasDelMes; i++) {
+      if (i < 9) {
         var cell = row.insertCell(i);
-        cell.innerHTML = "<b>"+"0"+(i+1)+"</b>";
-      }
-      else{
+        cell.innerHTML = "<b>" + "0" + (i + 1) + "</b>";
+      } else {
         var cell = row.insertCell(i);
-        cell.innerHTML = "<b>"+(i+1)+"</b>";
+        cell.innerHTML = "<b>" + (i + 1) + "</b>";
       }
     }
-     document.getElementById('fecha').setAttribute('value', fechaHoyMA);
+    document.getElementById('fecha').setAttribute('value', fechaHoyMA);
 
     //Llenar la primera tabla con los nombres de todos los Field Service
     //rows[i].rowIndex(Indice de la fila) e textContent(Nombre del especialista). className(IdEspecialista)
-   var tableA;
-   var fila;
-   var celda;
-   
+    var tableA;
+    var fila;
+    var celda;
 
-   this.traerNumeroEspecialistas().then(especialistas => {
-     this.resultados = especialistas;
-     this.traerAsignaciones(fechaHoyMA+"-"+"01").then(data =>{
-     this.Asignaciones = data;
-     for(var i=0; i<this.resultados.length;i++){
-       tableA = document.getElementById("tablaAsignacionesID");
-       fila = tableA.insertRow(i+1);
-       
-       for(var j=0; j<diasDelMes;j++){
-         celda = fila.insertCell(j);
-         celda.style.height = "19.6px";
-       }
-     }
-      var x;
-     for(var i=0; i<this.Asignaciones.length;i++){
-       var ids = (<HTMLTableRowElement>document.getElementById(this.Asignaciones[i]['IdEspecialista'])).rowIndex;
-       x = tableA.rows[ids].cells;
-          if(parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) == parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1])){          
-            for(var j=(parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2])-1);j<(parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2]));j++){
-               x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
-            }
+
+    this.traerNumeroEspecialistas().then(especialistas => {
+      this.resultados = especialistas;
+      this.traerAsignaciones(fechaHoyMA + "-" + "01").then(data => {
+        this.Asignaciones = data;
+        for (var i = 0; i < this.resultados.length; i++) {
+          tableA = document.getElementById("tablaAsignacionesID");
+          fila = tableA.insertRow(i + 1);
+
+          for (var j = 0; j < diasDelMes; j++) {
+            celda = fila.insertCell(j);
+            celda.style.height = "19.6px";
           }
-          else{
-            if(parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1])<parseInt(fechaHoy.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) == parseInt(fechaHoy.split("-")[1])){
+        }
+        var x;
+        for (var i = 0; i < this.Asignaciones.length; i++) {
+          var ids = ( < HTMLTableRowElement > document.getElementById(this.Asignaciones[i]['IdEspecialista'])).rowIndex;
+          x = tableA.rows[ids].cells;
+          if (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) == parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1])) {
+            for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
+              x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
+            }
+          } else {
+            if (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) < parseInt(fechaHoy.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) == parseInt(fechaHoy.split("-")[1])) {
 
-              for(var j=0;j<(parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2]));j++){
+              for (var j = 0; j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
               }
-            }
-            else if(parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1])>parseInt(fechaHoy.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) == parseInt(fechaHoy.split("-")[1])){
-              for(var j=(parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2])-1);j<diasDelMes-1;j++){
+            } else if (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) > parseInt(fechaHoy.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) == parseInt(fechaHoy.split("-")[1])) {
+              for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < diasDelMes - 1; j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
               }
-            }
-            else if(parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1])<parseInt(fechaHoy.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1])>parseInt(fechaHoy.split("-")[1])){
-              for(var j=0;j<diasDelMes;j++){
+            } else if (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) < parseInt(fechaHoy.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) > parseInt(fechaHoy.split("-")[1])) {
+              for (var j = 0; j < diasDelMes; j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
               }
             }
 
           }
-       
-     }
-   });
-   });
+
+        }
+      });
+    });
 
 
     //Crear un EventListener en el Seleccionador de fecha. Siempre que cambia, cambia la tabla
-     document.getElementById('fecha').addEventListener("change", (event) => {
-       var fecha=(<HTMLInputElement>event.target).value;
-       var diasDelMesN= new Date( parseInt(fecha.split("-")[0]) , parseInt(fecha.split("-")[1]), 0).getDate(); 
-       this.setFecha(fecha+"-"+"01");
-        var tabla=<HTMLTableElement>document.getElementById("tablaAsignacionesID");
-        tabla.deleteRow(0);
-        var header = tabla.createTHead();
-        var row = header.insertRow(0);
-        for(var i=0; i<diasDelMesN;i++){
-          if(i<9){
-            var cell = row.insertCell(i);
-            cell.innerHTML = "<b>"+"0"+(i+1)+"</b>";
-          }
-          else{
-            var cell = row.insertCell(i);
-            cell.innerHTML = "<b>"+(i+1)+"</b>";
-          }
+    document.getElementById('fecha').addEventListener("change", (event) => {
+      var fecha = ( < HTMLInputElement > event.target).value;
+      var diasDelMesN = new Date(parseInt(fecha.split("-")[0]), parseInt(fecha.split("-")[1]), 0).getDate();
+      this.setFecha(fecha + "-" + "01");
+      var tabla = < HTMLTableElement > document.getElementById("tablaAsignacionesID");
+      tabla.deleteRow(0);
+      var header = tabla.createTHead();
+      var row = header.insertRow(0);
+      for (var i = 0; i < diasDelMesN; i++) {
+        if (i < 9) {
+          var cell = row.insertCell(i);
+          cell.innerHTML = "<b>" + "0" + (i + 1) + "</b>";
+        } else {
+          var cell = row.insertCell(i);
+          cell.innerHTML = "<b>" + (i + 1) + "</b>";
         }
+      }
 
-        var tableA;
-        var fila;
-        var celda;
+      var tableA;
+      var fila;
+      var celda;
 
-         this.traerNumeroEspecialistas().then(especialistas => {
-            this.resultados = especialistas;
-            this.traerAsignaciones(fecha+"-"+"01").then(data =>{
-               this.Asignaciones = data;
-               tableA = document.getElementById("tablaAsignacionesID");
-               for(var i=this.resultados.length; i>1;i--){
-               fila = tableA.deleteRow(i);
-               }
-               tableA.deleteRow(1);
-               for(let i=0; i<this.resultados.length;i++){
-               tableA = document.getElementById("tablaAsignacionesID");
-               fila = tableA.insertRow(i+1);
-               
-               for(var j=0; j<diasDelMesN;j++){
-                   celda = fila.insertCell(j);
-                   celda.style.height = "19.6px";
-               }
-               }
-            var x;
-           for(let i=0; i<this.Asignaciones.length;i++){
-             var ids = (<HTMLTableRowElement>document.getElementById(this.Asignaciones[i]['IdEspecialista'])).rowIndex;
-             x = tableA.rows[ids].cells;
-                if(parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) == parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1])){          
-                  for(var j=(parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2])-1);j<(parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2]));j++){
-                     x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
-                  }
+      this.traerNumeroEspecialistas().then(especialistas => {
+        this.resultados = especialistas;
+        this.traerAsignaciones(fecha + "-" + "01").then(data => {
+          this.Asignaciones = data;
+          tableA = document.getElementById("tablaAsignacionesID");
+          for (var i = this.resultados.length; i > 1; i--) {
+            fila = tableA.deleteRow(i);
+          }
+          tableA.deleteRow(1);
+          for (let i = 0; i < this.resultados.length; i++) {
+            tableA = document.getElementById("tablaAsignacionesID");
+            fila = tableA.insertRow(i + 1);
+
+            for (var j = 0; j < diasDelMesN; j++) {
+              celda = fila.insertCell(j);
+              celda.style.height = "19.6px";
+            }
+          }
+          var x;
+          for (let i = 0; i < this.Asignaciones.length; i++) {
+            var ids = ( < HTMLTableRowElement > document.getElementById(this.Asignaciones[i]['IdEspecialista'])).rowIndex;
+            x = tableA.rows[ids].cells;
+            if (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) == parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1])) {
+              for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
+                x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
+              }
+            } else {
+              if (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) < parseInt(fecha.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) == parseInt(fecha.split("-")[1])) {
+
+                for (var j = 0; j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
+                  x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
                 }
-                else{
-                  if(parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1])<parseInt(fecha.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) == parseInt(fecha.split("-")[1])){
-
-                    for(var j=0;j<(parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2]));j++){
-                      x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
-                    }
-                  }
-                  else if(parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1])>parseInt(fecha.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) == parseInt(fecha.split("-")[1])){
-                    for(var j=(parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2])-1);j<diasDelMes-1;j++){
-                      console.log(j);
-                      x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
-                    }
-                  }
-                  else if(parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1])<parseInt(fecha.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1])>parseInt(fecha.split("-")[1])){
-                    for(var j=0;j<diasDelMes;j++){
-                      x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
-                    }
-                  }
+              } else if (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) > parseInt(fecha.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) == parseInt(fecha.split("-")[1])) {
+                for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < diasDelMes - 1; j++) {
+                  console.log(j);
+                  x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
                 }
-             
-           }
-          });
-          });
+              } else if (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) < parseInt(fecha.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) > parseInt(fecha.split("-")[1])) {
+                for (var j = 0; j < diasDelMes; j++) {
+                  x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
+                }
+              }
+            }
+
+          }
+        });
+      });
 
 
-   });
-     
+    });
+
   }
 
 }

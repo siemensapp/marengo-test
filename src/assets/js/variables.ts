@@ -1,4 +1,4 @@
-export var url:string = 'https://a6e403f2.ngrok.io';
+export var url:string = 'https://6564be02.ngrok.io';
 
 export var empresasLogos = {
     'ACERIAS DE COLOMBIA S.A.S': 'Acesco',

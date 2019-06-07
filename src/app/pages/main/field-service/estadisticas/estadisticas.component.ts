@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import * as env from '../../../../../assets/js/variables';
 import {HttpClient} from '@angular/common/http';
 import { DataRetrieverService } from '../../services/data-retriever.service';
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label } from 'ng2-charts';
+
 
 @Component({
   selector: 'app-estadisticas',
@@ -10,6 +13,16 @@ import { DataRetrieverService } from '../../services/data-retriever.service';
 })
 export class EstadisticasComponent implements OnInit {
 
+  labels;
+  barChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  barChartType: ChartType = 'horizontalBar';
+  barChartLegend = true;
+  barChartPlugins = [];
+  porcentajesIndividuales;
+  PIFinales;
+  especialistas;
   asignaciones;
   fechaA = "";
   totalDiasVFD=0;
@@ -32,6 +45,27 @@ export class EstadisticasComponent implements OnInit {
         resolve(data);
       })
     })
+  }
+
+  selectType(evt, tipo) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+  
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+  
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+  
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tipo).style.display = "block";
+    evt.currentTarget.className += " active";
   }
 
   datosGraficos()
@@ -145,12 +179,55 @@ export class EstadisticasComponent implements OnInit {
     this.porcentajeTotal = (this.porcentajeVFD + this.porcentajeBT + this.porcentajeAUT + this.porcentajeAOS + this.porcentajeMOT)/5;
     }
 
+    datosIndividuales(){
+      var mesSeleccionado = parseInt(this.fechaA.split("-")[1]);
+      var diasDelMes= new Date(parseInt(this.fechaA.split("-")[0]), parseInt(this.fechaA.split("-")[1]), 0).getDate();   
+      this.labels = [];
+      for(var i=0; i<this.especialistas.length;i++)
+      {
+          this.labels.push(this.especialistas[i]['NombreE']);
+      }
+      this.porcentajesIndividuales = [];
+      for(var i=0; i<this.asignaciones.length; i++){
+        if(this.porcentajesIndividuales[this.asignaciones[i]['IdEspecialista']]==null){
+          this.porcentajesIndividuales[this.asignaciones[i]['IdEspecialista']]=0;
+        }
+        var status=this.asignaciones[i]['IdStatus'];
+        var fechaInicio= this.asignaciones[i]['FechaInicio'];
+        var fechaFin = this.asignaciones[i]['FechaFin'];
+        if(status == 1 || status == 2 || status == 3 || status == 4 || status == 5){
+            if(mesSeleccionado>parseInt(fechaInicio.split("-")[1])){
+              this.porcentajesIndividuales[this.asignaciones[i]['IdEspecialista']] = this.porcentajesIndividuales[this.asignaciones[i]['IdEspecialista']]+(parseInt(fechaFin.split("-")[2].split("T")[0]))+1;
+             }
+             else if(mesSeleccionado<parseInt(fechaFin.split("-")[1])){
+              this.porcentajesIndividuales[this.asignaciones[i]['IdEspecialista']] = this.porcentajesIndividuales[this.asignaciones[i]['IdEspecialista']]+(diasDelMes-parseInt(fechaInicio.split("-")[2].split("T")[0]))+1;
+             }
+             else{
+              this.porcentajesIndividuales[this.asignaciones[i]['IdEspecialista']] = this.porcentajesIndividuales[this.asignaciones[i]['IdEspecialista']]+(parseInt(fechaFin.split("-")[2].split("T")[0])-parseInt(fechaInicio.split("-")[2].split("T")[0]))+1;
+            }
+        }
+     }
+      this.porcentajesIndividuales = this.porcentajesIndividuales.filter((nuevo)  => {
+        return nuevo != null;
+      });
+      for(var i=0; i<this.porcentajesIndividuales.length; i++){
+        this.porcentajesIndividuales[i] = (parseInt(this.porcentajesIndividuales)/diasDelMes)*100; 
+      }
+      this.PIFinales=[{'data': this.porcentajesIndividuales, 'label': 'Ocupacion (%)'}];
+    }
+
   ngOnInit() {
       this.DataRetriever.infoFecha.subscribe(infoFecha => {
         this.fechaA = infoFecha; 
         this.traerAsignaciones(this.fechaA).then(data =>{
         this.asignaciones = data;
-        this.datosGraficos();
+        this.DataRetriever.getData(env.url+"/api/allWorkers").then(especialistas => {
+          this.especialistas = especialistas;
+          console.log(this.especialistas);
+          this.datosGraficos();
+          this.datosIndividuales();
+          })
+        
       });  
       });
         

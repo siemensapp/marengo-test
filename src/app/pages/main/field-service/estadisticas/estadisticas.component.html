@@ -1,4 +1,12 @@
 <div id="titulo">Ocupacion Field Service</div>
+
+<div class="tab">
+  <button class="tablinks" (click)="selectType($event, 'grupal')">Grupal</button>
+  <button class="tablinks" (click)="selectType($event, 'individual')">Individual</button>
+</div>
+
+
+<div id="grupal" class="tabcontent">
  <div class="alineacion">
    <circle-progress [subtitle]="'FIELD SERVICE'" [percent]="porcentajeTotal" [radius]="80" [outerStrokeWidth]="16"
      [innerStrokeWidth]="8" [outerStrokeColor]="'#009999'" [innerStrokeColor]="'lightgray'" [animation]="true"
@@ -27,4 +35,19 @@
      [subtitleFontSize]='20' [unitsFontSize]='22' [titleFontSize]='25'>
    </circle-progress>
  </div>
+ </div>
+
+
+ <div id="individual" class="tabcontent" *ngIf="PIFinales">
+    <canvas baseChart 
+    [datasets]="PIFinales"
+    [labels]="labels"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [legend]="barChartLegend"
+    [chartType]="barChartType">
+  </canvas>
+</div> 
+
+
  <a href="#/main/field-service/cronograma"><button id="cronograma">Volver Al Cronograma</button></a>
