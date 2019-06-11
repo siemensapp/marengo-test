@@ -25,7 +25,7 @@ export class SearchComponent implements OnInit {
 
   testExcel() {
     // this.excelService.exportAsExcelFile( auxExcel.createExcel(JSON.parse(this.infoReporte[0]['HojaTiempo'])) , 'TEST');
-    this.excelService.exportAsExcelFile( auxExcel.createExcel({'key': 'value', 'key2': 'value2'}) , 'TEST');
+    this.excelService.exportAsExcelFile('TEST');
   }
 
   translateTipoEquipo( tipo ) {
