@@ -8,9 +8,9 @@ const EXCEL_EXTENSION = '.xlsx';
 export class ExcelService {
 
 HojaTiempo = {
-  "2019-05-14": {
+  "2019-06-22": {
       "desde": "07:00",
-      "fecha": "2019-05-14",
+      "fecha": "2019-06-22",
       "hasta": "20:00",
       "descuento": "00:00",
       "tiempoViaje": "01:00",
@@ -18,16 +18,45 @@ HojaTiempo = {
       "entrenamiento": "00:00",
       "servicioSitio": "10:00"
   },
-  "2019-05-15": {
+  "2019-06-23": {
       "desde": "07:30",
-      "fecha": "2019-05-15",
+      "fecha": "2019-06-23",
       "hasta": "20:30",
       "descuento": "01:00",
       "tiempoViaje": "01:00",
       "tiempoEspera": "00:30",
       "entrenamiento": "00:00",
       "servicioSitio": "10:00"
-  }
+  },
+  "2019-01-01": {
+    "desde": "07:30",
+    "fecha": "2019-01-01",
+    "hasta": "20:30",
+    "descuento": "01:00",
+    "tiempoViaje": "01:00",
+    "tiempoEspera": "00:30",
+    "entrenamiento": "00:00",
+    "servicioSitio": "10:00"
+  },
+  "2019-06-20": {
+    "desde": "07:30",
+    "fecha": "2019-06-20",
+    "hasta": "20:30",
+    "descuento": "01:00",
+    "tiempoViaje": "01:00",
+    "tiempoEspera": "00:30",
+    "entrenamiento": "00:00",
+    "servicioSitio": "10:00"
+},"2019-11-04": {
+  "desde": "07:30",
+  "fecha": "2019-11-04",
+  "hasta": "20:30",
+  "descuento": "01:00",
+  "tiempoViaje": "01:00",
+  "tiempoEspera": "00:30",
+  "entrenamiento": "00:00",
+  "servicioSitio": "10:00"
+},
 }
 
 

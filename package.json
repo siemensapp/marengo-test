@@ -68,7 +68,7 @@
     "@angular/language-service": "~7.1.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.4",
+    "@types/node": "^8.9.5",
     "chromedriver": "^2.43.1",
     "codelyzer": "~4.5.0",
     "eclint": "^2.8.1",
