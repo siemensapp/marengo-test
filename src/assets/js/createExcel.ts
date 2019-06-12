@@ -24,15 +24,26 @@ export function createReporteHorasSheet ( horas ) {
         let cellHasta = XLSX.utils.encode_cell({c: 4, r: i})
         let cellDescuento = XLSX.utils.encode_cell({c: 5, r: i})
         let cellPrimeraOperacion = XLSX.utils.encode_cell({c:6, r:i});
-        let cellHND = XLSX.utils.encode_cell({c:7, r:i})
+        let cellSegundaOperacion = XLSX.utils.encode_cell({c:7, r:i});
+        let cellTerceraOperacion = XLSX.utils.encode_cell({c:8, r:i});
+        let cellCuartaOperacion = XLSX.utils.encode_cell({c:9, r:i});
+        let cellQuintaOperacion = XLSX.utils.encode_cell({c:10, r:i});
+        let cellHND = XLSX.utils.encode_cell({c:11, r:i})
+        let cellHED = XLSX.utils.encode_cell({c:12, r:i})
+        let cellHEN = XLSX.utils.encode_cell({c:13, r:i})
+        let cellHEDF = XLSX.utils.encode_cell({c:14, r:i})
+        let cellHENF = XLSX.utils.encode_cell({c:15, r:i})
+        let cellHET = XLSX.utils.encode_cell({c:16, r:i})
         
         let cellNine = XLSX.utils.encode_cell({c:0, r:9})
+        let cellSix = XLSX.utils.encode_cell({c:0, r:10})
+        let cellTwentyOne = XLSX.utils.encode_cell({c:0, r:11})
 
         let fechaCompleta = new Date(horas[records]['fecha']).toISOString().split("T")[0];
         console.log('Fecha Completa: ', fechaCompleta)
         let aux = {
             //Fecha: String(String(fechaCompleta).split("/")[2] + '-' + String(fechaCompleta).split("/")[1] + '-' + String(fechaCompleta).split("/")[0]),
-            Fecha: {v: fechaCompleta, z:'d-mmm-yy'},
+            Fecha: {v: fechaCompleta, z:'d-mmm-yy', s:{fill: {fgColor:{rgb:'000000'}}}},
             Dia: dayNames[(f.getDay() + 1) % 7],
             /**
              * Si es sabado el tipo es 1
@@ -46,7 +57,17 @@ export function createReporteHorasSheet ( horas ) {
             Hasta: horas[records]['hasta'],
             Descuento: horas[records]['descuento'],
             PrimeraOperacion: {f: cellHasta+'-'+cellDesde+'-'+cellDescuento, z: 'h:mm'},
-            HND: {f:"IF(HOUR(" + cellPrimeraOperacion +  ")>HOUR(" + cellNine + ")," + cellNine + "," + cellPrimeraOperacion + ")", z:'h:mm'} 
+            SegundaOperacion: {f: "IF(HOUR(" + cellHasta + ")>=HOUR(" + cellSix + "),IF(HOUR(" + cellDesde + ")<HOUR(" + cellSix + ")," + cellSix + "-" + cellDesde + ",0),0)", z: 'h:mm'},
+            TerceraOperacion: {f: "IF(HOUR(" + cellDesde + ")<=HOUR(" + cellTwentyOne + "),IF(HOUR(" + cellHasta + ")>HOUR(" + cellTwentyOne + ")," + cellHasta + "-" + cellTwentyOne + ",0),0)", z: 'h:mm'},
+            CuartaOperacion: {f: "IF(OR(HOUR(" + cellHasta + ")<HOUR(" + cellSix + "),HOUR(" + cellDesde + ")>HOUR(" + cellTwentyOne + "))," + cellPrimeraOperacion + ",0)", z: 'h:mm'},
+            QuintaOperacion: {f: "IF(AND(" + cellTipo + ">1," + cellTipo + "<4)," + cellPrimeraOperacion + "," + cellPrimeraOperacion + " - " + cellSegundaOperacion + " - " + cellTerceraOperacion + " - " + cellCuartaOperacion + ")", z: 'h:mm'},
+            HND: {f:"IF(AND(" + cellTipo + ">0," + cellTipo + "<4),0,IF(HOUR(" + cellQuintaOperacion + ")>HOUR(" + cellNine + ")," + cellNine + "," + cellQuintaOperacion + "))", z:'h:mm'},
+            HED : {f: "IF(AND(" + cellTipo + ">1," + cellTipo + "<4),0,IF(HOUR(" + cellQuintaOperacion + ")>HOUR(" + cellHND + ")," + cellQuintaOperacion + "-" + cellHND + ",0))", z:'h:mm'},
+            HEN : {f: "IF(AND(" + cellTipo + ">1," + cellTipo + "<4),0," + cellSegundaOperacion + " + " + cellTerceraOperacion + " + " + cellCuartaOperacion + ")", z: 'h:mm'},
+            HEDF : {f: "IF(AND(" + cellTipo + ">1," + cellTipo + "<4)," + cellQuintaOperacion + "- " + cellSegundaOperacion + "- " + cellTerceraOperacion + "- " + cellCuartaOperacion + ",0)", z: 'h:mm'},
+            HENF : {f: "IF(AND(" + cellTipo + ">1," + cellTipo + "<4)," + cellSegundaOperacion + "+" + cellTerceraOperacion + "+" + cellCuartaOperacion + ",0)", z: 'h:mm'},
+            HET : {f: cellHED + "+" + cellHEN + "+" + cellHEDF + "+" + cellHENF, z:'h:mm'},
+            SUMA : {f: cellHND + " +" + cellHET, z:'h:mm'} 
         }
         console.log(aux);
         rows.push(aux);
@@ -54,6 +75,30 @@ export function createReporteHorasSheet ( horas ) {
     })
     var horasSheet = XLSX.utils.json_to_sheet(rows);
     XLSX.utils.sheet_add_json(horasSheet, [{nine:{v: '9:00'}}], {origin: "A10", skipHeader: true});
+    XLSX.utils.sheet_add_json(horasSheet, [{six:{v: '6:00'}}], {origin: "A11", skipHeader: true});
+    XLSX.utils.sheet_add_json(horasSheet, [{twentyOne:{v: '21:00'}}], {origin: "A12", skipHeader: true});
+
+    horasSheet['!cols'] = [
+        {wch:10},
+        {wch: 3},
+        {wch: 4},
+        {wch: 5},
+        {wch: 5},
+        {wch: 9},
+        {wch: 5, hidden: true},
+        {wch: 5, hidden: true},
+        {wch: 5, hidden: true},
+        {wch: 5, hidden: true},
+        {wch: 5, hidden: true},
+        {wch: 5},
+        {wch: 5},
+        {wch: 5},
+        {wch: 5},
+        {wch: 5},
+        {wch: 5},
+        {wch: 5},
+    ]
+
     XLSX.utils.book_append_sheet(workbook, horasSheet, 'REPORTE DE HORAS');
 }
 
