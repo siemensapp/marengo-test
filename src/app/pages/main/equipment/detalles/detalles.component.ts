@@ -36,7 +36,8 @@ export class DetallesComponent implements OnInit {
   }
 
   showReport( jsonReport ) {
-    return pdf.createPDF(jsonReport);
+    console.log(jsonReport);
+    pdf.createPDF(jsonReport);
   }
 
   getReportsData() {

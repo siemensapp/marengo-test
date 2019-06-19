@@ -185,8 +185,9 @@
 
 .tablaEspecialistas {
   background-color: white;
-  border: 2px inset lightgray;
   border-radius: 8px;
+  border-color: lightgray;
+  // border: 2px inset lightgray;
   width: 25%;
   height: 15%;
 }
@@ -208,8 +209,9 @@
 .tablaAsignaciones {
   margin-left: 1%;
   background-color: white;
-  border: 2px inset lightgray;
+  // border: 2px inset lightgray;
   border-radius: 8px;
+  border-color: lightgray;
   width: 60em;
   height: 15%;
 }

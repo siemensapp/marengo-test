@@ -20,12 +20,13 @@ export class SearchComponent implements OnInit {
   criteria = [
     {name: 'company', label: 'Compañia', options: ['ACERIAS DE COLOMBIA S.A.S', 'ACERIAS PAZ DEL RIO S.A.', 'CEMENTOS ARGOS S.A.', 'CABLES DE ENERGIA Y TELECOMUNICACIONES S.A.', 'ECOPETROL S.A.', 'T.C.BUEN S.A.', 'PAVCO', 'PRODUCTOS FAMILIA S.A.', 'POSTOBON S.A.', 'SOCIEDAD PORTUARIA REGIONAL DE BUENAVENTURA S.A.']},
     {name: 'equipment-type', label: 'Tipo de Equipo', options: ['Arrancadores', 'Motores', 'Automatización', 'Variadores', 'Interruptores']},
-    {name: 'MLFB'}
+    {name: 'MLFB'},
+    {name: 'Serial'}
   ];
 
   testExcel() {
     // this.excelService.exportAsExcelFile( auxExcel.createExcel(JSON.parse(this.infoReporte[0]['HojaTiempo'])) , 'TEST');
-    this.excelService.exportAsExcelFile('TEST');
+    // this.excelService.exportAsExcelFile('TEST');
   }
 
   translateTipoEquipo( tipo ) {

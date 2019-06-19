@@ -62,12 +62,8 @@ HojaTiempo = {
 
 constructor() { }
 // public exportAsExcelFile(json: any[], excelFileName: string): void {
-public exportAsExcelFile(excelFileName: string): void {
-  console.log(XLSX.version);
-  // const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
-  // const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-  // const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-  const excelBuffer: any = XLSX.write(auxExcel.createExcel( this.HojaTiempo ), { bookType: 'xlsx', type: 'array' });
+public exportAsExcelFile(excelFileName: string, HojaTiempo:JSON, costoServicio, costoViaje): void {
+  const excelBuffer: any = XLSX.write(auxExcel.createExcel( HojaTiempo, costoServicio, costoViaje ), { bookType: 'xlsx', type: 'array' });
   this.saveAsExcelFile(excelBuffer, excelFileName);
 }
 private saveAsExcelFile(buffer: any, fileName: string): void {
