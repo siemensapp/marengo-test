@@ -87,11 +87,17 @@ export class CronogramaComponent implements OnInit {
               } else {
                 status = "Asignación Terminada";
               }
+              if(this.infoAsignacion[0]['IdStatus']==1){
               var contenido = this.infoAsignacion[0]['NombreE'] + ' (' + this.infoAsignacion[0]['NombreT'] + ') - ' + this.infoAsignacion[0]['NombreS'] + '<br>' +
                 this.infoAsignacion[0]['NombreSitio'] + '<br><br>' +
                 this.infoAsignacion[0]['FechaInicio'].split("T")[0] + '  <i class="fas fa-long-arrow-alt-right"></i>  ' + this.infoAsignacion[0]['FechaFin'].split("T")[0] + '<br>' +
                 '<p style="font-weight: bold; text-decoration: underline;">' + status + '</p>' + '<br>' +
                 'Contacto: ' + this.infoAsignacion[0]['NombreContacto'] + ' - ' + this.infoAsignacion[0]['TelefonoContacto'];
+              }
+              else{
+                var contenido = this.infoAsignacion[0]['NombreE'] + ' (' + this.infoAsignacion[0]['NombreT'] + ') - ' + this.infoAsignacion[0]['NombreS'] + '<br>' +
+                this.infoAsignacion[0]['FechaInicio'].split("T")[0] + '  <i class="fas fa-long-arrow-alt-right"></i>  ' + this.infoAsignacion[0]['FechaFin'].split("T")[0] + '<br>';  
+              }
               if (reportData == 'false') {
                 Swal.fire({
                   title: 'Informacion Asignacion',
@@ -243,6 +249,7 @@ export class CronogramaComponent implements OnInit {
     });
     var header = tabla.createTHead();
     var row = header.insertRow(0);
+    row.style.fontSize = "1.1em";
     for (var i = 0; i < diasDelMes; i++) {
       if (i < 9) {
         var cell = row.insertCell(i);
@@ -252,6 +259,7 @@ export class CronogramaComponent implements OnInit {
         cell.innerHTML = "<b>" + (i + 1) + "</b>";
       }
     }
+    
     document.getElementById('fecha').setAttribute('value', fechaHoyMA);
 
     //Llenar la primera tabla con los nombres de todos los Field Service
@@ -268,10 +276,10 @@ export class CronogramaComponent implements OnInit {
         for (var i = 0; i < this.resultados.length; i++) {
           tableA = document.getElementById("tablaAsignacionesID");
           fila = tableA.insertRow(i + 1);
-
+          fila.style.borderTop = "1px ridge lightgray";
           for (var j = 0; j < diasDelMes; j++) {
             celda = fila.insertCell(j);
-            celda.style.height = "19.6px";
+            celda.style.height = "1.3em";
           }
         }
         var x;
@@ -314,6 +322,7 @@ export class CronogramaComponent implements OnInit {
       tabla.deleteRow(0);
       var header = tabla.createTHead();
       var row = header.insertRow(0);
+      row.style.fontSize = "1.1em";
       for (var i = 0; i < diasDelMesN; i++) {
         if (i < 9) {
           var cell = row.insertCell(i);
@@ -340,11 +349,11 @@ export class CronogramaComponent implements OnInit {
           for (let i = 0; i < this.resultados.length; i++) {
             tableA = document.getElementById("tablaAsignacionesID");
             fila = tableA.insertRow(i + 1);
-
+            fila.style.borderTop = "1px ridge lightgray";
             for (var j = 0; j < diasDelMesN; j++) {
               celda = fila.insertCell(j);
-              celda.style.height = "19.6px";
-            }
+              celda.style.height = "1.3em";
+              }
           }
           var x;
           for (let i = 0; i < this.Asignaciones.length; i++) {

@@ -17,6 +17,7 @@ export class AsignacionComponent implements OnInit {
     infoUbicacion = "";
     infoCiudad = "";
     clientCode = null;
+    fechaMinima;
 
 
   enviarDatos(){
@@ -79,6 +80,9 @@ export class AsignacionComponent implements OnInit {
   ResultadosEmpresas : JSON[];
   ResultadosField : JSON[];
   ngOnInit() {
+    document.getElementById('fechaI').addEventListener("change", (event) => {
+      this.fechaMinima = (<HTMLDataElement>document.getElementById('fechaI')).value;
+    });
     this.DataRetriever.infoUbicacion.subscribe(infoUbicacion => this.infoUbicacion = infoUbicacion);
     this.DataRetriever.finalCoords.subscribe(finalCoords => {this.finalCoords = finalCoords
       var nombreS = document.getElementById('ubicacion').textContent;

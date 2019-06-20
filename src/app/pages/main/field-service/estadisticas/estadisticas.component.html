@@ -1,12 +1,14 @@
 <div id="titulo">Ocupacion Field Service</div>
 
 <div class="tab">
-  <button class="tablinks" (click)="selectType($event, 'grupal')">Grupal</button>
-  <button class="tablinks" (click)="selectType($event, 'individual')">Individual</button>
+  <button class="tablinks" (click)="selectType($event, 'grupalM')">Grupal Mensual</button>
+  <button class="tablinks" (click)="selectType($event, 'individualM')">Individual Mensual</button>
+  <button class="tablinks" (click)="selectType($event, 'grupalA')">Grupal Anual</button>
+  <button class="tablinks" (click)="selectType($event, 'individualA')">Individual Anual</button>
 </div>
 
 
-<div id="grupal" class="tabcontent">
+<div id="grupalM" class="tabcontent">
  <div class="alineacion">
    <circle-progress [subtitle]="'FIELD SERVICE'" [percent]="porcentajeTotal" [radius]="80" [outerStrokeWidth]="16"
      [innerStrokeWidth]="8" [outerStrokeColor]="'#009999'" [innerStrokeColor]="'lightgray'" [animation]="true"
@@ -38,8 +40,9 @@
  </div>
 
 
- <div id="individual" class="tabcontent" *ngIf="PIFinales">
+ <div id="individualM" class="tabcontent" *ngIf="PIFinales">
     <canvas baseChart 
+    [colors] = "chartColors"
     [datasets]="PIFinales"
     [labels]="labels"
     [options]="barChartOptions"
@@ -49,5 +52,48 @@
   </canvas>
 </div> 
 
+
+<div id="grupalA" class="tabcontent">
+  <div class="alineacion">
+    <circle-progress [subtitle]="'FIELD SERVICE'" [percent]="porcentajeTotal" [radius]="80" [outerStrokeWidth]="16"
+      [innerStrokeWidth]="8" [outerStrokeColor]="'#009999'" [innerStrokeColor]="'lightgray'" [animation]="true"
+      [animationDuration]="400" [subtitleFontSize]='16' [unitsFontSize]='22' [titleFontSize]='25'>
+    </circle-progress>
+    <circle-progress [subtitle]="'VFD'" [percent]="porcentajeVFD" [radius]="80" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+      [outerStrokeColor]="'#009999'" [innerStrokeColor]="'lightgray'" [animation]="true" [animationDuration]="400"
+      [subtitleFontSize]='20' [unitsFontSize]='22' [titleFontSize]='25'>
+    </circle-progress>
+    <circle-progress [subtitle]="'BT'" [percent]="porcentajeBT" [radius]="80" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+      [outerStrokeColor]="'#009999'" [innerStrokeColor]="'lightgray'" [animation]="true" [animationDuration]="400"
+      [subtitleFontSize]='20' [unitsFontSize]='22' [titleFontSize]='25'>
+    </circle-progress>
+  </div>
+  <div class="alineacion">
+    <circle-progress [subtitle]="'AUT'" [percent]="porcentajeAUT" [radius]="80" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+      [outerStrokeColor]="'#009999'" [innerStrokeColor]="'lightgray'" [animation]="true" [animationDuration]="400"
+      [subtitleFontSize]='20' [unitsFontSize]='22' [titleFontSize]='25'>
+    </circle-progress>
+    <circle-progress [subtitle]="'AOS'" [percent]="porcentajeAOS" [radius]="80" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+      [outerStrokeColor]="'#009999'" [innerStrokeColor]="'lightgray'" [animation]="true" [animationDuration]="400"
+      [subtitleFontSize]='20' [unitsFontSize]='22' [titleFontSize]='25'>
+    </circle-progress>
+    <circle-progress [subtitle]="'MOT'" [percent]="porcentajeMOT" [radius]="80" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+      [outerStrokeColor]="'#009999'" [innerStrokeColor]="'lightgray'" [animation]="true" [animationDuration]="400"
+      [subtitleFontSize]='20' [unitsFontSize]='22' [titleFontSize]='25'>
+    </circle-progress>
+  </div>
+  </div>
+
+  <div id="individualA" class="tabcontent" *ngIf="PIFinales">
+    <canvas baseChart 
+    [colors] = "chartColors"
+    [datasets]="PIFinales"
+    [labels]="labels"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [legend]="barChartLegend"
+    [chartType]="barChartType">
+  </canvas>
+</div> 
 
  <a href="#/main/field-service/cronograma"><button id="cronograma">Volver Al Cronograma</button></a>

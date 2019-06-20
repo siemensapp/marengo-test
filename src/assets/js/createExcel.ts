@@ -301,12 +301,12 @@ export function createReporteHorasSheet(horas, costoServicio, costoViaje) {
   var cellHEDNueva = 'M'+(i+5);
   XLSX.utils.sheet_add_json(horasSheet, 
     [
-        {Horario: 'Horas Normales', Servicio: {f : cellHNDHS+'*24', z: '0'}, Viaje: {f: cellHNDHV+'*24', z:'0'}, Multiplicador: '1', PrecioHrServicio: costoServicio, PrecioHrViaje: costoViaje, Total: {f : '(O'+(i+1)+'*L'+(i+1)+') + (P'+(i+1)+'*M'+(i+1)+')', z: '\$ #,#'}}, 
-        {Horario: 'Horas Extra Diurnas', Servicio: {f : cellHEDHS+'*24', z: '0'}, Viaje: {f: cellHEDHV+'*24', z:'0'}, Multiplicador: '1,25', PrecioHrServicio: {f: 'O'+(i+1)+'*N'+(i+2)}, PrecioHrViaje: costoViaje, Total: {f : '(O'+(i+2)+'*L'+(i+2)+') + (P'+(i+2)+'*M'+(i+2)+')', z: '\$ #,#'}},
-        {Horario: 'Horas Extra Nocturnas', Servicio: {f : cellHENHS+'*24', z: '0'}, Viaje: {f: cellHENHV+'*24', z:'0'}, Multiplicador: '1,75', PrecioHrServicio: {f: 'O'+(i+1)+'*N'+(i+3)}, PrecioHrViaje: costoViaje, Total: {f : '(O'+(i+3)+'*L'+(i+3)+') + (P'+(i+3)+'*M'+(i+3)+')', z: '\$ #,#'}},
-        {Horario: 'Horas Extra Diurnas Festivos', Servicio: {f : cellHEDFHS+'*24', z: '0'}, Viaje: {f: cellHEDFHV+'*24', z:'0'}, Multiplicador: '2', PrecioHrServicio: {f: 'O'+(i+1)+'*N'+(i+4)}, PrecioHrViaje: costoViaje, Total: {f : '(O'+(i+4)+'*L'+(i+4)+') + (P'+(i+4)+'*M'+(i+4)+')', z: '\$ #,#'}},
-        {Horario: 'Horas Extra Nocturnas Festivos', Servicio: {f : cellHENFHS+'*24', z: '0'}, Viaje: {f: cellHENFHV+'*24', z:'0'}, Multiplicador: '2,50', PrecioHrServicio: {f: 'O'+(i+1)+'*N'+(i+5)}, PrecioHrViaje: costoViaje, Total: {f : '(O'+(i+5)+'*L'+(i+5)+') + (P'+(i+5)+'*M'+(i+5)+')', z: '\$ #,#'}},
-        {Horario: 'TOTAL', Servicio: {f : 'SUM(L'+(i+1)+':'+cellHNDNueva+')', z: '0'}, Viaje: {f: 'SUM(M'+(i+1)+':'+cellHEDNueva+')', z:'0'}, Multiplicador: '', PrecioHrServicio: '', PrecioHrViaje: '', Total: {f : 'SUM(Q'+(i+1)+':Q'+(i+5)+')', z: '\$ #,#'}}
+        {Horario: 'Horas Normales', Servicio: {f : cellHNDHS+'*24', z: '#,##0.00'}, Viaje: {f: cellHNDHV+'*24', z:'0'}, Multiplicador: '1', PrecioHrServicio: costoServicio, PrecioHrViaje: costoViaje, Total: {f : '(O'+(i+1)+'*L'+(i+1)+') + (P'+(i+1)+'*M'+(i+1)+')', z: '\$ #,#'}}, 
+        {Horario: 'Horas Extra Diurnas', Servicio: {f : cellHEDHS+'*24', z: '#,##0.00'}, Viaje: {f: cellHEDHV+'*24', z:'0'}, Multiplicador: '1,25', PrecioHrServicio: {f: 'O'+(i+1)+'*N'+(i+2)}, PrecioHrViaje: costoViaje, Total: {f : '(O'+(i+2)+'*L'+(i+2)+') + (P'+(i+2)+'*M'+(i+2)+')', z: '\$ #,#'}},
+        {Horario: 'Horas Extra Nocturnas', Servicio: {f : cellHENHS+'*24', z: '#,##0.00'}, Viaje: {f: cellHENHV+'*24', z:'0'}, Multiplicador: '1,75', PrecioHrServicio: {f: 'O'+(i+1)+'*N'+(i+3)}, PrecioHrViaje: costoViaje, Total: {f : '(O'+(i+3)+'*L'+(i+3)+') + (P'+(i+3)+'*M'+(i+3)+')', z: '\$ #,#'}},
+        {Horario: 'Horas Extra Diurnas Festivos', Servicio: {f : cellHEDFHS+'*24', z: '#,##0.00'}, Viaje: {f: cellHEDFHV+'*24', z:'0'}, Multiplicador: '2', PrecioHrServicio: {f: 'O'+(i+1)+'*N'+(i+4)}, PrecioHrViaje: costoViaje, Total: {f : '(O'+(i+4)+'*L'+(i+4)+') + (P'+(i+4)+'*M'+(i+4)+')', z: '\$ #,#'}},
+        {Horario: 'Horas Extra Nocturnas Festivos', Servicio: {f : cellHENFHS+'*24', z: '#,##0.00'}, Viaje: {f: cellHENFHV+'*24', z:'0'}, Multiplicador: '2,50', PrecioHrServicio: {f: 'O'+(i+1)+'*N'+(i+5)}, PrecioHrViaje: costoViaje, Total: {f : '(O'+(i+5)+'*L'+(i+5)+') + (P'+(i+5)+'*M'+(i+5)+')', z: '\$ #,#'}},
+        {Horario: 'TOTAL', Servicio: {f : 'SUM(L'+(i+1)+':'+cellHNDNueva+')', z: '#,##0.00'}, Viaje: {f: 'SUM(M'+(i+1)+':'+cellHEDNueva+')', z:'0'}, Multiplicador: '', PrecioHrServicio: '', PrecioHrViaje: '', Total: {f : 'SUM(Q'+(i+1)+':Q'+(i+5)+')', z: '\$ #,#'}}
     ], {origin: "K"+i});
 
   horasSheet['!cols'] = [{
@@ -345,7 +345,7 @@ export function createReporteHorasSheet(horas, costoServicio, costoViaje) {
     },
     {
       wch: 15,
-      hidden: true
+      // hidden: true
     },
     {
       wch: 5
