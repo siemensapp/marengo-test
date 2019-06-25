@@ -235,7 +235,8 @@ export class CronogramaComponent implements OnInit {
   ngOnInit() {
     
     //Obtener las asignaciones del mes y año de la fecha de HOY 
-    var fechaHoy = new Date().toISOString();
+    var fechaH = new Date();
+    var fechaHoy = fechaH.toISOString();
     var fechaHoyMA = fechaHoy.split("-")[0] + "-" + fechaHoy.split("-")[1];
     var diasDelMes = new Date(parseInt(fechaHoy.split("-")[0]), parseInt(fechaHoy.split("-")[1]), 0).getDate();
     this.setFecha(fechaHoyMA + "-" + "01");
@@ -256,7 +257,7 @@ export class CronogramaComponent implements OnInit {
         cell.innerHTML = "<b>" + "0" + (i + 1) + "</b>";
       } else {
         var cell = row.insertCell(i);
-        cell.innerHTML = "<b>" + (i + 1) + "</b>";
+        cell.innerHTML = "<b>" + (i + 1) + "</b>";  
       }
     }
     
@@ -284,23 +285,29 @@ export class CronogramaComponent implements OnInit {
         }
         var x;
         for (var i = 0; i < this.Asignaciones.length; i++) {
+          var fechaI = new Date(this.Asignaciones[i]['FechaInicio'].split("T")[0].split("-")[0], this.Asignaciones[i]['FechaInicio'].split("T")[0].split("-")[1],this.Asignaciones[i]['FechaInicio'].split("T")[0].split("-")[2]);
+          var fechaF = new Date(this.Asignaciones[i]['FechaFin'].split("T")[0].split("-")[0], this.Asignaciones[i]['FechaFin'].split("T")[0].split("-")[1],this.Asignaciones[i]['FechaFin'].split("T")[0].split("-")[2]);
           var ids = ( < HTMLTableRowElement > document.getElementById(this.Asignaciones[i]['IdEspecialista'])).rowIndex;
           x = tableA.rows[ids].cells;
-          if (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) == parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1])) {
+          if (fechaI.getMonth() == fechaF.getMonth() && fechaI.getFullYear() == fechaF.getFullYear()) {
             for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
               x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
             }
           } else {
-            if (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) < parseInt(fechaHoy.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) == parseInt(fechaHoy.split("-")[1])) {
+            var añosDifIH = fechaI.getFullYear()-fechaH.getFullYear();
+            var mesesDifIH = (fechaI.getMonth()-fechaH.getMonth())+(12*añosDifIH);
+            var añosDifFH = fechaF.getFullYear()-fechaH.getFullYear();
+            var mesesDifFH = (fechaF.getMonth()-fechaH.getMonth())+(12*añosDifFH);
+            if (mesesDifIH<0 && mesesDifFH ==0) {
 
               for (var j = 0; j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
               }
-            } else if (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) > parseInt(fechaHoy.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) == parseInt(fechaHoy.split("-")[1])) {
-              for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < diasDelMes - 1; j++) {
+            } else if (mesesDifFH>0 && mesesDifIH == 0) {
+              for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < diasDelMes; j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
               }
-            } else if (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) < parseInt(fechaHoy.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) > parseInt(fechaHoy.split("-")[1])) {
+            } else if (mesesDifIH<0 && mesesDifFH>0) {
               for (var j = 0; j < diasDelMes; j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
               }
@@ -317,6 +324,7 @@ export class CronogramaComponent implements OnInit {
     document.getElementById('fecha').addEventListener("change", (event) => {
       var fecha = ( < HTMLInputElement > event.target).value;
       var diasDelMesN = new Date(parseInt(fecha.split("-")[0]), parseInt(fecha.split("-")[1]), 0).getDate();
+      console.log(diasDelMesN);
       this.setFecha(fecha + "-" + "01");
       var tabla = < HTMLTableElement > document.getElementById("tablaAsignacionesID");
       tabla.deleteRow(0);
@@ -341,6 +349,8 @@ export class CronogramaComponent implements OnInit {
         this.resultados = especialistas;
         this.traerAsignaciones(fecha + "-" + "01").then(data => {
           this.Asignaciones = data;
+          fecha = fecha + '-01';
+          var fechaNueva = new Date(parseInt(fecha.split("-")[0]), parseInt(fecha.split("-")[1]), parseInt(fecha.split("-")[2]));
           tableA = document.getElementById("tablaAsignacionesID");
           for (var i = this.resultados.length; i > 1; i--) {
             fila = tableA.deleteRow(i);
@@ -357,25 +367,31 @@ export class CronogramaComponent implements OnInit {
           }
           var x;
           for (let i = 0; i < this.Asignaciones.length; i++) {
+            var fechaI = new Date(this.Asignaciones[i]['FechaInicio'].split("T")[0].split("-")[0], this.Asignaciones[i]['FechaInicio'].split("T")[0].split("-")[1],this.Asignaciones[i]['FechaInicio'].split("T")[0].split("-")[2]);
+            var fechaF = new Date(this.Asignaciones[i]['FechaFin'].split("T")[0].split("-")[0], this.Asignaciones[i]['FechaFin'].split("T")[0].split("-")[1],this.Asignaciones[i]['FechaFin'].split("T")[0].split("-")[2]);
             var ids = ( < HTMLTableRowElement > document.getElementById(this.Asignaciones[i]['IdEspecialista'])).rowIndex;
             x = tableA.rows[ids].cells;
-            if (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) == parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1])) {
+            if (fechaI.getMonth() == fechaF.getMonth() && fechaI.getFullYear() == fechaF.getFullYear()) {
               for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
               }
             } else {
-              if (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) < parseInt(fecha.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) == parseInt(fecha.split("-")[1])) {
+              var añosDifIN = fechaI.getFullYear()-fechaNueva.getFullYear();
+              var mesesDifIN = (fechaI.getMonth()-fechaNueva.getMonth())+(12*añosDifIN);
+              var añosDifFN = fechaF.getFullYear()-fechaNueva.getFullYear();
+              var mesesDifFN = (fechaF.getMonth()-fechaNueva.getMonth())+(12*añosDifFN);
+              if (mesesDifIN<0 && mesesDifFN ==0) {
 
                 for (var j = 0; j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
                   x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
                 }
-              } else if (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) > parseInt(fecha.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) == parseInt(fecha.split("-")[1])) {
-                for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < diasDelMes - 1; j++) {
+              } else if (mesesDifFN>0 && mesesDifIN == 0) {
+                for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < diasDelMesN; j++) {
                   console.log(j);
                   x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
                 }
-              } else if (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[1]) < parseInt(fecha.split("-")[1]) && parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[1]) > parseInt(fecha.split("-")[1])) {
-                for (var j = 0; j < diasDelMes; j++) {
+              } else if (mesesDifIN<0 && mesesDifFN>0) {
+                for (var j = 0; j < diasDelMesN; j++) {
                   x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
                 }
               }

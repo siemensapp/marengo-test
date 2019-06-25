@@ -241,141 +241,341 @@ export class EstadisticasComponent implements OnInit {
     }];
   }
 
-  datosGrupalesA(){
+  datosGrupalesA() {
 
     var inicioAño;
     var finAño;
-    var mesInicio = 10;
-    var mesFin = 9;
-    if(parseInt(this.fechaA.split("-")[1])<10){
-      inicioAño = (parseInt(this.fechaA.split("-")[0])-1) + '10';
-      finAño = this.fechaA.split("-")[0] + '09';
+    if (parseInt(this.fechaA.split("-")[1]) < 10) {
+      inicioAño = new Date((parseInt(this.fechaA.split("-")[0]) - 1), 9, 1);
+      finAño = new Date(parseInt(this.fechaA.split("-")[0]), 8, 30);
+    } else {
+      inicioAño = new Date(parseInt(this.fechaA.split("-")[0]), 9, 1);
+      finAño = new Date((parseInt(this.fechaA.split("-")[0]) + 1), 8, 30);
     }
-
-    else{
-      inicioAño = this.fechaA.split("-")[0] + '10';
-      finAño = (parseInt(this.fechaA.split("-")[0])+1) + '09';
+    var diasDelAño = 365;
+    var countVFD, countBT, countAUT, countAOS, countMOT;
+    for (let i = 0; i < this.asignacionesA.length; i++) {
+      var status = this.asignacionesA[i]['IdStatus'];
+      var fechaInicio = this.asignacionesA[i]['FechaInicio'].split("T")[0];
+      var fechaFin = this.asignacionesA[i]['FechaFin'].split("T")[0];
+      var añosDifFFIA = parseInt(fechaFin.split("-")[0]) - inicioAño.getFullYear();
+      var mesesDifFFIA = (parseInt(fechaFin.split("-")[1]) - inicioAño.getMonth()) + (12 * añosDifFFIA);
+      var añosDifFAFI = finAño.getFullYear() - parseInt(fechaInicio.split("-")[0]);
+      var mesesDifFAFI = (finAño.getMonth() - parseInt(fechaFin.split("-")[1])) + (12 * añosDifFAFI);
+      var añosDifFFFI = parseInt(fechaFin.split("-")[0]) - parseInt(fechaInicio.split("-")[0]);
+      var mesesDifFFFI = (parseInt(fechaFin.split("-")[1]) - parseInt(fechaInicio.split("-")[1])) + (12 * añosDifFFFI);
+      switch (parseInt(this.asignacionesA[i]['tecnica'])) {
+        case 1: {
+          countVFD = this.asignacionesA[i]['Cuenta'];
+          if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
+            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) < parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth())) {
+              for (let i = 0; i <= mesesDifFFIA; i++) {
+                var diasMes = new Date(inicioAño.getFullYear(), i + inicioAño.getMonth(), 0).getDate();
+                if (i == mesesDifFFIA) {
+                  this.totalDiasVFDA = this.totalDiasVFDA + parseInt(fechaFin.split("-")[2]);
+                } else {
+                  this.totalDiasVFDA = this.totalDiasVFDA + diasMes;
+                }
+              }
+            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth())) {
+              for (let i = 0; i <= mesesDifFAFI; i++) {
+                var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
+                if (i == 0) {
+                  this.totalDiasVFDA = this.totalDiasVFDA + parseInt(fechaInicio.split("-")[2]);
+                } else {
+                  this.totalDiasVFDA = this.totalDiasVFDA + diasMes;
+                }
+              }
+            } else {
+              if (fechaInicio.split("-")[1] == fechaFin.split("-")[1]) {
+                this.totalDiasVFDA = this.totalDiasVFDA + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
+              } else {
+                for (let i = 0; i <= mesesDifFFFI; i++) {
+                  var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
+                  if (i == 0) {
+                    this.totalDiasVFDA = this.totalDiasVFDA + diasMes - parseInt(fechaInicio.split("-")[2]);
+                  } else if (i == mesesDifFFFI) {
+                    this.totalDiasVFDA = this.totalDiasVFDA + parseInt(fechaFin.split("-")[2]);
+                  } else {
+                    this.totalDiasVFDA = this.totalDiasVFDA + diasMes;
+                  }
+                }
+              }
+            }
+          }
+          break;
+        }
+        case 2: {
+          countBT = this.asignacionesA[i]['Cuenta'];
+          if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
+            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) < parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth())) {
+              for (let i = 0; i <= mesesDifFFIA; i++) {
+                var diasMes = new Date(inicioAño.getFullYear(), i + inicioAño.getMonth(), 0).getDate();
+                if (i == mesesDifFFIA) {
+                  this.totalDiasBTA = this.totalDiasBTA + parseInt(fechaFin.split("-")[2]);
+                } else {
+                  this.totalDiasBTA = this.totalDiasBTA + diasMes;
+                }
+              }
+            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth())) {
+              for (let i = 0; i <= mesesDifFAFI; i++) {
+                var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
+                if (i == 0) {
+                  this.totalDiasBTA = this.totalDiasBTA + parseInt(fechaInicio.split("-")[2]);
+                } else {
+                  this.totalDiasBTA = this.totalDiasBTA + diasMes;
+                }
+              }
+            } else {
+              if (fechaInicio.split("-")[1] == fechaFin.split("-")[1]) {
+                this.totalDiasBTA = this.totalDiasBTA + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
+              } else {
+                for (let i = 0; i <= mesesDifFFFI; i++) {
+                  var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
+                  if (i == 0) {
+                    this.totalDiasBTA = this.totalDiasBTA + diasMes - parseInt(fechaInicio.split("-")[2]);
+                  } else if (i == mesesDifFFFI) {
+                    this.totalDiasBTA = this.totalDiasBTA + parseInt(fechaFin.split("-")[2]);
+                  } else {
+                    this.totalDiasBTA = this.totalDiasBTA + diasMes;
+                  }
+                }
+              }
+            }
+          }
+          break;
+        }
+        case 3: {
+          countAUT = this.asignacionesA[i]['Cuenta'];
+          if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
+            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) < parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth())) {
+              for (let i = 0; i <= mesesDifFFIA; i++) {
+                var diasMes = new Date(inicioAño.getFullYear(), i + inicioAño.getMonth(), 0).getDate();
+                if (i == mesesDifFFIA) {
+                  this.totalDiasAUTA = this.totalDiasAUTA + parseInt(fechaFin.split("-")[2]);
+                } else {
+                  this.totalDiasAUTA = this.totalDiasAUTA + diasMes;
+                }
+              }
+            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth())) {
+              for (let i = 0; i <= mesesDifFAFI; i++) {
+                var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
+                if (i == 0) {
+                  this.totalDiasAUTA = this.totalDiasAUTA + parseInt(fechaInicio.split("-")[2]);
+                } else {
+                  this.totalDiasAUTA = this.totalDiasAUTA + diasMes;
+                }
+              }
+            } else {
+              if (fechaInicio.split("-")[1] == fechaFin.split("-")[1]) {
+                this.totalDiasAUTA = this.totalDiasAUTA + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
+              } else {
+                for (let i = 0; i <= mesesDifFFFI; i++) {
+                  var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
+                  if (i == 0) {
+                    this.totalDiasAUTA = this.totalDiasAUTA + diasMes - parseInt(fechaInicio.split("-")[2]);
+                  } else if (i == mesesDifFFFI) {
+                    this.totalDiasAUTA = this.totalDiasAUTA + parseInt(fechaFin.split("-")[2]);
+                  } else {
+                    this.totalDiasAUTA = this.totalDiasAUTA + diasMes;
+                  }
+                }
+              }
+            }
+          }
+          break;
+        }
+        case 4: {
+          countAOS = this.asignacionesA[i]['Cuenta'];
+          if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
+            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) < parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth())) {
+              for (let i = 0; i <= mesesDifFFIA; i++) {
+                var diasMes = new Date(inicioAño.getFullYear(), i + inicioAño.getMonth(), 0).getDate();
+                if (i == mesesDifFFIA) {
+                  this.totalDiasAOSA = this.totalDiasAOSA + parseInt(fechaFin.split("-")[2]);
+                } else {
+                  this.totalDiasAOSA = this.totalDiasAOSA + diasMes;
+                }
+              }
+            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth())) {
+              for (let i = 0; i <= mesesDifFAFI; i++) {
+                var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
+                if (i == 0) {
+                  this.totalDiasAOSA = this.totalDiasAOSA + parseInt(fechaInicio.split("-")[2]);
+                } else {
+                  this.totalDiasAOSA = this.totalDiasAOSA + diasMes;
+                }
+              }
+            } else {
+              if (fechaInicio.split("-")[1] == fechaFin.split("-")[1]) {
+                this.totalDiasAOSA = this.totalDiasAOSA + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
+              } else {
+                for (let i = 0; i <= mesesDifFFFI; i++) {
+                  var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
+                  if (i == 0) {
+                    this.totalDiasAOSA = this.totalDiasAOSA + diasMes - parseInt(fechaInicio.split("-")[2]);
+                  } else if (i == mesesDifFFFI) {
+                    this.totalDiasAOSA = this.totalDiasAOSA + parseInt(fechaFin.split("-")[2]);
+                  } else {
+                    this.totalDiasAOSA = this.totalDiasAOSA + diasMes;
+                  }
+                }
+              }
+            }
+          }
+          break;
+        }
+        case 5: {
+          countMOT = this.asignacionesA[i]['Cuenta'];
+          if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
+            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) < parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth())) {
+              for (let i = 0; i <= mesesDifFFIA; i++) {
+                var diasMes = new Date(inicioAño.getFullYear(), i + inicioAño.getMonth(), 0).getDate();
+                if (i == mesesDifFFIA) {
+                  this.totalDiasMOTA = this.totalDiasMOTA + parseInt(fechaFin.split("-")[2]);
+                } else {
+                  this.totalDiasMOTA = this.totalDiasMOTA + diasMes;
+                }
+              }
+            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth())) {
+              for (let i = 0; i <= mesesDifFAFI; i++) {
+                var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
+                if (i == 0) {
+                  this.totalDiasMOTA = this.totalDiasMOTA + parseInt(fechaInicio.split("-")[2]);
+                } else {
+                  this.totalDiasMOTA = this.totalDiasMOTA + diasMes;
+                }
+              }
+            } else {
+              if (fechaInicio.split("-")[1] == fechaFin.split("-")[1]) {
+                this.totalDiasMOTA = this.totalDiasMOTA + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
+              } else {
+                for (let i = 0; i <= mesesDifFFFI; i++) {
+                  var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
+                  if (i == 0) {
+                    this.totalDiasMOTA = this.totalDiasMOTA + diasMes - parseInt(fechaInicio.split("-")[2]);
+                  } else if (i == mesesDifFFFI) {
+                    this.totalDiasMOTA = this.totalDiasMOTA + parseInt(fechaFin.split("-")[2]);
+                  } else {
+                    this.totalDiasMOTA = this.totalDiasMOTA + diasMes;
+                  }
+                }
+              }
+            }
+          }
+          break;
+        }
+      }
     }
-
-    if(parseInt(this.asignacionesA[0]['FechaInicio'].split("-")[0]+''+this.asignacionesA[0]['FechaInicio'].split("-")[1])<parseInt(inicioAño) && parseInt(this.asignacionesA[0]['FechaFin'].split("-")[0]+''+this.asignacionesA[0]['FechaFin'].split("-")[1])>parseInt(inicioAño) && parseInt(this.asignacionesA[0]['FechaFin'].split("-")[0]+''+this.asignacionesA[0]['FechaFin'].split("-")[1])<parseInt(finAño)){
-      for(var i=parseInt(this.asignacionesA[0]['FechaFin'].split("-")[1])-mesInicio; i=0;i--){
-        
-      } 
-    }
-
-    else if(parseInt(this.asignacionesA[0]['FechaInicio'].split("-")[0]+''+this.asignacionesA[0]['FechaInicio'].split("-")[1])<parseInt(finAño) && parseInt(this.asignacionesA[0]['FechaFin'].split("-")[0]+''+this.asignacionesA[0]['FechaFin'].split("-")[1])>parseInt(finAño) && parseInt(this.asignacionesA[0]['FechaInicio'].split("-")[0]+''+this.asignacionesA[0]['FechaInicio'].split("-")[1])>parseInt(inicioAño)){
-
-    }
-
-    else{
-
-    }
-
-    // var diasDelAño = 365;
-    // var mesSeleccionado = parseInt(this.fechaA.split("-")[1]);
-    // var countVFD, countBT, countAUT, countAOS, countMOT;
-    // console.log(this.asignacionesA);
-    // for (var i = 0; i < this.asignacionesA.length; i++) {
-    //   var status = this.asignacionesA[i]['IdStatus'];
-    //   var fechaInicio = this.asignacionesA[i]['FechaInicio'];
-    //   var fechaFin = this.asignacionesA[i]['FechaFin'];
-    //   switch (parseInt(this.asignacionesA[i]['tecnica'])) {
-    //     case 1: {
-    //       countVFD = this.asignacionesA[i]['Cuenta'];
-    //       if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-    //         if (mesSeleccionado > parseInt(fechaInicio.split("-")[1])) {
-    //           this.totalDiasVFD = this.totalDiasVFD + (parseInt(fechaFin.split("-")[2]));
-    //         } else if (mesSeleccionado < parseInt(fechaFin.split("-")[1])) {
-    //           this.totalDiasVFD = this.totalDiasVFD + (diasDelAño - parseInt(fechaInicio.split("-")[2]));
-    //         } else {
-    //           this.totalDiasVFD = this.totalDiasVFD + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
-    //         }
-    //       }
-    //       break;
-    //     }
-    //     case 2: {
-    //       countBT = this.asignacionesA[i]['Cuenta'];
-    //       if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-    //         if (mesSeleccionado > parseInt(fechaInicio.split("-")[1])) {
-    //           this.totalDiasBT = this.totalDiasBT + (parseInt(fechaFin.split("-")[2]));
-    //         } else if (mesSeleccionado < parseInt(fechaFin.split("-")[1])) {
-    //           this.totalDiasBT = this.totalDiasBT + (diasDelAño - parseInt(fechaInicio.split("-")[2]));
-    //         } else {
-    //           this.totalDiasBT = this.totalDiasBT + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
-    //         }
-    //       }
-    //       break;
-    //     }
-    //     case 3: {
-    //       countAUT = this.asignacionesA[i]['Cuenta'];
-    //       if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-    //         if (mesSeleccionado > parseInt(fechaInicio.split("-")[1])) {
-    //           this.totalDiasAUT = this.totalDiasAUT + (parseInt(fechaFin.split("-")[2]));
-    //         } else if (mesSeleccionado < parseInt(fechaFin.split("-")[1])) {
-    //           this.totalDiasAUT = this.totalDiasAUT + (diasDelAño - parseInt(fechaInicio.split("-")[2]));
-    //         } else {
-    //           this.totalDiasAUT = this.totalDiasAUT + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
-    //         }
-    //       }
-    //       break;
-    //     }
-    //     case 4: {
-    //       countAOS = this.asignacionesA[i]['Cuenta'];
-    //       if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-    //         if (mesSeleccionado > parseInt(fechaInicio.split("-")[1])) {
-    //           this.totalDiasAOS = this.totalDiasAOS + (parseInt(fechaFin.split("-")[2]));
-    //         } else if (mesSeleccionado < parseInt(fechaFin.split("-")[1])) {
-    //           this.totalDiasAOS = this.totalDiasAOS + (diasDelAño - parseInt(fechaInicio.split("-")[2]));
-    //         } else {
-    //           this.totalDiasAOS = this.totalDiasAOS + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
-    //         }
-    //       }
-    //       break;
-    //     }
-    //     case 5: {
-    //       countMOT = this.asignacionesA[i]['Cuenta'];
-    //       if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-    //         if (mesSeleccionado > parseInt(fechaInicio.split("-")[1])) {
-    //           this.totalDiasMOT = this.totalDiasMOT + (parseInt(fechaFin.split("-")[2]));
-    //         } else if (mesSeleccionado < parseInt(fechaFin.split("-")[1])) {
-    //           this.totalDiasMOT = this.totalDiasMOT + (diasDelAño - parseInt(fechaInicio.split("-")[2]));
-    //         } else {
-    //           this.totalDiasMOT = this.totalDiasMOT + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
-    //         }
-    //       }
-    //       break;
-    //     }
-    //   }
-    // }
-    // this.porcentajeVFD = (this.totalDiasVFD / (diasDelAño * countVFD)) * 100;
-    // if (isNaN(this.porcentajeVFD))
-    //   this.porcentajeVFD = 0;
-    // this.porcentajeBT = (this.totalDiasBT / (diasDelAño * countBT)) * 100;
-    // if (isNaN(this.porcentajeBT))
-    //   this.porcentajeBT = 0;
-    // this.porcentajeAUT = (this.totalDiasAUT / (diasDelAño * countAUT)) * 100;
-    // if (isNaN(this.porcentajeAUT))
-    //   this.porcentajeAUT = 0;
-    // this.porcentajeAOS = (this.totalDiasAOS / (diasDelAño * countAOS)) * 100;
-    // if (isNaN(this.porcentajeAOS))
-    //   this.porcentajeAOS = 0;
-    // this.porcentajeMOT = (this.totalDiasMOT / (diasDelAño * countMOT)) * 100;
-    // if (isNaN(this.porcentajeMOT))
-    //   this.porcentajeMOT = 0;
-    // this.porcentajeTotal = (this.porcentajeVFD + this.porcentajeBT + this.porcentajeAUT + this.porcentajeAOS + this.porcentajeMOT) / 5;
+    this.porcentajeVFDA = (this.totalDiasVFDA / (diasDelAño * countVFD)) * 100;
+    if (isNaN(this.porcentajeVFDA))
+      this.porcentajeVFDA = 0;
+    this.porcentajeBTA = (this.totalDiasBTA / (diasDelAño * countBT)) * 100;
+    if (isNaN(this.porcentajeBTA))
+      this.porcentajeBTA = 0;
+    this.porcentajeAUTA = (this.totalDiasAUTA / (diasDelAño * countAUT)) * 100;
+    if (isNaN(this.porcentajeAUTA))
+      this.porcentajeAUTA = 0;
+    this.porcentajeAOSA = (this.totalDiasAOSA / (diasDelAño * countAOS)) * 100;
+    if (isNaN(this.porcentajeAOSA))
+      this.porcentajeAOSA = 0;
+    this.porcentajeMOTA = (this.totalDiasMOTA / (diasDelAño * countMOT)) * 100;
+    if (isNaN(this.porcentajeMOTA))
+      this.porcentajeMOTA = 0;
+    this.porcentajeTotalA = (this.porcentajeVFDA + this.porcentajeBTA + this.porcentajeAUTA + this.porcentajeAOSA + this.porcentajeMOTA) / 5;
+    console.log(this.porcentajeVFDA, this.porcentajeBTA, this.porcentajeAUTA, this.porcentajeAOSA, this.porcentajeMOTA);
   }
 
-  datosIndividualesA(){
+  datosIndividualesA() {
+    var inicioAño;
+    var finAño;
+    if (parseInt(this.fechaA.split("-")[1]) < 10) {
+      inicioAño = new Date((parseInt(this.fechaA.split("-")[0]) - 1), 9, 1);
+      finAño = new Date(parseInt(this.fechaA.split("-")[0]), 8, 30);
+    } else {
+      inicioAño = new Date(parseInt(this.fechaA.split("-")[0]), 9, 1);
+      finAño = new Date((parseInt(this.fechaA.split("-")[0]) + 1), 8, 30);
+    }
+    var diasAño = 365;
+    this.labels = [];
+    for (var i = 0; i < this.especialistas.length; i++) {
+      this.labels.push(this.especialistas[i]['NombreE']);
+    }
+    this.porcentajesIndividualesA = [];
+    for (var i = 0; i < this.asignacionesA.length; i++) {
+      if (this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] == null) {
+        this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = 0;
+      }
+      var status = this.asignacionesA[i]['IdStatus'];
+      var fechaInicio = this.asignacionesA[i]['FechaInicio'].split("T")[0];
+      var fechaFin = this.asignacionesA[i]['FechaFin'].split("T")[0];
+      var añosDifFFIA = parseInt(fechaFin.split("-")[0]) - inicioAño.getFullYear();
+      var mesesDifFFIA = (parseInt(fechaFin.split("-")[1]) - inicioAño.getMonth()) + (12 * añosDifFFIA);
+      var añosDifFAFI = finAño.getFullYear() - parseInt(fechaInicio.split("-")[0]);
+      var mesesDifFAFI = (finAño.getMonth() - parseInt(fechaFin.split("-")[1])) + (12 * añosDifFAFI);
+      var añosDifFFFI = parseInt(fechaFin.split("-")[0]) - parseInt(fechaInicio.split("-")[0]);
+      var mesesDifFFFI = (parseInt(fechaFin.split("-")[1]) - parseInt(fechaInicio.split("-")[1])) + (12 * añosDifFFFI);
+      if (status == 1 || status == 2 || status == 3 || status == 4 || status == 5) {
+        if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) < parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth())) {
 
+          for (let i = 0; i <= mesesDifFFIA; i++) {
+            var diasMes = new Date(inicioAño.getFullYear(), i + inicioAño.getMonth(), 0).getDate();
+            if (i == mesesDifFFIA) {
+              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + parseInt(fechaFin.split("-")[2]) +1;
+            } else {
+              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + diasMes + 1;
+            }
+          }
+        } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth())) {
+
+          for (let i = 0; i <= mesesDifFAFI; i++) {
+            var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
+            if (i == 0) {
+              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + parseInt(fechaInicio.split("-")[2]) + 1;
+            } else {
+              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + diasMes + 1;
+            }
+          }
+        } else {
+          if (fechaInicio.split("-")[1] == fechaFin.split("-")[1]) {
+            this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2])) + 1;
+          } else {
+            for (let i = 0; i <= mesesDifFFFI; i++) {
+              var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
+              if (i == 0) {
+                this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + diasMes - parseInt(fechaInicio.split("-")[2]) + 1;
+              } else if (i == mesesDifFFFI) {
+                this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + parseInt(fechaFin.split("-")[2]) + 1;
+              } else {
+                this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + diasMes + 1;
+              }
+            }
+          }
+        }
+      }
+    }
+    this.porcentajesIndividualesA = this.porcentajesIndividualesA.filter((nuevo) => {
+      return nuevo != null;
+    });
+    for (var i = 0; i < this.porcentajesIndividualesA.length; i++) {
+      this.porcentajesIndividualesA[i] = (parseInt(this.porcentajesIndividualesA[i]) / diasAño) * 100;
+    }
+    this.PIFinalesA = [{
+      'data': this.porcentajesIndividualesA,
+      'label': 'Ocupacion (%)'
+    }];
   }
 
   ngOnInit() {
     this.DataRetriever.infoFecha.subscribe(infoFecha => {
       this.fechaA = infoFecha;
+      if(this.fechaA == ""){
+        this.fechaA = new Date().toISOString().split("T")[0];
+      }
       this.traerAsignacionesM(this.fechaA).then(data => {
         this.asignacionesM = data;
-        this.traerAsignacionesA(this.fechaA).then(data => {
-          this.asignacionesA = data;
+        this.traerAsignacionesA(this.fechaA).then(datos => {
+          this.asignacionesA = datos;
           this.DataRetriever.getData(env.url + "/api/allWorkers").then(especialistas => {
             this.especialistas = especialistas;
             console.log(this.especialistas);
@@ -384,7 +584,7 @@ export class EstadisticasComponent implements OnInit {
             this.datosGrupalesA();
             this.datosIndividualesA();
           })
-       });
+        });
       });
     });
 
