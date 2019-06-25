@@ -264,11 +264,13 @@ export class EstadisticasComponent implements OnInit {
       var mesesDifFAFI = (finAño.getMonth() - parseInt(fechaFin.split("-")[1])) + (12 * añosDifFAFI);
       var añosDifFFFI = parseInt(fechaFin.split("-")[0]) - parseInt(fechaInicio.split("-")[0]);
       var mesesDifFFFI = (parseInt(fechaFin.split("-")[1]) - parseInt(fechaInicio.split("-")[1])) + (12 * añosDifFFFI);
+      var mesInicio = inicioAño.getMonth()<10? '0'+inicioAño.getMonth(): inicioAño.getMonth(); 
+      var mesFin = finAño.getMonth()<10? '0'+finAño.getMonth(): finAño.getMonth();
       switch (parseInt(this.asignacionesA[i]['tecnica'])) {
         case 1: {
           countVFD = this.asignacionesA[i]['Cuenta'];
           if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) < parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth())) {
+            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) <= parseInt(inicioAño.getFullYear() + '' + mesInicio)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + mesFin)+1) {
               for (let i = 0; i <= mesesDifFFIA; i++) {
                 var diasMes = new Date(inicioAño.getFullYear(), i + inicioAño.getMonth(), 0).getDate();
                 if (i == mesesDifFFIA) {
@@ -277,7 +279,7 @@ export class EstadisticasComponent implements OnInit {
                   this.totalDiasVFDA = this.totalDiasVFDA + diasMes;
                 }
               }
-            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth())) {
+            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) <= parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1) {
               for (let i = 0; i <= mesesDifFAFI; i++) {
                 var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
                 if (i == 0) {
@@ -308,7 +310,7 @@ export class EstadisticasComponent implements OnInit {
         case 2: {
           countBT = this.asignacionesA[i]['Cuenta'];
           if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) < parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth())) {
+            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) <= parseInt(inicioAño.getFullYear() + '' + mesInicio)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + mesFin)+1) {
               for (let i = 0; i <= mesesDifFFIA; i++) {
                 var diasMes = new Date(inicioAño.getFullYear(), i + inicioAño.getMonth(), 0).getDate();
                 if (i == mesesDifFFIA) {
@@ -317,7 +319,7 @@ export class EstadisticasComponent implements OnInit {
                   this.totalDiasBTA = this.totalDiasBTA + diasMes;
                 }
               }
-            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth())) {
+            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) <= parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1) {
               for (let i = 0; i <= mesesDifFAFI; i++) {
                 var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
                 if (i == 0) {
@@ -348,7 +350,7 @@ export class EstadisticasComponent implements OnInit {
         case 3: {
           countAUT = this.asignacionesA[i]['Cuenta'];
           if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) < parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth())) {
+            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) <= parseInt(inicioAño.getFullYear() + '' + mesInicio)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + mesFin)+1) {
               for (let i = 0; i <= mesesDifFFIA; i++) {
                 var diasMes = new Date(inicioAño.getFullYear(), i + inicioAño.getMonth(), 0).getDate();
                 if (i == mesesDifFFIA) {
@@ -357,7 +359,7 @@ export class EstadisticasComponent implements OnInit {
                   this.totalDiasAUTA = this.totalDiasAUTA + diasMes;
                 }
               }
-            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth())) {
+            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) <= parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1) {
               for (let i = 0; i <= mesesDifFAFI; i++) {
                 var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
                 if (i == 0) {
@@ -388,7 +390,7 @@ export class EstadisticasComponent implements OnInit {
         case 4: {
           countAOS = this.asignacionesA[i]['Cuenta'];
           if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) < parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth())) {
+            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) <= parseInt(inicioAño.getFullYear() + '' + mesInicio)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + mesFin)+1) {
               for (let i = 0; i <= mesesDifFFIA; i++) {
                 var diasMes = new Date(inicioAño.getFullYear(), i + inicioAño.getMonth(), 0).getDate();
                 if (i == mesesDifFFIA) {
@@ -397,7 +399,7 @@ export class EstadisticasComponent implements OnInit {
                   this.totalDiasAOSA = this.totalDiasAOSA + diasMes;
                 }
               }
-            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth())) {
+            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) <= parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1) {
               for (let i = 0; i <= mesesDifFAFI; i++) {
                 var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
                 if (i == 0) {
@@ -428,7 +430,7 @@ export class EstadisticasComponent implements OnInit {
         case 5: {
           countMOT = this.asignacionesA[i]['Cuenta'];
           if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) < parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth())) {
+            if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) <= parseInt(inicioAño.getFullYear() + '' + mesInicio)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + mesFin)+1) {
               for (let i = 0; i <= mesesDifFFIA; i++) {
                 var diasMes = new Date(inicioAño.getFullYear(), i + inicioAño.getMonth(), 0).getDate();
                 if (i == mesesDifFFIA) {
@@ -437,7 +439,7 @@ export class EstadisticasComponent implements OnInit {
                   this.totalDiasMOTA = this.totalDiasMOTA + diasMes;
                 }
               }
-            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth())) {
+            } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) <= parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1) {
               for (let i = 0; i <= mesesDifFAFI; i++) {
                 var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
                 if (i == 0) {
@@ -509,6 +511,8 @@ export class EstadisticasComponent implements OnInit {
       var status = this.asignacionesA[i]['IdStatus'];
       var fechaInicio = this.asignacionesA[i]['FechaInicio'].split("T")[0];
       var fechaFin = this.asignacionesA[i]['FechaFin'].split("T")[0];
+      var mesInicio = inicioAño.getMonth()<10? '0'+inicioAño.getMonth(): inicioAño.getMonth(); 
+      var mesFin = finAño.getMonth()<10? '0'+finAño.getMonth(): finAño.getMonth();
       var añosDifFFIA = parseInt(fechaFin.split("-")[0]) - inicioAño.getFullYear();
       var mesesDifFFIA = (parseInt(fechaFin.split("-")[1]) - inicioAño.getMonth()) + (12 * añosDifFFIA);
       var añosDifFAFI = finAño.getFullYear() - parseInt(fechaInicio.split("-")[0]);
@@ -516,18 +520,16 @@ export class EstadisticasComponent implements OnInit {
       var añosDifFFFI = parseInt(fechaFin.split("-")[0]) - parseInt(fechaInicio.split("-")[0]);
       var mesesDifFFFI = (parseInt(fechaFin.split("-")[1]) - parseInt(fechaInicio.split("-")[1])) + (12 * añosDifFFFI);
       if (status == 1 || status == 2 || status == 3 || status == 4 || status == 5) {
-        if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) < parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth())) {
-
+        if (parseInt(fechaInicio.split("-")[0] + fechaInicio.split("-")[1]) <= parseInt(inicioAño.getFullYear() + '' + mesInicio)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) < parseInt(finAño.getFullYear() + '' + mesFin)+1) {
           for (let i = 0; i <= mesesDifFFIA; i++) {
-            var diasMes = new Date(inicioAño.getFullYear(), i + inicioAño.getMonth(), 0).getDate();
+            var diasMes = new Date(inicioAño.getFullYear(), i + mesInicio, 0).getDate();
             if (i == mesesDifFFIA) {
-              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + parseInt(fechaFin.split("-")[2]) +1;
+              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + parseInt(fechaFin.split("-")[2]) + 1;
             } else {
               this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + diasMes + 1;
             }
           }
-        } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) < parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + finAño.getMonth()) && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + inicioAño.getMonth())) {
-
+        } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) <= parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1) {
           for (let i = 0; i <= mesesDifFAFI; i++) {
             var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
             if (i == 0) {
@@ -569,7 +571,7 @@ export class EstadisticasComponent implements OnInit {
   ngOnInit() {
     this.DataRetriever.infoFecha.subscribe(infoFecha => {
       this.fechaA = infoFecha;
-      if(this.fechaA == ""){
+      if (this.fechaA == "") {
         this.fechaA = new Date().toISOString().split("T")[0];
       }
       this.traerAsignacionesM(this.fechaA).then(data => {
