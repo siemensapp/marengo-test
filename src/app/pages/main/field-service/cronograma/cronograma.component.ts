@@ -160,6 +160,8 @@ export class CronogramaComponent implements OnInit {
                 var datos = {
                   'IdEspecialista': this.infoAsignacion2[0]['IdEspecialista'],
                   'IdStatus': this.infoAsignacion2[0]['IdStatus'],
+                  'IdEmpresa': this.infoAsignacion2[0]['IdEmpresa'],
+                  'PCE': this.infoAsignacion2[0]['PCE'],
                   'IdAsignacion': this.infoAsignacion2[0]['IdAsignacion'],
                   'NombreCliente': this.infoAsignacion2[0]['NombreCliente'],
                   'NombrePlanta': this.infoAsignacion2[0]['NombrePlanta'],

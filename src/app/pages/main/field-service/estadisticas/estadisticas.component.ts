@@ -221,14 +221,14 @@ export class EstadisticasComponent implements OnInit {
     var mesSeleccionado = parseInt(this.fechaA.split("-")[1]);
     var diasDelMes = new Date(parseInt(this.fechaA.split("-")[0]), parseInt(this.fechaA.split("-")[1]), 0).getDate();
     this.labels = [];
+    this.porcentajesIndividuales = [];
     for (var i = 0; i < this.especialistas.length; i++) {
       this.labels.push(this.especialistas[i]['NombreE']);
-    }
-    this.porcentajesIndividuales = [];
-    for (var i = 0; i < this.asignacionesM.length; i++) {
-      if (this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] == null) {
-        this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] = 0;
+      if (this.porcentajesIndividuales[this.especialistas[i]['IdEspecialista']] == null) {
+        this.porcentajesIndividuales[this.especialistas[i]['IdEspecialista']] = 0;
       }
+    }
+    for (var i = 0; i < this.asignacionesM.length; i++) {
       var status = this.asignacionesM[i]['IdStatus'];
       var fechaInicio = this.asignacionesM[i]['FechaInicio'];
       var fechaFin = this.asignacionesM[i]['FechaFin'];
@@ -518,20 +518,19 @@ export class EstadisticasComponent implements OnInit {
     }
     var diasAño = 365;
     this.labels = [];
+    this.porcentajesIndividualesA = [];
     for (var i = 0; i < this.especialistas.length; i++) {
       this.labels.push(this.especialistas[i]['NombreE']);
-    }
-    this.porcentajesIndividualesA = [];
-    for (var i = 0; i < this.asignacionesA.length; i++) {
-      if (this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] == null) {
-        this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = 0;
+      if (this.porcentajesIndividualesA[this.especialistas[i]['IdEspecialista']] == null) {
+        this.porcentajesIndividualesA[this.especialistas[i]['IdEspecialista']] = 0;
       }
+    }
+    for (var i = 0; i < this.asignacionesA.length; i++) {
       var status = this.asignacionesA[i]['IdStatus'];
       var fechaInicio = this.asignacionesA[i]['FechaInicio'].split("T")[0];
       var fechaFin = this.asignacionesA[i]['FechaFin'].split("T")[0];
       var mesInicio = inicioAño.getMonth()<10? '0'+inicioAño.getMonth(): inicioAño.getMonth(); 
       var mesFin = finAño.getMonth()<10? '0'+finAño.getMonth(): finAño.getMonth();
-      console.log(finAño, inicioAño);
       var añosDifFFIA = parseInt(fechaFin.split("-")[0]) - inicioAño.getFullYear();
       var mesesDifFFIA = (parseInt(fechaFin.split("-")[1]) - inicioAño.getMonth()) + (12 * añosDifFFIA);
       var añosDifFAFI = finAño.getFullYear() - parseInt(fechaInicio.split("-")[0]);

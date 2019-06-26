@@ -49,6 +49,28 @@ export class AsignacionComponent implements OnInit {
                  "Descripcion" : datos11,
                 };
     console.log(datos);
+    if(this.infoUbicacion == ""){
+      Swal.fire(
+        'Debe elegir una ubicación para la asignación',
+        'Indique una ubicación en el mapa',
+        'warning'
+      )  
+    }
+    else if(datos1 == ""){
+      Swal.fire(
+        'Debe indicar el cliente',
+        'Elija el cliente al cual se le brindará el servicio',
+        'warning'
+      )  
+    }
+    else if(datos6 == "" || datos7 == ""){
+      Swal.fire(
+        'Debe indicar las fechas de la asignación',
+        'Verifique que tanto la fecha de inicio como la fecha de fin estén especificadas',
+        'warning'
+      )  
+    }
+    else{
     this.httpService.post(env.url+'/api/setAssignment', datos).toPromise()
                 .then((res) => {
                   console.log(res);
@@ -75,6 +97,7 @@ export class AsignacionComponent implements OnInit {
                   ) 
                 }
                  });
+                }
   }
   constructor(private httpService: HttpClient, private DataRetriever: DataRetrieverService, private router: Router) { }
   ResultadosEmpresas : JSON[];
