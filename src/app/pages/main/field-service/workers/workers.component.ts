@@ -85,7 +85,7 @@ export class WorkersComponent implements OnInit {
     let fechaCambio=new Date().toISOString().split("T")[0];
     document.getElementById('pickDate').addEventListener("change", (event) => {
       fechaCambio=(<HTMLInputElement>event.target).value;
-      console.log(fechaCambio);
+      this.dataRetriever.obtenerCoordsPorFecha(fechaCambio);
       this.httpService.get(env.url + '/api/workersList/'+fechaCambio).subscribe(
         data => {
           this.Resultados = data as JSON[];

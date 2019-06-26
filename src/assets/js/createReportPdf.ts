@@ -314,7 +314,12 @@ export function createPDF(reporte: {}){
     doc.rect(165, 250, 40, 25);
     doc.addImage(reporte['FirmaCliente'], 165, 250, 40, 25);
 
-
+    for(let i=0; i<reporte['Adjuntos'].split("data:image").length; i++){
+      if(i!=0){
+      doc.insertPage();
+      doc.addImage("data:image"+reporte['Adjuntos'].split("data:image")[i], 20, 40, 180, 180);
+      }
+    }
 
     //CREAR EL PDF
     //doc.save(reporte['NombreColaborador']+'.pdf');

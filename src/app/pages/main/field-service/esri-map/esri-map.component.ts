@@ -135,8 +135,11 @@ export class EsriMapComponent implements OnInit {
     return points;
   }
 
-  async prepareWorkers() {
-    let results = await this.dataRetriever.getData(env.url + "/api/workers");
+  async prepareWorkers(fecha: string) {
+    if(this.nuevaFecha==""){
+      this.nuevaFecha=new Date().toISOString().split("T")[0];
+    }
+    let results = await this.dataRetriever.getData(env.url + "/api/workers/"+this.nuevaFecha);
     return this.preparePoints(results);
   }
 
@@ -173,7 +176,7 @@ export class EsriMapComponent implements OnInit {
       // Se crea la vista del mapa
       let view = new EsriMapView(mapViewProperties)
       // Se agrega a la vista
-      let points = await this.prepareWorkers();
+      let points = await this.prepareWorkers("");
       for (let x of points) {
         if(x.pointMap.longitude !== ""){
         console.log(x);
@@ -232,10 +235,12 @@ export class EsriMapComponent implements OnInit {
   }
 
   infoUbicacion="";
-  
+  nuevaFecha="";
+
   ngOnInit() {
     // Initialize MapView and return an instance of MapView
     this.dataRetriever.infoUbicacion.subscribe(infoUbicacion => this.infoUbicacion = infoUbicacion);
+    this.dataRetriever.fechaCoordenadas.subscribe(fecha => {this.nuevaFecha = fecha; this.initializeMap()});
     this.initializeMap().then((mapView) => {
       this.houseKeeping(mapView);
     });

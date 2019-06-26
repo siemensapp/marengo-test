@@ -113,21 +113,26 @@ export class EstadisticasComponent implements OnInit {
     var diasDelMes = new Date(parseInt(this.fechaA.split("-")[0]), parseInt(this.fechaA.split("-")[1]), 0).getDate();
     var mesSeleccionado = parseInt(this.fechaA.split("-")[1]);
     var countVFD, countBT, countAUT, countAOS, countMOT;
-    console.log(this.asignacionesM);
     for (var i = 0; i < this.asignacionesM.length; i++) {
       var status = this.asignacionesM[i]['IdStatus'];
       var fechaInicio = this.asignacionesM[i]['FechaInicio'];
       var fechaFin = this.asignacionesM[i]['FechaFin'];
+      var añosDifFFMS = parseInt(fechaFin.split("T")[0].split("-")[0]) - parseInt(this.fechaA.split("-")[0]);
+      var mesesDifFFMS = (parseInt(fechaFin.split("T")[0].split("-")[1]) - mesSeleccionado) + (12 * añosDifFFMS);
+      var añosDifMSFI = parseInt(this.fechaA.split("-")[0]) - parseInt(fechaInicio.split("-")[0].split("-")[0]);
+      var mesesDifMSFI = (mesSeleccionado - parseInt(fechaInicio.split("T")[0].split("-")[1])) + (12 * añosDifMSFI);
       switch (parseInt(this.asignacionesM[i]['tecnica'])) {
         case 1: {
           countVFD = this.asignacionesM[i]['Cuenta'];
           if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-            if (mesSeleccionado > parseInt(fechaInicio.split("-")[1])) {
-              this.totalDiasVFD = this.totalDiasVFD + (parseInt(fechaFin.split("-")[2]));
-            } else if (mesSeleccionado < parseInt(fechaFin.split("-")[1])) {
-              this.totalDiasVFD = this.totalDiasVFD + (diasDelMes - parseInt(fechaInicio.split("-")[2]));
+            if (mesesDifMSFI>0 && mesesDifFFMS == 0) {
+              this.totalDiasVFD = this.totalDiasVFD + (parseInt(fechaFin.split("T")[0].split("-")[2]));
+            } else if (mesesDifMSFI == 0 && mesesDifFFMS>0) {
+              this.totalDiasVFD = this.totalDiasVFD + (diasDelMes - parseInt(fechaInicio.split("T")[0].split("-")[2])) + 1;
+            } else if (mesesDifFFMS == 0 && mesesDifMSFI ==0) {
+              this.totalDiasVFD = this.totalDiasVFD + (parseInt(fechaFin.split("T")[0].split("-")[2]) - parseInt(fechaInicio.split("T")[0].split("-")[2])) + 1;
             } else {
-              this.totalDiasVFD = this.totalDiasVFD + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
+              this.totalDiasVFD = this.totalDiasVFD + diasDelMes;
             }
           }
           break;
@@ -135,12 +140,14 @@ export class EstadisticasComponent implements OnInit {
         case 2: {
           countBT = this.asignacionesM[i]['Cuenta'];
           if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-            if (mesSeleccionado > parseInt(fechaInicio.split("-")[1])) {
-              this.totalDiasBT = this.totalDiasBT + (parseInt(fechaFin.split("-")[2]));
-            } else if (mesSeleccionado < parseInt(fechaFin.split("-")[1])) {
-              this.totalDiasBT = this.totalDiasBT + (diasDelMes - parseInt(fechaInicio.split("-")[2]));
+            if (mesesDifMSFI>0 && mesesDifFFMS == 0) {
+              this.totalDiasBT = this.totalDiasBT + (parseInt(fechaFin.split("T")[0].split("-")[2]));
+            } else if (mesesDifMSFI == 0 && mesesDifFFMS>0) {
+              this.totalDiasBT = this.totalDiasBT + (diasDelMes - parseInt(fechaInicio.split("T")[0].split("-")[2])) + 1;
+            } else if (mesesDifFFMS == 0 && mesesDifMSFI ==0) {
+              this.totalDiasBT = this.totalDiasBT + (parseInt(fechaFin.split("T")[0].split("-")[2]) - parseInt(fechaInicio.split("T")[0].split("-")[2])) + 1;
             } else {
-              this.totalDiasBT = this.totalDiasBT + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
+              this.totalDiasBT = this.totalDiasBT + diasDelMes;
             }
           }
           break;
@@ -148,12 +155,14 @@ export class EstadisticasComponent implements OnInit {
         case 3: {
           countAUT = this.asignacionesM[i]['Cuenta'];
           if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-            if (mesSeleccionado > parseInt(fechaInicio.split("-")[1])) {
-              this.totalDiasAUT = this.totalDiasAUT + (parseInt(fechaFin.split("-")[2]));
-            } else if (mesSeleccionado < parseInt(fechaFin.split("-")[1])) {
-              this.totalDiasAUT = this.totalDiasAUT + (diasDelMes - parseInt(fechaInicio.split("-")[2]));
+            if (mesesDifMSFI>0 && mesesDifFFMS == 0) {
+              this.totalDiasAUT = this.totalDiasAUT + (parseInt(fechaFin.split("T")[0].split("-")[2]));
+            } else if (mesesDifMSFI == 0 && mesesDifFFMS>0) {
+              this.totalDiasAUT = this.totalDiasAUT + (diasDelMes - parseInt(fechaInicio.split("T")[0].split("-")[2])) + 1;
+            } else if (mesesDifFFMS == 0 && mesesDifMSFI ==0) {
+              this.totalDiasAUT = this.totalDiasAUT + (parseInt(fechaFin.split("T")[0].split("-")[2]) - parseInt(fechaInicio.split("T")[0].split("-")[2])) + 1;
             } else {
-              this.totalDiasAUT = this.totalDiasAUT + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
+              this.totalDiasAUT = this.totalDiasAUT + diasDelMes;
             }
           }
           break;
@@ -161,12 +170,14 @@ export class EstadisticasComponent implements OnInit {
         case 4: {
           countAOS = this.asignacionesM[i]['Cuenta'];
           if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-            if (mesSeleccionado > parseInt(fechaInicio.split("-")[1])) {
-              this.totalDiasAOS = this.totalDiasAOS + (parseInt(fechaFin.split("-")[2]));
-            } else if (mesSeleccionado < parseInt(fechaFin.split("-")[1])) {
-              this.totalDiasAOS = this.totalDiasAOS + (diasDelMes - parseInt(fechaInicio.split("-")[2]));
+            if (mesesDifMSFI>0 && mesesDifFFMS == 0) {
+              this.totalDiasAOS = this.totalDiasAOS + (parseInt(fechaFin.split("T")[0].split("-")[2]));
+            } else if (mesesDifMSFI == 0 && mesesDifFFMS>0) {
+              this.totalDiasAOS = this.totalDiasAOS + (diasDelMes - parseInt(fechaInicio.split("T")[0].split("-")[2])) + 1;
+            } else if (mesesDifFFMS == 0 && mesesDifMSFI ==0) {
+              this.totalDiasAOS = this.totalDiasAOS + (parseInt(fechaFin.split("T")[0].split("-")[2]) - parseInt(fechaInicio.split("T")[0].split("-")[2])) + 1;
             } else {
-              this.totalDiasAOS = this.totalDiasAOS + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
+              this.totalDiasAOS = this.totalDiasAOS + diasDelMes;
             }
           }
           break;
@@ -174,12 +185,14 @@ export class EstadisticasComponent implements OnInit {
         case 5: {
           countMOT = this.asignacionesM[i]['Cuenta'];
           if (status == 1 || status == 2 || status == 3 || status == 4 || status == 4 || status == 5) {
-            if (mesSeleccionado > parseInt(fechaInicio.split("-")[1])) {
-              this.totalDiasMOT = this.totalDiasMOT + (parseInt(fechaFin.split("-")[2]));
-            } else if (mesSeleccionado < parseInt(fechaFin.split("-")[1])) {
-              this.totalDiasMOT = this.totalDiasMOT + (diasDelMes - parseInt(fechaInicio.split("-")[2]));
+            if (mesesDifMSFI>0 && mesesDifFFMS == 0) {
+              this.totalDiasMOT = this.totalDiasMOT + (parseInt(fechaFin.split("T")[0].split("-")[2]));
+            } else if (mesesDifMSFI == 0 && mesesDifFFMS>0) {
+              this.totalDiasMOT = this.totalDiasMOT + (diasDelMes - parseInt(fechaInicio.split("T")[0].split("-")[2])) + 1;
+            } else if (mesesDifFFMS == 0 && mesesDifMSFI ==0) {
+              this.totalDiasMOT = this.totalDiasMOT + (parseInt(fechaFin.split("T")[0].split("-")[2]) - parseInt(fechaInicio.split("T")[0].split("-")[2])) + 1;
             } else {
-              this.totalDiasMOT = this.totalDiasMOT + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
+              this.totalDiasMOT = this.totalDiasMOT + diasDelMes;
             }
           }
           break;
@@ -219,13 +232,19 @@ export class EstadisticasComponent implements OnInit {
       var status = this.asignacionesM[i]['IdStatus'];
       var fechaInicio = this.asignacionesM[i]['FechaInicio'];
       var fechaFin = this.asignacionesM[i]['FechaFin'];
+      var añosDifFFMS = parseInt(fechaFin.split("T")[0].split("-")[0]) - parseInt(this.fechaA.split("-")[0]);
+      var mesesDifFFMS = (parseInt(fechaFin.split("T")[0].split("-")[1]) - mesSeleccionado) + (12 * añosDifFFMS);
+      var añosDifMSFI = parseInt(this.fechaA.split("-")[0]) - parseInt(fechaInicio.split("-")[0].split("-")[0]);
+      var mesesDifMSFI = (mesSeleccionado - parseInt(fechaInicio.split("T")[0].split("-")[1])) + (12 * añosDifMSFI);
       if (status == 1 || status == 2 || status == 3 || status == 4 || status == 5) {
-        if (mesSeleccionado > parseInt(fechaInicio.split("-")[1])) {
-          this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] = this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] + (parseInt(fechaFin.split("-")[2].split("T")[0])) + 1;
-        } else if (mesSeleccionado < parseInt(fechaFin.split("-")[1])) {
-          this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] = this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] + (diasDelMes - parseInt(fechaInicio.split("-")[2].split("T")[0])) + 1;
+        if (mesesDifMSFI>0 && mesesDifFFMS == 0) {
+          this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] = this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] + (parseInt(fechaFin.split("T")[0].split("-")[2]));
+        } else if (mesesDifMSFI == 0 && mesesDifFFMS>0) {
+          this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] = this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] + (diasDelMes - parseInt(fechaInicio.split("T")[0].split("-")[2])) + 1;
+        } else if (mesesDifFFMS == 0 && mesesDifMSFI ==0) {
+          this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] = this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] + (parseInt(fechaFin.split("T")[0].split("-")[2]) - parseInt(fechaInicio.split("T")[0].split("-")[2])) + 1;
         } else {
-          this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] = this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] + (parseInt(fechaFin.split("-")[2].split("T")[0]) - parseInt(fechaInicio.split("-")[2].split("T")[0])) + 1;
+          this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] = this.porcentajesIndividuales[this.asignacionesM[i]['IdEspecialista']] + diasDelMes;
         }
       }
     }
@@ -295,7 +314,7 @@ export class EstadisticasComponent implements OnInit {
                 for (let i = 0; i <= mesesDifFFFI; i++) {
                   var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
                   if (i == 0) {
-                    this.totalDiasVFDA = this.totalDiasVFDA + diasMes - parseInt(fechaInicio.split("-")[2]);
+                    this.totalDiasVFDA = this.totalDiasVFDA + diasMes - parseInt(fechaInicio.split("-")[2]) +1;
                   } else if (i == mesesDifFFFI) {
                     this.totalDiasVFDA = this.totalDiasVFDA + parseInt(fechaFin.split("-")[2]);
                   } else {
@@ -335,7 +354,7 @@ export class EstadisticasComponent implements OnInit {
                 for (let i = 0; i <= mesesDifFFFI; i++) {
                   var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
                   if (i == 0) {
-                    this.totalDiasBTA = this.totalDiasBTA + diasMes - parseInt(fechaInicio.split("-")[2]);
+                    this.totalDiasBTA = this.totalDiasBTA + diasMes - parseInt(fechaInicio.split("-")[2]) +1;
                   } else if (i == mesesDifFFFI) {
                     this.totalDiasBTA = this.totalDiasBTA + parseInt(fechaFin.split("-")[2]);
                   } else {
@@ -375,7 +394,7 @@ export class EstadisticasComponent implements OnInit {
                 for (let i = 0; i <= mesesDifFFFI; i++) {
                   var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
                   if (i == 0) {
-                    this.totalDiasAUTA = this.totalDiasAUTA + diasMes - parseInt(fechaInicio.split("-")[2]);
+                    this.totalDiasAUTA = this.totalDiasAUTA + diasMes - parseInt(fechaInicio.split("-")[2]) +1;
                   } else if (i == mesesDifFFFI) {
                     this.totalDiasAUTA = this.totalDiasAUTA + parseInt(fechaFin.split("-")[2]);
                   } else {
@@ -415,7 +434,7 @@ export class EstadisticasComponent implements OnInit {
                 for (let i = 0; i <= mesesDifFFFI; i++) {
                   var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
                   if (i == 0) {
-                    this.totalDiasAOSA = this.totalDiasAOSA + diasMes - parseInt(fechaInicio.split("-")[2]);
+                    this.totalDiasAOSA = this.totalDiasAOSA + diasMes - parseInt(fechaInicio.split("-")[2]) +1;
                   } else if (i == mesesDifFFFI) {
                     this.totalDiasAOSA = this.totalDiasAOSA + parseInt(fechaFin.split("-")[2]);
                   } else {
@@ -450,12 +469,12 @@ export class EstadisticasComponent implements OnInit {
               }
             } else {
               if (fechaInicio.split("-")[1] == fechaFin.split("-")[1]) {
-                this.totalDiasMOTA = this.totalDiasMOTA + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2]));
+                this.totalDiasMOTA = this.totalDiasMOTA + (parseInt(fechaFin.split("-")[2]) - parseInt(fechaInicio.split("-")[2])) +1;
               } else {
                 for (let i = 0; i <= mesesDifFFFI; i++) {
                   var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
                   if (i == 0) {
-                    this.totalDiasMOTA = this.totalDiasMOTA + diasMes - parseInt(fechaInicio.split("-")[2]);
+                    this.totalDiasMOTA = this.totalDiasMOTA + diasMes - parseInt(fechaInicio.split("-")[2]) +1;
                   } else if (i == mesesDifFFFI) {
                     this.totalDiasMOTA = this.totalDiasMOTA + parseInt(fechaFin.split("-")[2]);
                   } else {
@@ -485,7 +504,6 @@ export class EstadisticasComponent implements OnInit {
     if (isNaN(this.porcentajeMOTA))
       this.porcentajeMOTA = 0;
     this.porcentajeTotalA = (this.porcentajeVFDA + this.porcentajeBTA + this.porcentajeAUTA + this.porcentajeAOSA + this.porcentajeMOTA) / 5;
-    console.log(this.porcentajeVFDA, this.porcentajeBTA, this.porcentajeAUTA, this.porcentajeAOSA, this.porcentajeMOTA);
   }
 
   datosIndividualesA() {
@@ -513,6 +531,7 @@ export class EstadisticasComponent implements OnInit {
       var fechaFin = this.asignacionesA[i]['FechaFin'].split("T")[0];
       var mesInicio = inicioAño.getMonth()<10? '0'+inicioAño.getMonth(): inicioAño.getMonth(); 
       var mesFin = finAño.getMonth()<10? '0'+finAño.getMonth(): finAño.getMonth();
+      console.log(finAño, inicioAño);
       var añosDifFFIA = parseInt(fechaFin.split("-")[0]) - inicioAño.getFullYear();
       var mesesDifFFIA = (parseInt(fechaFin.split("-")[1]) - inicioAño.getMonth()) + (12 * añosDifFFIA);
       var añosDifFAFI = finAño.getFullYear() - parseInt(fechaInicio.split("-")[0]);
@@ -524,18 +543,18 @@ export class EstadisticasComponent implements OnInit {
           for (let i = 0; i <= mesesDifFFIA; i++) {
             var diasMes = new Date(inicioAño.getFullYear(), i + mesInicio, 0).getDate();
             if (i == mesesDifFFIA) {
-              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + parseInt(fechaFin.split("-")[2]) + 1;
+              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + parseInt(fechaFin.split("-")[2]);
             } else {
-              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + diasMes + 1;
+              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + diasMes;
             }
           }
         } else if (parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) <= parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaFin.split("-")[0] + '' + fechaFin.split("-")[1]) > parseInt(finAño.getFullYear() + '' + mesFin)+1 && parseInt(fechaInicio.split("-")[0] + '' + fechaInicio.split("-")[1]) > parseInt(inicioAño.getFullYear() + '' + mesInicio)+1) {
           for (let i = 0; i <= mesesDifFAFI; i++) {
             var diasMes = new Date(parseInt(fechaInicio.split("-")[0]), i + parseInt(fechaInicio.split("-")[1]), 0).getDate();
             if (i == 0) {
-              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + parseInt(fechaInicio.split("-")[2]) + 1;
+              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + parseInt(fechaInicio.split("-")[2]);
             } else {
-              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + diasMes + 1;
+              this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + diasMes;
             }
           }
         } else {
@@ -547,9 +566,9 @@ export class EstadisticasComponent implements OnInit {
               if (i == 0) {
                 this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + diasMes - parseInt(fechaInicio.split("-")[2]) + 1;
               } else if (i == mesesDifFFFI) {
-                this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + parseInt(fechaFin.split("-")[2]) + 1;
+                this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + parseInt(fechaFin.split("-")[2]);
               } else {
-                this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + diasMes + 1;
+                this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] = this.porcentajesIndividualesA[this.asignacionesA[i]['IdEspecialista']] + diasMes;
               }
             }
           }
@@ -580,7 +599,6 @@ export class EstadisticasComponent implements OnInit {
           this.asignacionesA = datos;
           this.DataRetriever.getData(env.url + "/api/allWorkers").then(especialistas => {
             this.especialistas = especialistas;
-            console.log(this.especialistas);
             this.datosGrupalesM();
             this.datosIndividualesM();
             this.datosGrupalesA();

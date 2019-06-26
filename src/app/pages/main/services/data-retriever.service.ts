@@ -12,12 +12,17 @@ export class DataRetrieverService {
   private fechaSource = new BehaviorSubject("");
   private coordsSource= new BehaviorSubject([]);
   private especialistaSource = new BehaviorSubject({});
+  private dateSource = new BehaviorSubject("");
   finalCoords = this.coordsSource.asObservable();
   infoFecha = this.fechaSource.asObservable();
   infoUbicacion = this.infoSource.asObservable();
   infoEspecialista = this.especialistaSource.asObservable();
+  fechaCoordenadas = this.dateSource.asObservable();
   constructor( private http: HttpClient){ }
 
+  obtenerCoordsPorFecha(fecha: string){
+    this.dateSource.next(fecha);
+  }
   
   obtenerFecha(fecha: string){
     this.fechaSource.next(fecha);
