@@ -33,7 +33,7 @@ export class WorkersComponent implements OnInit {
         return '#5B00BB';
       case 'Capacitación':
         return '#8B8B8B';
-      case 'Disponibilidad FDS':
+      case 'Disponible Fin de Semana':
         return '#A04B00';
     }    
   }

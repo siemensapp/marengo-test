@@ -15,6 +15,7 @@ export class EspecialistaComponent implements OnInit {
 
   constructor(private httpService: HttpClient, private router: Router) { }
   
+  fechaMinima;
   subirArchivo(){
     var click = document.getElementById("fileInput");   
     click.click();
@@ -60,6 +61,14 @@ export class EspecialistaComponent implements OnInit {
                  "Foto" : document.getElementById("resultadoImagen").innerHTML
                 };
 
+    if(datos3=="" || datos8=="" || datos4=="" || datos5=="" || datos9=="" || datos10=="" || datos11=="" || datos7==""){
+      Swal.fire(
+        'Campos requeridos',
+        'Asegurese de llenar toda la información para poder agregar al especialista',
+        'warning'
+       )
+    }            
+    else{
     this.httpService.post(env.url + '/api/createWorker', datos).toPromise()
                 .then((res) => {
                   console.log(datos);
@@ -80,10 +89,11 @@ export class EspecialistaComponent implements OnInit {
                     )  
                   }
                 });
+              }
   }
 
   ngOnInit() {
-  
+    this.fechaMinima = new Date().toISOString().split("T")[0];
   }
 
 }

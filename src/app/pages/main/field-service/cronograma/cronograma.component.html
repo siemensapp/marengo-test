@@ -14,10 +14,10 @@
     <div id="tablas">
       <table class="tablaEspecialistas" id="tablaEspecialistas1">
         <tr id="tituloTablaE">
-          <th>Especialista</th>
+          <th>Especialista<br>Técnica</th>
         </tr>
         <tr *ngFor="let especialista of resultados" id={{especialista.IdEspecialista}}>
-          <td style="border-top: 1px ridge lightgray; text-align: right; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 0.9em; white-space:nowrap; text-overflow: ellipsis">{{especialista.NombreE}}</td>
+          <td style="border-top: 1px ridge lightgray; text-align: right; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 0.9em; white-space:nowrap; text-overflow: ellipsis">{{especialista.NombreE}} | {{especialista.NombreT}}</td>
         </tr>
       </table>
       <table class="tablaAsignaciones" id="tablaAsignacionesID">
@@ -55,9 +55,9 @@
         </div>
       </div>
     </div>
-    <div class="estado" style="border-color: #06AA00">
+    <div class="estado" style="border-color: white">
       <div class="servicio"> Disponible
-        <div class="polig" style="background-color: #06AA00">
+        <div class="polig" style="background-color: white; border:1px ridge lightgray">
     
         </div>
       </div>
@@ -85,9 +85,9 @@
         </div>
       </div>
     </div>
-    <div class="estado" style="border-color: #A04B00">
-      <div class="servicio"> Disponibilidad FDS
-        <div class="polig" style="background-color: #A04B00">
+    <div class="estado" style="border-color: #06AA00">
+      <div class="servicio"> Disponible Fin de Semana
+        <div class="polig" style="background-color: #06AA00">
     
         </div>
       </div>

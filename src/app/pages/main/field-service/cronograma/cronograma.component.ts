@@ -26,6 +26,8 @@ import * as pdf from '../../../../../assets/js/createReportPdf';
 export class CronogramaComponent implements OnInit {
 
   constructor(private httpService: HttpClient, private dataRetriever: DataRetrieverService, private excelService: ExcelService) {}
+  private holidays = require('colombia-holidays');
+  festivos = {};
   Asignaciones;
   resultados;
   datos: JSON[];
@@ -161,7 +163,7 @@ export class CronogramaComponent implements OnInit {
                   'IdEspecialista': this.infoAsignacion2[0]['IdEspecialista'],
                   'IdStatus': this.infoAsignacion2[0]['IdStatus'],
                   'IdEmpresa': this.infoAsignacion2[0]['IdEmpresa'],
-                  'PCE': this.infoAsignacion2[0]['PCE'],
+                  'PCFSV': this.infoAsignacion2[0]['PCFSV'],
                   'IdAsignacion': this.infoAsignacion2[0]['IdAsignacion'],
                   'NombreCliente': this.infoAsignacion2[0]['NombreCliente'],
                   'NombrePlanta': this.infoAsignacion2[0]['NombrePlanta'],
@@ -218,7 +220,7 @@ export class CronogramaComponent implements OnInit {
       case 3:
         return '#FFE300';
       case 4:
-        return '#06AA00';
+        return 'white';
       case 5:
         return '#BB0000';
       case 6:
@@ -226,7 +228,7 @@ export class CronogramaComponent implements OnInit {
       case 7:
         return '#8B8B8B';
       case 8:
-        return '#A04B00';
+        return '#06AA00';
     }
   }
 
@@ -252,14 +254,21 @@ export class CronogramaComponent implements OnInit {
     });
     var header = tabla.createTHead();
     var row = header.insertRow(0);
+    var diaSemana = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'];
     row.style.fontSize = "1.1em";
+    let auxFestivos = this.holidays.getColombiaHolidaysByYear(parseInt(fechaHoy.split("-")[0]));
+    for (let festivos of auxFestivos) this.festivos[festivos['holiday']] = "";
     for (var i = 0; i < diasDelMes; i++) {
+      var dia = diaSemana[new Date(parseInt(fechaHoy.split("-")[0]), parseInt(fechaHoy.split("-")[1])-1, i+1).getDay()];
+      var cell = row.insertCell(i);
+      var diaFestivo = String(fechaHoy.split("-")[0] +'-'+fechaHoy.split("-")[1]+ '-' + (i + 1 < 10 ? '0' + (i + 1): (i + 1)));
+      if(dia=="Do" || dia=="Sa" || this.festivos.hasOwnProperty(diaFestivo)){
+        cell.style.color = 'red';
+      }
       if (i < 9) {
-        var cell = row.insertCell(i);
-        cell.innerHTML = "<b>" + "0" + (i + 1) + "</b>";
+        cell.innerHTML = dia + "<br><b>" + "0" + (i + 1) + "</b>";
       } else {
-        var cell = row.insertCell(i);
-        cell.innerHTML = "<b>" + (i + 1) + "</b>";  
+        cell.innerHTML = dia + "<br><b>" + (i + 1) + "</b>";  
       }
     }
     
@@ -332,14 +341,20 @@ export class CronogramaComponent implements OnInit {
       tabla.deleteRow(0);
       var header = tabla.createTHead();
       var row = header.insertRow(0);
+      var diaSemana = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'];
       row.style.fontSize = "1.1em";
+      for (let festivos of auxFestivos) this.festivos[festivos['holiday']] = "";
       for (var i = 0; i < diasDelMesN; i++) {
+        var dia = diaSemana[new Date(parseInt(fecha.split("-")[0]), parseInt(fecha.split("-")[1])-1, i+1).getDay()];
+        var cell = row.insertCell(i);
+        var diaFestivo = String(fecha.split("-")[0] +'-'+fecha.split("-")[1]+ '-' + (i + 1 < 10 ? '0' + (i + 1): (i + 1)));
+        if(dia=="Do" || dia=="Sa" || this.festivos.hasOwnProperty(diaFestivo)){
+          cell.style.color = 'red';
+        }
         if (i < 9) {
-          var cell = row.insertCell(i);
-          cell.innerHTML = "<b>" + "0" + (i + 1) + "</b>";
+          cell.innerHTML = dia +"<br><b>" + "0" + (i + 1) + "</b>";
         } else {
-          var cell = row.insertCell(i);
-          cell.innerHTML = "<b>" + (i + 1) + "</b>";
+          cell.innerHTML = dia +"<br><b>" + (i + 1) + "</b>";
         }
       }
 

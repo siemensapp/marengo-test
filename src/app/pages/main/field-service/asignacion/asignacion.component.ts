@@ -38,7 +38,7 @@ export class AsignacionComponent implements OnInit {
                  "NombreCliente" : datos1,
                  "NombrePlanta" : datos2, 
                  "CiudadPlanta" : this.finalCoords[2],
-                 "PCE": datos5,
+                 "PCFSV": datos5,
                  "FechaInicio" : datos6,
                  "FechaFin" : datos7,
                  "CoordenadasSitio" : this.finalCoords[0],
@@ -56,9 +56,9 @@ export class AsignacionComponent implements OnInit {
         'warning'
       )  
     }
-    else if(datos1 == ""){
+    else if(datos1 == "" || datos2==""){
       Swal.fire(
-        'Debe indicar el cliente',
+        'Debe indicar el cliente y la planta',
         'Elija el cliente al cual se le brindará el servicio',
         'warning'
       )  
@@ -67,6 +67,13 @@ export class AsignacionComponent implements OnInit {
       Swal.fire(
         'Debe indicar las fechas de la asignación',
         'Verifique que tanto la fecha de inicio como la fecha de fin estén especificadas',
+        'warning'
+      )  
+    }
+    else if(datos10==""){
+      Swal.fire(
+        'Información de contacto incompleta',
+        'Debe indicar por lo menos el Email del contacto',
         'warning'
       )  
     }
