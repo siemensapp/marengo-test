@@ -26,7 +26,7 @@ export class WorkersComponent implements OnInit {
       case 'Vacaciones':
         return '#FFE300';
       case 'Disponible':
-        return '#06AA00';
+        return '#FFFFFF';
       case 'Incapacidad':
         return '#BB0000';
       case 'Permiso':
@@ -34,7 +34,9 @@ export class WorkersComponent implements OnInit {
       case 'Capacitación':
         return '#8B8B8B';
       case 'Disponible Fin de Semana':
-        return '#A04B00';
+        return '#06AA00';
+      default : 
+        return '#FFFFFF';
     }    
   }
 
@@ -108,6 +110,7 @@ export class WorkersComponent implements OnInit {
      this.httpService.get(env.url + '/api/workersList/'+fechaHoy).subscribe(
       data => {
         this.Resultados = data as JSON[];
+        console.log(this.Resultados);
       }
     )
   }

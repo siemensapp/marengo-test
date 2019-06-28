@@ -2,10 +2,10 @@
   <input type="date" id="pickDate">
     <div *ngFor="let resultado of Resultados">
       <div class="sobreTabla"><i class="fas fa-circle"
-          [ngStyle]="{'color': setColor(resultado.NombreS)}"></i>{{resultado.NombreS}}</div>
+          [ngStyle]="{'color': setColor(resultado.Estado)}"></i>{{resultado.Estado}}</div>
       <div class="tabla">
         <div class="tablaLeft">
-          <img [ngStyle]="{'border-color': setColor(resultado.NombreS)}"
+          <img [ngStyle]="{'border-color': setColor(resultado.Estado)}"
             src="data:image/png;base64,{{resultado.FotoBase64}}">
           <div class="tablaLeftDatos">
             {{resultado.NombreE}}<br>

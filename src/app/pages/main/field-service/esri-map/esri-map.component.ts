@@ -121,7 +121,7 @@ export class EsriMapComponent implements OnInit {
         color: [255, 255, 255],
         size: "40px",
         outline: {
-          color: [100, 119, 40],
+          color: [227, 102, 0],
           width: 3
         }
       };
