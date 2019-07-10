@@ -24,6 +24,10 @@ export class SearchComponent implements OnInit {
     {name: 'Serial'}
   ];
 
+  secondaryNavItems = [
+    {title: '+ Equipo', link: 'workers'}
+  ]
+
   testExcel() {
     // this.excelService.exportAsExcelFile( auxExcel.createExcel(JSON.parse(this.infoReporte[0]['HojaTiempo'])) , 'TEST');
     // this.excelService.exportAsExcelFile('TEST');

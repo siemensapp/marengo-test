@@ -42,6 +42,7 @@ const routes: Routes = [
         children: [
           {path: '',pathMatch: 'full', redirectTo: 'busqueda'},
           {path: 'busqueda', component: SearchComponent},
+          // {path: 'crearEquipo', component:}
           {path: 'detalles/:searchTerm', component: DetallesComponent}
         ]
       },

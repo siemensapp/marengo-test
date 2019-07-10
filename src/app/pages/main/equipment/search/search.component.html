@@ -1,4 +1,4 @@
-<main class="page-work-area">
+<!-- <main class="page-work-area">
   <div class="container">
     <div class="space-around">
       <si-filtered-search [criteria]="criteria" [showIcon]="true" placeholder="Buscar ..." submitText="Presione Enter o Click..." (doSearch)="logEvent($event)">
@@ -31,4 +31,37 @@
 
     <si-loading-spinner *ngIf="loading"></si-loading-spinner>
   </div>
-</main>
+</main> -->
+
+<div class="container">
+    <div class="space-around">
+      <si-filtered-search [criteria]="criteria" [showIcon]="true" placeholder="Buscar ..." submitText="Presione Enter o Click..." (doSearch)="logEvent($event)">
+      </si-filtered-search>
+    </div>
+
+    <ng-container *ngIf="resultados | async as results" id='resultList'>
+      <div class="result-list" style="background-color: gray; color:white">
+          <div>Nombre Empresa</div>
+          <div style="text-align: left">Tipo de Equipo</div>
+          <div>Numero Serial</div>
+          <div></div>
+      </div>
+      <br>
+      <div *ngFor="let result of results" class="result-list">
+        <div>{{result.NombreEmpresa}}</div>
+        <div style="text-align: left">{{translateTipoEquipo(result.TipoEquipo)}}</div>
+        <div>{{result.NumeroSerial}}</div>
+        <div> <a [routerLink]="['../', 'detalles', result.NumeroSerial ]">detalles</a> </div>
+      </div>
+    </ng-container>
+
+    <si-empty-list *ngIf="!(resultados | async) && firstSearch && !loading" icon="marengo-search" title="Busca algo"
+      content="Puedes buscar por empresa , tipo de equipo y MLFB">
+    </si-empty-list>
+
+    <si-empty-list *ngIf="!(resultados | async)?.length && !firstSearch" icon="marengo-activation-unconfirmed" title="No items"
+      content="La busqueda no arrojo resultados">
+    </si-empty-list>
+
+    <si-loading-spinner *ngIf="loading"></si-loading-spinner>
+  </div>

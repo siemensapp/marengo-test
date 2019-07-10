@@ -9,6 +9,10 @@ export class ConsultaContentComponent implements OnInit {
 
   constructor() { }
 
+  secondaryNavItems = [
+    {title: '+ Equipo', link: 'workers'}
+  ]
+
   ngOnInit() {
   }
 

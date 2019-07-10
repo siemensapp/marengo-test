@@ -1,0 +1,140 @@
+<main class="page-work-area">
+    <table class="table-logos"  style="width: 100%">
+      <td class="td-images"><img [src]="cv && clientLogo()" style="width: 100%; height:auto;" ></td>
+      <td class="td-title-header">{{cv && cv.NombreEmpresa}}<br>Gestión de Mantenimiento</td>
+      <td class="td-images"><img src="../../../../../assets/images/logos/Siemens-logo.png" style="width: 100%; height:auto;" ></td>
+    </table>
+  
+    <div class="section-title">
+      datos generales del cliente
+    </div>
+  
+    <table class="table-info">
+      <tr>
+        <td class="td-title-info">cliente</td>
+        <td colspan=5>{{cv && cv.NombreEmpresa}}</td>
+      </tr>
+      <tr>
+          <td class="td-title-info">N° Contrato</td>
+          <td>Etwas zu schreiben</td>
+          <td class="td-title-info">Planta</td>
+          <td>Etwas zu schreiben</td>
+          <td class="td-title-info">Ciudad</td>
+          <td>Etwas zu schreiben</td>
+      </tr>
+      <tr>
+          <td class="td-title-info">Fecha</td>
+          <td>Etwas zu schreiben</td>
+          <td class="td-title-info">Periodo</td>
+          <td>Etwas zu schreiben</td>
+          <td class="td-title-info">Vence</td>
+          <td>Etwas zu schreiben</td>
+      </tr>
+      <tr>
+          <td class="td-title-info">Responsable</td>
+          <td>Etwas zu schreiben</td>
+          <td class="td-title-info">Teléfono</td>
+          <td>Etwas zu schreiben</td>
+          <td class="td-title-info">E-mail</td>
+          <td>Etwas zu schreiben</td>
+      </tr>
+    </table>
+  
+    <div class="section-title">
+        datos generales Siemens
+    </div>
+  
+      <table class="table-info">
+        <tr>
+            <td class="td-title-info">P.M.</td>
+            <td>Max Mustermann</td>
+            <td class="td-title-info">Teléfono</td>
+            <td>Etwas zu schreiben</td>
+            <td class="td-title-info">E-mail</td>
+            <td>max.mustermann@siemens.com</td>
+        </tr>
+      </table>
+    <div class="section-title">
+        datos del equipo
+    </div>
+      <table class="table-info">
+        <tr>
+            <td class="td-title-info">Tipo de Equipo</td>
+            <td>{{cv && translateTipoEquipo(cv.TipoEquipo)}}</td>
+        </tr>
+        <tr>
+            <td class="td-title-info">Descripción</td>
+            <td colspan=5 style="padding: 10px 0;">{{cv && cv.Descripcion}}</td>
+        </tr>
+        <tr>
+            <td class="td-title-info">N° serial</td>
+            <td>{{cv && cv.NumeroSerial}}</td>
+            <td class="td-title-info">MLFB</td>
+            <td>{{cv && cv.MLFB}}</td>
+            <td class="td-title-info">Fecha producción</td>
+            <td>{{cv && cv.FechaProduccion && cv.FechaProduccion.split("T")[0]}}</td>
+        </tr>
+        <tr>          
+            <td class="td-title-info">Años operación</td>
+            <td>{{cv && cv.AnnosOperacion}}</td>
+            <td class="td-title-info">Ciclo de vida</td>
+            <td colspan=3>{{cv && cv.CicloVida}}</td>
+        </tr>
+      </table>
+      <div class="section-title">
+          control de actividades
+      </div>
+      <table class="table-report">
+          <thead>
+              <tr>
+                  <th rowspan=2 class="td-title-report">fecha</th>
+                  <th colspan=3 class="td-title-report">tipo</th>
+                  <th rowspan=2 class="td-title-report">actividad realizada</th>
+                  <th rowspan=2 class="td-title-report">field service</th>
+                  <th rowspan=2 class="td-title-report">informe</th>
+                </tr>
+                <tr>
+                  
+                  <th tooltip="Preventivo" placement="auto" class="td-title-report">P</th>
+                  <th tooltip="Correctivo" placement="auto" class="td-title-report">c</th>
+                  <th tooltip="Emergencia" placement="auto" class="td-title-report">e</th>
+                  
+                </tr>
+          </thead>
+          <tbody *ngIf="reportes | async as results">
+              <tr *ngFor="let result of results">
+                  <td>{{result.FechaEnvio.split("T")[0]}}</td>
+                  <td></td>
+                  <td>X</td>
+                  <td></td>
+                  <td>{{result.ActividadesRealizadas}}</td>
+                  <td>{{result.NombreColaborador}}</td>
+                  <td><a (click)="showReport(result)" >detalles</a></td>
+                </tr>
+            <!-- <div *ngIf="reportes | async as results">
+              <tr *ngFor="let result of results">
+                <td>{{result.FechaEnvio.split("T")[0]}}</td>
+                <td></td>
+                <td>X</td>
+                <td></td>
+                <td>{{result.ActividadesRealizadas}}</td>
+                <td>{{result.NombreColaborador}}</td>
+                <td><a>detalles</a></td>
+              </tr>
+            </div> -->
+            
+          </tbody>
+        </table>
+  
+    <!-- <div *ngIf="reportes | async as results">
+      <table class="table-info">
+        <tr>
+          <th rowspan=2 class="td-title-info">fecha</th>
+          <th rowspan=2 class="td-title-info">tipo</th>
+          <th rowspan=2 class="td-title-info">actividad realizada</th>
+          <th rowspan=2 class="td-title-info">field service</th>
+          <th rowspan=2 class="td-title-info">informe</th>
+        </tr>
+      </table>
+    </div> -->
+  </main>

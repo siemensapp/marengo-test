@@ -94,7 +94,7 @@ export class CronogramaComponent implements OnInit {
                 this.infoAsignacion[0]['NombreSitio'] + '<br><br>' +
                 this.infoAsignacion[0]['FechaInicio'].split("T")[0] + '  <i class="fas fa-long-arrow-alt-right"></i>  ' + this.infoAsignacion[0]['FechaFin'].split("T")[0] + '<br>' +
                 '<p style="font-weight: bold; text-decoration: underline;">' + status + '</p>' + '<br>' +
-                'Contacto: ' + this.infoAsignacion[0]['NombreContacto'] + ' - ' + this.infoAsignacion[0]['TelefonoContacto'];
+                'Contacto: ' + this.infoAsignacion[0]['NombreContacto'] + '<br>Teléfono: ' + this.infoAsignacion[0]['TelefonoContacto'];
               }
               else{
                 var contenido = this.infoAsignacion[0]['NombreE'] + ' (' + this.infoAsignacion[0]['NombreT'] + ') - ' + this.infoAsignacion[0]['NombreS'] + '<br>' +

@@ -291,22 +291,22 @@ export function createPDF(reporte: {}){
     doc.rect(5, 250, 40, 25);
     doc.addImage(reporte['FirmaEmisor'], 5, 250, 40, 25);
 
-    doc.text(50, 244, "Responsable \nde Obra");
-    doc.rect(45, 240, 40, 10);
-    doc.rect(45, 250, 40, 25);
-    doc.addImage(reporte['FirmaResponsableO'], 45, 250, 40, 25);
+    // doc.text(50, 244, "Responsable \nde Obra");
+    // doc.rect(45, 240, 40, 10);
+    // doc.rect(45, 250, 40, 25);
+    // doc.addImage(reporte['FirmaResponsableO'], 45, 250, 40, 25);
 
 
-    doc.text(90, 244, "Comerciante /\nFinanciero ");
-    doc.rect(85, 240, 40, 10);
-    doc.rect(85, 250, 40, 25);
-    doc.addImage(reporte['FirmaComerciante'], 85, 250, 40, 25);
+    // doc.text(90, 244, "Comerciante /\nFinanciero ");
+    // doc.rect(85, 240, 40, 10);
+    // doc.rect(85, 250, 40, 25);
+    // doc.addImage(reporte['FirmaComerciante'], 85, 250, 40, 25);
 
 
-    doc.text(130, 244, "Responsable \ndel Proyecto");
-    doc.rect(125, 240, 40, 10);
-    doc.rect(125, 250, 40, 25);
-    doc.addImage(reporte['FirmaResponsableP'], 125, 250, 40, 25);
+    // doc.text(130, 244, "Responsable \ndel Proyecto");
+    // doc.rect(125, 240, 40, 10);
+    // doc.rect(125, 250, 40, 25);
+    // doc.addImage(reporte['FirmaResponsableP'], 125, 250, 40, 25);
 
 
     doc.text(170, 244, "Recibido por\nel Cliente");
@@ -314,12 +314,27 @@ export function createPDF(reporte: {}){
     doc.rect(165, 250, 40, 25);
     doc.addImage(reporte['FirmaCliente'], 165, 250, 40, 25);
 
-    for(let i=0; i<reporte['Adjuntos'].split("data:image").length; i++){
-      if(i!=0){
+    let adjuntos = JSON.parse(reporte['Adjuntos']);
+    for(let i = 0; i < (Object.keys(adjuntos).length / 2); i++) {
       doc.insertPage();
-      doc.addImage("data:image"+reporte['Adjuntos'].split("data:image")[i], 20, 40, 180, 180);
-      }
+      if ( i == 0) {
+        doc.setFontSize(20);
+        doc.setFontStyle("bold");
+        doc.text(10, 30, "Anexos Fotográficos");
+      }      
+      doc.addImage(adjuntos[`Foto ${i+1}`], 20, 40, 180, 180);
+      doc.setFontSize(10);
+      doc.setFontStyle("bold");
+      doc.text(10, 230, `Anexo ${i+1}. ${(adjuntos[`Comentario ${i+1}`] == ``)? `Sin comentarios` : (adjuntos[`Comentario ${i+1}`])}`);
     }
+
+
+    // for(let i=0; i<reporte['Adjuntos'].split("data:image").length; i++){
+    //   if(i!=0){
+    //   doc.insertPage();
+    //   doc.addImage("data:image"+reporte['Adjuntos'].split("data:image")[i], 20, 40, 180, 180);
+    //   }
+    // }
 
     //CREAR EL PDF
     //doc.save(reporte['NombreColaborador']+'.pdf');

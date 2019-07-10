@@ -20,6 +20,7 @@ import { DetallesComponent } from './equipment/detalles/detalles.component';
 import { ConsultaContentComponent } from './equipment/consulta-content/consulta-content.component';
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { EquipoComponent } from './equipment/equipo/equipo.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     WidgetsComponent,
     SearchComponent,
     DetallesComponent,
-    ConsultaContentComponent
+    ConsultaContentComponent,
+    EquipoComponent
   ],
   imports: [
     // Angular
