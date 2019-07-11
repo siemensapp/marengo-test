@@ -1,3 +1,12 @@
+.container {
+  margin: auto;
+  width: 90vw;
+  height: 79vh;   
+  float: left;
+  padding: 0;
+  overflow-y: scroll;
+}
+
 .table-logos td {
     text-align: center;
 }
@@ -9,6 +18,13 @@
     width: 25%;
 }
 
+td {
+  padding: 5px 0;
+}
+
+td input {
+  width: 100%;
+}
 
 .section-title {
     text-transform: uppercase;
@@ -46,3 +62,71 @@
 a:hover {
     cursor: pointer;
 }
+
+/* styled input */
+.styledInput {
+    position: relative;
+    width: 95%;    
+  }
+  
+  /* input */
+  .styledInput input {
+    /* border-bottom: 1px solid #757575; */
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    font-size: 1.2rem;
+  }
+  
+  .styledInput input:focus {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 2px solid #0077FF;
+  }
+  
+  .styledInput input ~ label {
+    position: absolute;
+    left: 2%;
+    top: 6px;
+    /* z-index: -1; */
+    transition: 0.2s;
+    color: #757575;
+  }
+  
+  .styledInput input:focus ~ label {
+    color: #0077FF;
+    transform: translateY(-30px);
+    font-size: 0.9rem;
+  }
+  
+  .styledInput input:not(:placeholder-shown) ~ label{
+    transform: translateY(-30px);
+    font-size: 0.9rem;
+  }
+
+  .save-button {
+    background-color: #009999;
+    width: 25%;
+    color: white;
+    text-transform: uppercase;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    outline: none;     
+    margin: 20px 0;
+  }
+  .cancel-button {
+    background-color: inherit;
+    width: 25%;
+    color: #009999;
+    text-transform: uppercase;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #009999;
+    margin: 20px 20px;
+  }
+
+  .cancel-button:hover , .save-button:hover {
+    cursor: pointer;
+  }

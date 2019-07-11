@@ -1,140 +1,112 @@
-<main class="page-work-area">
+<div class="container">
     <table class="table-logos"  style="width: 100%">
-      <td class="td-images"><img [src]="cv && clientLogo()" style="width: 100%; height:auto;" ></td>
-      <td class="td-title-header">{{cv && cv.NombreEmpresa}}<br>Gestión de Mantenimiento</td>
-      <td class="td-images"><img src="../../../../../assets/images/logos/Siemens-logo.png" style="width: 100%; height:auto;" ></td>
-    </table>
-  
-    <div class="section-title">
-      datos generales del cliente
-    </div>
-  
-    <table class="table-info">
-      <tr>
-        <td class="td-title-info">cliente</td>
-        <td colspan=5>{{cv && cv.NombreEmpresa}}</td>
-      </tr>
-      <tr>
-          <td class="td-title-info">N° Contrato</td>
-          <td>Etwas zu schreiben</td>
-          <td class="td-title-info">Planta</td>
-          <td>Etwas zu schreiben</td>
-          <td class="td-title-info">Ciudad</td>
-          <td>Etwas zu schreiben</td>
-      </tr>
-      <tr>
-          <td class="td-title-info">Fecha</td>
-          <td>Etwas zu schreiben</td>
-          <td class="td-title-info">Periodo</td>
-          <td>Etwas zu schreiben</td>
-          <td class="td-title-info">Vence</td>
-          <td>Etwas zu schreiben</td>
-      </tr>
-      <tr>
-          <td class="td-title-info">Responsable</td>
-          <td>Etwas zu schreiben</td>
-          <td class="td-title-info">Teléfono</td>
-          <td>Etwas zu schreiben</td>
-          <td class="td-title-info">E-mail</td>
-          <td>Etwas zu schreiben</td>
-      </tr>
-    </table>
-  
-    <div class="section-title">
-        datos generales Siemens
-    </div>
-  
-      <table class="table-info">
-        <tr>
-            <td class="td-title-info">P.M.</td>
-            <td>Max Mustermann</td>
-            <td class="td-title-info">Teléfono</td>
-            <td>Etwas zu schreiben</td>
-            <td class="td-title-info">E-mail</td>
-            <td>max.mustermann@siemens.com</td>
-        </tr>
+        <td class="td-images"><img [src]="clientLogo()" style="width: 100%; height:auto;" ></td>
+        <td class="td-title-header">
+          <div style="width:70%;margin:auto;font-weight: 600" id="NombreEmpresa">            
+          </div>
+        </td>
+        <td class="td-images"><img src="../../../../../assets/images/logos/Siemens-logo.png" style="width: 100%; height:auto;" ></td>
       </table>
-    <div class="section-title">
-        datos del equipo
-    </div>
-      <table class="table-info">
-        <tr>
-            <td class="td-title-info">Tipo de Equipo</td>
-            <td>{{cv && translateTipoEquipo(cv.TipoEquipo)}}</td>
-        </tr>
-        <tr>
-            <td class="td-title-info">Descripción</td>
-            <td colspan=5 style="padding: 10px 0;">{{cv && cv.Descripcion}}</td>
-        </tr>
-        <tr>
-            <td class="td-title-info">N° serial</td>
-            <td>{{cv && cv.NumeroSerial}}</td>
-            <td class="td-title-info">MLFB</td>
-            <td>{{cv && cv.MLFB}}</td>
-            <td class="td-title-info">Fecha producción</td>
-            <td>{{cv && cv.FechaProduccion && cv.FechaProduccion.split("T")[0]}}</td>
-        </tr>
-        <tr>          
-            <td class="td-title-info">Años operación</td>
-            <td>{{cv && cv.AnnosOperacion}}</td>
-            <td class="td-title-info">Ciclo de vida</td>
-            <td colspan=3>{{cv && cv.CicloVida}}</td>
-        </tr>
-      </table>
+    
       <div class="section-title">
-          control de actividades
+        datos generales del cliente
       </div>
-      <table class="table-report">
-          <thead>
-              <tr>
-                  <th rowspan=2 class="td-title-report">fecha</th>
-                  <th colspan=3 class="td-title-report">tipo</th>
-                  <th rowspan=2 class="td-title-report">actividad realizada</th>
-                  <th rowspan=2 class="td-title-report">field service</th>
-                  <th rowspan=2 class="td-title-report">informe</th>
-                </tr>
-                <tr>
-                  
-                  <th tooltip="Preventivo" placement="auto" class="td-title-report">P</th>
-                  <th tooltip="Correctivo" placement="auto" class="td-title-report">c</th>
-                  <th tooltip="Emergencia" placement="auto" class="td-title-report">e</th>
-                  
-                </tr>
-          </thead>
-          <tbody *ngIf="reportes | async as results">
-              <tr *ngFor="let result of results">
-                  <td>{{result.FechaEnvio.split("T")[0]}}</td>
-                  <td></td>
-                  <td>X</td>
-                  <td></td>
-                  <td>{{result.ActividadesRealizadas}}</td>
-                  <td>{{result.NombreColaborador}}</td>
-                  <td><a (click)="showReport(result)" >detalles</a></td>
-                </tr>
-            <!-- <div *ngIf="reportes | async as results">
-              <tr *ngFor="let result of results">
-                <td>{{result.FechaEnvio.split("T")[0]}}</td>
-                <td></td>
-                <td>X</td>
-                <td></td>
-                <td>{{result.ActividadesRealizadas}}</td>
-                <td>{{result.NombreColaborador}}</td>
-                <td><a>detalles</a></td>
-              </tr>
-            </div> -->
-            
-          </tbody>
-        </table>
-  
-    <!-- <div *ngIf="reportes | async as results">
+    
       <table class="table-info">
         <tr>
-          <th rowspan=2 class="td-title-info">fecha</th>
-          <th rowspan=2 class="td-title-info">tipo</th>
-          <th rowspan=2 class="td-title-info">actividad realizada</th>
-          <th rowspan=2 class="td-title-info">field service</th>
-          <th rowspan=2 class="td-title-info">informe</th>
+          <td class="td-title-info">cliente <span style="color: red">*</span></td>
+          <td colspan=5>
+            <input style="width:100%; text-align: left;" list="clientList" type="text" name="nombreCliente" id="nCliente" autocomplete="off" placeholder="Selecciona Empresa">
+            <datalist id="clientList">
+                <option (click)='setCliente(client.NombreEmpresa)' *ngFor="let client of listaEmpresas">{{client.NombreEmpresa}}</option>
+            </datalist>
+          </td>
+        </tr>
+        <tr>
+            <td class="td-title-info">N° Contrato</td>
+            <td><input type="text"></td>
+            <td class="td-title-info">Planta</td>
+            <td><input type="text"></td>
+            <td class="td-title-info">Ciudad</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td class="td-title-info">Fecha</td>
+            <td><input  type="date"></td>
+            <td class="td-title-info">Periodo</td>
+            <td><input type="text"></td>
+            <td class="td-title-info">Vence</td>
+            <td><input type="date"></td>
+        </tr>
+        <tr>
+            <td class="td-title-info">Responsable</td>
+            <td><input type="text"></td>
+            <td class="td-title-info">Teléfono</td>
+            <td><input type="text"></td>
+            <td class="td-title-info">E-mail</td>
+            <td><input type="email"></td>
         </tr>
       </table>
-    </div> -->
-  </main>
+    
+      <div class="section-title">
+          datos generales Siemens
+      </div>
+    
+        <table class="table-info">
+          <tr>
+              <td class="td-title-info">P.M.</td>
+              <td><input type="text"></td>
+              <td class="td-title-info">Teléfono</td>
+              <td><input type="text"></td>
+              <td class="td-title-info">E-mail</td>
+              <td><input type="email"></td>
+          </tr>
+        </table>
+      <div class="section-title">
+          datos del equipo
+      </div>
+        <table class="table-info">
+          <tr>
+              <td class="td-title-info">Tipo de Equipo</td>
+              <td>
+                <select style="width: 100%">
+                  <option>Arrancador suave</option>
+                  <option>Equipo automatización</option>
+                  <option>Interruptor</option>
+                  <option>Motor</option>
+                  <option>Variador</option>
+                </select>
+              </td>
+          </tr>
+          <tr>
+              <td class="td-title-info">Descripción</td>
+              <td colspan=5 style="padding: 10px 0;"><input type="text"></td>
+          </tr>
+          <tr>
+              <td class="td-title-info">N° serial <span style="color: red">*</span></td>
+              <td><input type="text"></td>
+              <td class="td-title-info">MLFB</td>
+              <td><input type="text"></td>
+              <td class="td-title-info">Fecha producción</td>
+              <td><input type="date"></td>
+          </tr>
+          <tr>          
+              <td class="td-title-info">Años operación</td>
+              <td><input type="number"></td>
+              <td class="td-title-info">Ciclo de vida</td>
+              <td>
+                <select style="width: 100%">
+                    <option>PM 300 Active</option>
+                    <option>PM 400 Phase Out</option>
+                    <option>PM 410 End of Production</option>
+                    <option>PM 490 Discontinuation</option>
+                  </select>
+              </td>
+          </tr>
+        </table>
+        <div style="display: flex; justify-items: flex-end; flex-direction: row-reverse;">
+          <button class="save-button"(click)="guardarEquipo()">Guardar</button>
+          <button routerLink='/main/consultaEquipos/busqueda' class="cancel-button" >Cancelar</button>
+        </div>
+        
+</div>

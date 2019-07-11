@@ -18,6 +18,7 @@ import { EstadisticasComponent } from './field-service/estadisticas/estadisticas
 import { AsignacionesEliminadasComponent } from './field-service/asignaciones-eliminadas/asignaciones-eliminadas.component';
 import { DetallesComponent } from './equipment/detalles/detalles.component';
 import { ConsultaContentComponent } from './equipment/consulta-content/consulta-content.component';
+import { EquipoComponent } from './equipment/equipo/equipo.component';
 
 const routes: Routes = [
   {
@@ -42,7 +43,7 @@ const routes: Routes = [
         children: [
           {path: '',pathMatch: 'full', redirectTo: 'busqueda'},
           {path: 'busqueda', component: SearchComponent},
-          // {path: 'crearEquipo', component:}
+          {path: 'nuevoEquipo', component:EquipoComponent},
           {path: 'detalles/:searchTerm', component: DetallesComponent}
         ]
       },
