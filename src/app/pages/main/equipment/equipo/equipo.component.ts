@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataRetrieverService } from '../../services/data-retriever.service';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import Swal from 'sweetalert2';
 import * as pdf from '../../../../../assets/js/createReportPdf';
 import * as env from '../../../../../assets/js/variables';
 
@@ -17,11 +18,11 @@ export class EquipoComponent implements OnInit {
   cv;
 
 
-  constructor(private route: ActivatedRoute, private dataRetriever: DataRetrieverService) { }
+  constructor(private dataRetriever: DataRetrieverService) { }
 
   setCliente(nombre) {
     this.client.next(nombre);
-    document.getElementById('NombreEmpresa').innerHTML = this.client.getValue();
+    document.getElementById('NombreEmpresa').innerHTML = ((this.client.getValue() == "")? `<div style="opacity: 0.4">Selecciona un Cliente`: `<div>${this.client.getValue()}` ) + "</div><div>Nuevo Registro de Equipo</div>";
     this.clientLogo();
   }
 
@@ -30,14 +31,38 @@ export class EquipoComponent implements OnInit {
   }
 
   guardarEquipo() {
-    var inputs = document.getElementsByTagName('input');
-    for(let i = 0; i < inputs.length; i++){
-      console.log(`Input ${i+1}:`, inputs[i].value);
+
+    /**
+     *  VALIDACIONES
+     * 
+     *  => Cliente, No.Serial y Tipo de equipo son obligatorios
+     */
+    let inputCliente = (<HTMLInputElement>document.getElementById('nCliente')).value;
+    let inputSerial = (<HTMLInputElement>document.getElementById('NumeroSerial')).value;
+    let inputTipoEquipo = (<HTMLInputElement>document.getElementById('TipoEquipo')).value;
+
+    if (inputCliente === "" || inputSerial == "" || inputTipoEquipo == "Selecciona una opción") {
+      Swal.fire({
+        title: 'Datos faltantes',
+        html: `Los campos con <span style="color='red'; font-weight: 600;">*</span> son obligatorios`,
+        type: 'warning'
+      });
     }
-    var selects = document.getElementsByTagName('select');
-    for(let i = 0; i < selects.length; i++ ){
-      console.log(`Select ${i+1}:`, selects[i].value);
+    else {
+      var equipment = {};
+      var inputs = document.getElementsByTagName('input');
+      for(let i = 0; i < inputs.length; i++){
+        equipment[`${inputs[i].name}`] = inputs[i].value;
+        //console.log(`${inputs[i].name}: `, inputs[i].value);
+      }
+      var selects = document.getElementsByTagName('select');
+      for(let i = 0; i < selects.length; i++ ){
+        equipment[`${selects[i].name}`] = (selects[i].value == "Selecciona una opción")? "" : selects[i].value;
+        // console.log(`${selects[i].name}:`, selects[i].value);
+      }
+      console.log('Form: ', equipment);
     }
+    
   }
 
   getClientsList() {

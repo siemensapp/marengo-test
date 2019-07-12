@@ -2,7 +2,13 @@
     <table class="table-logos"  style="width: 100%">
         <td class="td-images"><img [src]="clientLogo()" style="width: 100%; height:auto;" ></td>
         <td class="td-title-header">
-          <div style="width:70%;margin:auto;font-weight: 600" id="NombreEmpresa">            
+          <div style="width:70%;margin:auto;font-weight: 600" id="NombreEmpresa">
+            <div style="opacity: 0.4">
+              Selecciona un Cliente
+            </div>
+            <div>
+              Nuevo Registro de Equipo
+            </div>
           </div>
         </td>
         <td class="td-images"><img src="../../../../../assets/images/logos/Siemens-logo.png" style="width: 100%; height:auto;" ></td>
@@ -16,7 +22,7 @@
         <tr>
           <td class="td-title-info">cliente <span style="color: red">*</span></td>
           <td colspan=5>
-            <input style="width:100%; text-align: left;" list="clientList" type="text" name="nombreCliente" id="nCliente" autocomplete="off" placeholder="Selecciona Empresa">
+            <input style="width:100%; text-align: left;" list="clientList" type="text" name="NombreCliente" id="nCliente" autocomplete="off" placeholder="Selecciona Empresa">
             <datalist id="clientList">
                 <option (click)='setCliente(client.NombreEmpresa)' *ngFor="let client of listaEmpresas">{{client.NombreEmpresa}}</option>
             </datalist>
@@ -24,27 +30,27 @@
         </tr>
         <tr>
             <td class="td-title-info">N° Contrato</td>
-            <td><input type="text"></td>
+            <td><input type="text" name="NumeroContrato"></td>
             <td class="td-title-info">Planta</td>
-            <td><input type="text"></td>
+            <td><input type="text" name="Planta"></td>
             <td class="td-title-info">Ciudad</td>
-            <td><input type="text"></td>
+            <td><input type="text" name="Ciudad"></td>
         </tr>
         <tr>
             <td class="td-title-info">Fecha</td>
-            <td><input  type="date"></td>
+            <td><input  type="date" name="Fecha"></td>
             <td class="td-title-info">Periodo</td>
-            <td><input type="text"></td>
+            <td><input type="text" name="Periodo"></td>
             <td class="td-title-info">Vence</td>
-            <td><input type="date"></td>
+            <td><input type="date" name="Vence"></td>
         </tr>
         <tr>
             <td class="td-title-info">Responsable</td>
-            <td><input type="text"></td>
+            <td><input type="text" name="Responsable"></td>
             <td class="td-title-info">Teléfono</td>
-            <td><input type="text"></td>
+            <td><input type="text" name="TelefonoResponsable"></td>
             <td class="td-title-info">E-mail</td>
-            <td><input type="email"></td>
+            <td><input type="email" name="EmailResponsable"></td>
         </tr>
       </table>
     
@@ -55,11 +61,11 @@
         <table class="table-info">
           <tr>
               <td class="td-title-info">P.M.</td>
-              <td><input type="text"></td>
+              <td><input type="text" name="NombrePM"></td>
               <td class="td-title-info">Teléfono</td>
-              <td><input type="text"></td>
+              <td><input type="text" name="TelefonoPM"></td>
               <td class="td-title-info">E-mail</td>
-              <td><input type="email"></td>
+              <td><input type="email" name="EmailPM"></td>
           </tr>
         </table>
       <div class="section-title">
@@ -67,9 +73,10 @@
       </div>
         <table class="table-info">
           <tr>
-              <td class="td-title-info">Tipo de Equipo</td>
+              <td class="td-title-info">Tipo de Equipo<span style="color: red">*</span> </td>
               <td>
-                <select style="width: 100%">
+                <select style="width: 100%" id="TipoEquipo" name="TipoEquipo">
+                  <option disabled selected>Selecciona una opción</option>
                   <option>Arrancador suave</option>
                   <option>Equipo automatización</option>
                   <option>Interruptor</option>
@@ -80,22 +87,23 @@
           </tr>
           <tr>
               <td class="td-title-info">Descripción</td>
-              <td colspan=5 style="padding: 10px 0;"><input type="text"></td>
+              <td colspan=5 style="padding: 10px 0;"><input type="text" name="Descripcion"></td>
           </tr>
           <tr>
               <td class="td-title-info">N° serial <span style="color: red">*</span></td>
-              <td><input type="text"></td>
+              <td><input type="text" id="NumeroSerial" name="NumeroSerial"></td>
               <td class="td-title-info">MLFB</td>
-              <td><input type="text"></td>
+              <td><input type="text" name="MLFB"></td>
               <td class="td-title-info">Fecha producción</td>
-              <td><input type="date"></td>
+              <td><input type="date" name="FechaProduccion"></td>
           </tr>
           <tr>          
               <td class="td-title-info">Años operación</td>
-              <td><input type="number"></td>
+              <td><input type="number" name="AnnosOPeracion"></td>
               <td class="td-title-info">Ciclo de vida</td>
               <td>
-                <select style="width: 100%">
+                <select style="width: 100%" name="CicloVida">
+                    <option disabled selected>Selecciona una opción</option>
                     <option>PM 300 Active</option>
                     <option>PM 400 Phase Out</option>
                     <option>PM 410 End of Production</option>
