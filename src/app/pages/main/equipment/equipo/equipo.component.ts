@@ -27,7 +27,7 @@ export class EquipoComponent implements OnInit {
   }
 
   clientLogo() {
-    return "../../../../../assets/images/logos/" + ((this.client.getValue() == "")?'Unknown':env.empresasLogos[this.client.getValue()]) +"-logo.png"
+    return "../../../../../assets/images/logos/" + ((this.client.getValue() == "" || !(env.empresasLogos).hasOwnProperty(this.client.getValue()))?'Unknown':env.empresasLogos[this.client.getValue()]) +"-logo.png"
   }
 
   guardarEquipo() {

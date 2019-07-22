@@ -1,4 +1,4 @@
-export var url:string = 'https://48a37561.ngrok.io';
+export var url:string = 'https://b5a1a472.ngrok.io';
 
 export var empresasLogos = {
     'ACERIAS DE COLOMBIA S.A.S': 'Acesco',
@@ -27,9 +27,40 @@ export var empresasLogos = {
     'GRUPO PHOENIX': 'Phoenix',
     'HOCOL S.A.': 'Hocol',
     'HOLCIM COLOMBIA S.A.': 'Holcim',
-    'T.C.BUEN S.A.': 'Tcbuen',
+    'INGENIO CARMELITA S.A.': 'Carmelita',
+    'INGENIO LA CABAÑA S.A.': 'Cabaña',
+    'INGENIO PROVIDENCIA S.A.': 'Providencia',
+    'INGENIO RISARALDA': 'Risaralda',
+    'INGENIO RISARALDA S.A.': 'Risaralda',
+    'INGENIO SAN CARLOS': 'Sancarlos',
+    'KAESER': 'Kaeser',
+    'KAESER COMPRESORES DE COLOMBIA LTDA.': 'Kaeser',
+    'LEONISA S.A.': 'Leonisa',
+    'LINDE COLOMBIA S.A.': 'Linde',
+    'MEALS DE COLOMBIA S.A.S.': 'Meals',
+    'MULTIDIMENSIONALES S.A.': 'Phoenix',
+    'NACIONAL DE CHOCOLATES S.A.': 'Chocolates',
+    'NESTLÉ PURINA PETCARE DE COLOMBIA S.A.': 'Purina',
+    'OLEODUCTO DE LOS LLANOS ORIENTALES S.A.': 'ODL',
     'PAVCO': 'Pavco',
-    'PRODUCTOS FAMILIA S.A.': 'Familia',
+    'PCH SUBA': 'Acueducto',
+    'PCH USAQUEN': 'Acueducto',
+    'PGI COLOMBIA LTDA': 'PGI',
     'POSTOBON S.A.': 'Postobon',
-    'SOCIEDAD PORTUARIA REGIONAL DE BUENAVENTURA S.A.': 'Sprb'
+    'PRODUCTOS ALIMENTICIOS DORIA S.A.S.': 'Doria',
+    'PRODUCTOS FAMILIA S.A.': 'Familia',
+    'PROPILCO S.A.': 'Propilco',
+    'PUERTO BRISA S.A.': 'Brisa',
+    'QUALA S.A.': 'Quala',
+    'RED EAGLE': 'Redeagle',
+    'SMURFIT KAPPA CARTON DE COLOMBIA S.A': 'Smurfit',
+    'SOCIEDAD PORTUARIA REGIONAL DE BUENAVENTURA S.A.': 'Sprb',
+    'SOCIEDAD PORTUARIA REGIONAL DE CARTAGENA S.A': 'Cartagena',
+    'SOFASA S.A.': 'Sofasa',
+    'TABLEMAC': 'Tablemac',
+    'TERMINAL DE CONTENEDORES DE CARTAGENA S.A': 'Contecar',
+    'T.C.BUEN S.A.': 'Tcbuen',    
+    
+    
+    
 } 
