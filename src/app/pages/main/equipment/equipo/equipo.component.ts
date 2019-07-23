@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { DataRetrieverService } from '../../services/data-retriever.service';
 import { BehaviorSubject } from 'rxjs';
 import Swal from 'sweetalert2';
-import * as pdf from '../../../../../assets/js/createReportPdf';
+
 import * as env from '../../../../../assets/js/variables';
 
 @Component({
@@ -57,10 +56,27 @@ export class EquipoComponent implements OnInit {
       }
       var selects = document.getElementsByTagName('select');
       for(let i = 0; i < selects.length; i++ ){
-        equipment[`${selects[i].name}`] = (selects[i].value == "Selecciona una opción")? "" : selects[i].value;
+        equipment[`${selects[i].name}`] = (selects[i].value == "Selecciona una opción")? "" : (selects[i].name == "TipoEquipo")? this.translateTipoEquipo(selects[i].value) : selects[i].value;
         // console.log(`${selects[i].name}:`, selects[i].value);
       }
       console.log('Form: ', equipment);
+      Swal.showLoading();
+      this.dataRetriever.postData(env.url + '/api/createEquipment', JSON.stringify(equipment)).then(res => {
+        if(res == "true") {
+          Swal.fire({
+            title: 'Equipo creado !',
+            text: `Equipo con serial ${equipment['NumeroSerial']}`,
+            type: 'success'
+          })
+        } else {
+          Swal.fire({
+            title: 'Error !',
+            text: `Hubo un error en la creación del equipo`,
+            type: 'error'
+          })
+        }
+
+      })      
     }
     
   }
@@ -94,25 +110,18 @@ export class EquipoComponent implements OnInit {
   }
 
   translateTipoEquipo( tipo ) {
+    console.log(tipo);
     switch(tipo) {
-      case 0:
-        return "Arrancador suave";
-      case 1:
-        return "Equipo Automatización";
-      case 2:
-        return "Interruptor";
-      case 3:
-        return "Motor";
-      case 4:
-        return "Variador";
+      case "Arrancador suave":
+        return 0;
+      case "Equipo automatización":
+        return 1;
+      case "Interruptor":
+        return 2;
+      case "Motor":
+        return 3;
+      case "Variador":
+        return 4;
     }
   }
-
-  showReport( jsonReport ) {
-    console.log(jsonReport);
-    pdf.createPDF(jsonReport);
-  }
-
-
-
 }
