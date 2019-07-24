@@ -44,7 +44,8 @@ const routes: Routes = [
           {path: '',pathMatch: 'full', redirectTo: 'busqueda'},
           {path: 'busqueda', component: SearchComponent},
           {path: 'nuevoEquipo', component:EquipoComponent},
-          {path: 'detalles/:searchTerm', component: DetallesComponent}
+          {path: 'detalles/:searchTerm', component: DetallesComponent},
+          {path: 'editarEquipo/:searchTerm', component: EquipoComponent}
         ]
       },
       {

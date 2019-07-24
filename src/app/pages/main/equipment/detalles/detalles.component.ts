@@ -31,6 +31,8 @@ export class DetallesComponent implements OnInit {
     }
   }
 
+  
+
   clientLogo() {
     return "../../../../../assets/images/logos/" + env.empresasLogos[this.cv['NombreEmpresa']] +"-logo.png"
   }
@@ -38,6 +40,10 @@ export class DetallesComponent implements OnInit {
   showReport( jsonReport ) {
     console.log(jsonReport);
     pdf.createPDF(jsonReport);
+  }
+
+  formatDate( date ) {
+    return (date !== '0000-00-00')? date.split("T")[0]: "";
   }
 
   getReportsData() {
@@ -50,6 +56,7 @@ export class DetallesComponent implements OnInit {
     this.dataRetriever.getData(env.url + '/api/getEquipmentBySerial/' + this.searchTerm).then( results => {
       this.cv = results[0];
       this.cv['AnnosOperacion'] = this.cv['AñosOperacion'];
+      console.log(this.cv);
     });
   }
 

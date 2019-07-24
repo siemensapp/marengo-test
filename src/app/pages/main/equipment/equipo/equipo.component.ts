@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataRetrieverService } from '../../services/data-retriever.service';
 import { BehaviorSubject } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import * as env from '../../../../../assets/js/variables';
@@ -15,9 +16,11 @@ export class EquipoComponent implements OnInit {
   listaEmpresas : JSON[];
   client = new BehaviorSubject('');
   cv;
+  linkCancelar;
+  linkGuardado;
 
 
-  constructor(private dataRetriever: DataRetrieverService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private dataRetriever: DataRetrieverService) { }
 
   setCliente(nombre) {
     this.client.next(nombre);
@@ -28,6 +31,58 @@ export class EquipoComponent implements OnInit {
   clientLogo() {
     return "../../../../../assets/images/logos/" + ((this.client.getValue() == "" || !(env.empresasLogos).hasOwnProperty(this.client.getValue()))?'Unknown':env.empresasLogos[this.client.getValue()]) +"-logo.png"
   }
+
+  initSequence() {
+    if(window.location.href.includes('editarEquipo')) {
+      for (let i of (Object.keys(this.cv))) {
+        if(this.cv.hasOwnProperty(i)) {
+          var input;
+          var newValue;
+          var campo;
+          switch(i) {
+            case 'AñosOperacion':
+              campo = 'AnnosOperacion';
+              newValue = this.cv[campo];
+              break;
+            case 'Fecha':
+            case 'Vence':
+            case 'FechaProduccion':
+              campo = i;
+              newValue = (this.cv[i] !== '0000-00-00')?new Date(this.cv[i]).toISOString().split("T")[0]: "";
+              break;
+            case 'TipoEquipo':              
+              campo = i;
+              newValue = this.translateTipoEquipo(this.cv[i]);
+              break;
+            case 'NombreEmpresa':
+                campo = i;
+                newValue = this.cv[i];
+                this.setCliente(this.cv[i]);
+                break;
+            default:
+              campo = i;
+              newValue = this.cv[i];
+              break;
+          }
+          input = document.getElementsByName(campo)[0];
+          input.value = newValue;
+        }        
+      }
+    }
+  }
+
+  setLinkCancelar() {
+    let serial = window.location.href.split("/");
+    if (window.location.href.includes('editar')) this.linkCancelar = `/main/consultaEquipos/detalles/${serial[serial.length - 1]}`;
+    else this.linkCancelar = `/main/consultaEquipos/busqueda`;
+  }
+  
+  setLinkGuardado() {
+    let serial = window.location.href.split("/");
+    if (window.location.href.includes('editar')) return `${env.url}/api/updateEquipment/${serial[serial.length - 1]}`;
+    else return `${env.url}/api/createEquipment`;
+  }
+
 
   guardarEquipo() {
 
@@ -59,19 +114,21 @@ export class EquipoComponent implements OnInit {
         equipment[`${selects[i].name}`] = (selects[i].value == "Selecciona una opción")? "" : (selects[i].name == "TipoEquipo")? this.translateTipoEquipo(selects[i].value) : selects[i].value;
         // console.log(`${selects[i].name}:`, selects[i].value);
       }
-      console.log('Form: ', equipment);
       Swal.showLoading();
-      this.dataRetriever.postData(env.url + '/api/createEquipment', JSON.stringify(equipment)).then(res => {
+      let url = this.setLinkGuardado();
+      console.log('url: ', url);
+      this.dataRetriever.postData(url, JSON.stringify(equipment)).then(res => {
         if(res == "true") {
           Swal.fire({
-            title: 'Equipo creado !',
+            title: 'Equipo guardado !',
             text: `Equipo con serial ${equipment['NumeroSerial']}`,
             type: 'success'
           })
+          this.router.navigate(['/main/consultaEquipos/busqueda']);
         } else {
           Swal.fire({
             title: 'Error !',
-            text: `Hubo un error en la creación del equipo`,
+            text: `Hubo un error en el guardado del equipo`,
             type: 'error'
           })
         }
@@ -92,7 +149,8 @@ export class EquipoComponent implements OnInit {
   getEquipmentData() {
     this.dataRetriever.getData(env.url + '/api/getEquipmentBySerial/' + this.searchTerm).then( results => {
       this.cv = results[0];
-      this.cv['AnnosOperacion'] = this.cv['AñosOperacion'];
+      this.cv['AnnosOperacion'] = this.cv['AñosOperacion'];     
+      this.initSequence(); 
     });
   }
 
@@ -105,23 +163,41 @@ export class EquipoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.searchTerm = this.route.snapshot.paramMap.get('searchTerm');
+    this.setLinkCancelar();
     this.getClientsList();
     this.subscribeClient();
+    if(window.location.href.includes('editar'))this.getEquipmentData();
   }
 
   translateTipoEquipo( tipo ) {
     console.log(tipo);
-    switch(tipo) {
-      case "Arrancador suave":
-        return 0;
-      case "Equipo automatización":
-        return 1;
-      case "Interruptor":
-        return 2;
-      case "Motor":
-        return 3;
-      case "Variador":
-        return 4;
-    }
+    if( Number.isInteger(tipo) ) {
+      switch(tipo) {
+        case 0:
+          return "Arrancador suave";
+        case 1:
+          return "Equipo automatización";
+        case 2:
+          return "Interruptor";
+        case 3:
+          return "Motor";
+        case 4:
+          return "Variador";
+      }
+    } else {
+      switch(tipo) {
+        case "Arrancador suave":
+          return 0;
+        case "Equipo automatización":
+          return 1;
+        case "Interruptor":
+          return 2;
+        case "Motor":
+          return 3;
+        case "Variador":
+          return 4;
+      }
+    }    
   }
 }

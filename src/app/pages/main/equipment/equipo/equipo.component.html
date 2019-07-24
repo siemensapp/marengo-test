@@ -22,7 +22,7 @@
         <tr>
           <td class="td-title-info">cliente <span style="color: red">*</span></td>
           <td colspan=5>
-            <input style="width:100%; text-align: left;" list="clientList" type="text" name="NombreCliente" id="nCliente" autocomplete="off" placeholder="Selecciona Empresa">
+            <input style="width:100%; text-align: left;" list="clientList" type="text" name="NombreEmpresa" id="nCliente" autocomplete="off" placeholder="Selecciona Empresa">
             <datalist id="clientList">
                 <option (click)='setCliente(client.NombreEmpresa)' *ngFor="let client of listaEmpresas">{{client.NombreEmpresa}}</option>
             </datalist>
@@ -46,7 +46,7 @@
         </tr>
         <tr>
             <td class="td-title-info">Responsable</td>
-            <td><input type="text" name="Responsable"></td>
+            <td><input type="text" name="NombreResponsable"></td>
             <td class="td-title-info">Teléfono</td>
             <td><input type="text" name="TelefonoResponsable"></td>
             <td class="td-title-info">E-mail</td>
@@ -114,7 +114,7 @@
         </table>
         <div style="display: flex; justify-items: flex-end; flex-direction: row-reverse;">
           <button class="save-button"(click)="guardarEquipo()">Guardar</button>
-          <button routerLink='/main/consultaEquipos/busqueda' class="cancel-button" >Cancelar</button>
+          <button routerLink="{{linkCancelar}}" class="cancel-button" >Cancelar</button>
         </div>
         
 </div>
