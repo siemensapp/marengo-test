@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 
 import { MainComponent } from './main.component';
 import { AboutComponent } from './about/about.component';
@@ -19,6 +19,8 @@ import { AsignacionesEliminadasComponent } from './field-service/asignaciones-el
 import { DetallesComponent } from './equipment/detalles/detalles.component';
 import { ConsultaContentComponent } from './equipment/consulta-content/consulta-content.component';
 import { EquipoComponent } from './equipment/equipo/equipo.component';
+
+import {AuthGuardService as AuthGuard} from '../main/services/auth-services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -41,11 +43,11 @@ const routes: Routes = [
         path: 'consultaEquipos',
         component: ConsultaContentComponent,
         children: [
-          {path: '',pathMatch: 'full', redirectTo: 'busqueda'},
-          {path: 'busqueda', component: SearchComponent},
-          {path: 'nuevoEquipo', component:EquipoComponent},
-          {path: 'detalles/:searchTerm', component: DetallesComponent},
-          {path: 'editarEquipo/:searchTerm', component: EquipoComponent}
+          {path: '',pathMatch: 'full', redirectTo: 'busqueda', canActivate:[AuthGuard]},
+          {path: 'busqueda', component: SearchComponent, canActivate:[AuthGuard]},
+          {path: 'nuevoEquipo', component:EquipoComponent, canActivate:[AuthGuard]},
+          {path: 'detalles/:searchTerm', component: DetallesComponent, canActivate:[AuthGuard]},
+          {path: 'editarEquipo/:searchTerm', component: EquipoComponent, canActivate:[AuthGuard]}
         ]
       },
       {
@@ -55,14 +57,14 @@ const routes: Routes = [
           // {path: '',pathMatch: 'full', redirectTo: 'workers', outlet: 'fieldServiceOutlet'},
           // {path: 'workers', component: WorkersComponent, outlet: "fieldServiceOutlet"} 
           {path: '',pathMatch: 'full', redirectTo: 'workers'},
-          {path: 'workers', component: WorkersComponent},
-          {path: 'formularioEdicionEspecialista', component: EditarEspecialistaComponent},
-          {path: 'formularioAsignacion', component: AsignacionComponent},
-          {path: 'formularioEspecialista', component: EspecialistaComponent},
-          {path: 'cronograma', component: CronogramaComponent},
-          {path: 'perfil', component: PerfilComponent},
-          {path: 'estadisticas', component: EstadisticasComponent},
-          {path: 'asignacionesEliminadas', component: AsignacionesEliminadasComponent}
+          {path: 'workers', component: WorkersComponent, canActivate:[AuthGuard] },
+          {path: 'formularioEdicionEspecialista', component: EditarEspecialistaComponent, canActivate:[AuthGuard]},
+          {path: 'formularioAsignacion', component: AsignacionComponent, canActivate:[AuthGuard]},
+          {path: 'formularioEspecialista', component: EspecialistaComponent, canActivate:[AuthGuard]},
+          {path: 'cronograma', component: CronogramaComponent, canActivate:[AuthGuard]},
+          {path: 'perfil', component: PerfilComponent, canActivate:[AuthGuard]},
+          {path: 'estadisticas', component: EstadisticasComponent, canActivate:[AuthGuard]},
+          {path: 'asignacionesEliminadas', component: AsignacionesEliminadasComponent, canActivate:[AuthGuard]}
         ]
       },
       {

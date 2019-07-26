@@ -19,9 +19,16 @@ import { SearchComponent } from './equipment/search/search.component';
 import { DetallesComponent } from './equipment/detalles/detalles.component';
 import { ConsultaContentComponent } from './equipment/consulta-content/consulta-content.component';
 
+// import { JwtModule } from  '@auth0/angular-jwt';
+
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { EquipoComponent } from './equipment/equipo/equipo.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from 'src/environments/environment.prod';
 
+  export function tokenGetter() {
+    return localStorage.getItem('access_token');
+  }
 
 @NgModule({
   declarations: [
@@ -35,6 +42,13 @@ import { EquipoComponent } from './equipment/equipo/equipo.component';
     EquipoComponent
   ],
   imports: [
+
+    // JwtModule.forRoot({
+    //   config: {
+    //     tokenGetter: tokenGetter
+    //   }
+    // }),
+
     // Angular
     CommonModule,
     HttpClientModule,
@@ -50,7 +64,10 @@ import { EquipoComponent } from './equipment/equipo/equipo.component';
     // Own Modules
     FieldServiceModule,
     FieldServiceRoutingModule,
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    ServiceWorkerModule.register('../../../ngsw-config.json', {
+      enabled: environment.production
+    })
   ],
 })
 export class MainModule {}

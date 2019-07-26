@@ -1,8 +1,8 @@
 <div class="page-frame page-fixed">
   <div class="page-head">
-    <si-navbar-primary [primaryItems]="primaryLinks" settingsLink="about" [account]="{title: 'John Milton', image: 'https://secure.gravatar.com/avatar/xxx'}"
+    <si-navbar-primary [primaryItems]="primaryLinks" settingsLink="about" [account]="{title: getCurrentUserName(), image: 'https://secure.gravatar.com/avatar/xxx'}"
     [accountItems]="[
-      {title: 'Logout', link: 'logout'}
+      {title: 'Logout', link:'/landing'}
     ]"></si-navbar-primary>
   </div>
   <div class="page-work">

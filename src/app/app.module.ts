@@ -11,6 +11,7 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { SharedModule } from './shared';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { JwtModule } from '@auth0/angular-jwt';
 const routes: Routes = [
   {
     path: 'landing',
@@ -30,12 +31,21 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
 }
 
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent
   ],
   imports: [
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter
+      }
+    }),
     BrowserModule,
     RouterModule.forRoot(routes, {useHash: true}),
     SimplMarengoNgModule,
