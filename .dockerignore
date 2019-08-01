@@ -1,0 +1,4 @@
+# Archivos a ignorar en dockerizacion
+# node_modules
+# .git
+# .gitignore
