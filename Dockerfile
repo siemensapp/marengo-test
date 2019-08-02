@@ -8,7 +8,7 @@ COPY . .
 #RUN npm cache clean --force
 RUN rm -rf node_modules package-lock.json
 RUN npm install -g @angular/cli
-RUN npm install
+RUN npm install nyc
 
 # RUN rm -rf ~/.npm
 # # In the project folder:
