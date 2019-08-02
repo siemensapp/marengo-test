@@ -5,18 +5,21 @@ RUN mkdir -p $NODE_ROOT
 WORKDIR $NODE_ROOT
 COPY . .
 
+RUN npm cache clean
 RUN npm install npm@latest -g
-# RUN npm cache clean --force
+RUN npm install -g @angular/cli
+RUN npm install
+RUN npm install ./src/assets/marengo-packages/auth0-angular-jwt-3.0.0.tgz
 # RUN rm -rf ~/.npm
 # # In the project folder:
 # RUN rm -rf node_modules
 # RUN rm -f package-lock.json
 
 # Install all the packages
-RUN npm install -g @angular/cli
+
 #RUN ng update @angular/core
-RUN npm install ./src/assets/marengo-packages/auth0-angular-jwt-3.0.0.tgz
-RUN npm install
+
+
 
 #RUN npm rebuild node-sass
 # Necesario para correr PWA
