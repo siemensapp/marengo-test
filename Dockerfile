@@ -15,8 +15,9 @@ RUN npm install npm@latest -g
 # Install all the packages
 RUN npm install -g @angular/cli
 #RUN ng update @angular/core
-RUN npm install
 RUN npm install ./src/assets/marengo-packages/auth0-angular-jwt-3.0.0.tgz
+RUN npm install
+
 #RUN npm rebuild node-sass
 # Necesario para correr PWA
 # RUN npm install http-server
