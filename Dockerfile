@@ -10,6 +10,7 @@ RUN npm install npm@latest -g
 RUN npm install -g @angular/cli
 RUN npm install
 RUN npm install ./src/assets/marengo-packages/auth0-angular-jwt-3.0.0.tgz
+
 # RUN rm -rf ~/.npm
 # # In the project folder:
 # RUN rm -rf node_modules
