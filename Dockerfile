@@ -5,7 +5,7 @@ RUN mkdir -p $NODE_ROOT
 WORKDIR $NODE_ROOT
 COPY . .
 
-RUN npm cache clean
+RUN npm cache clean --force
 RUN npm install npm@latest -g
 RUN npm install -g @angular/cli
 RUN npm install
