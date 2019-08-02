@@ -6,10 +6,8 @@ WORKDIR $NODE_ROOT
 COPY . .
 
 #RUN npm cache clean --force
-RUN npm install npm@latest -g
 RUN npm install -g @angular/cli
 RUN npm install
-RUN npm install ./src/assets/marengo-packages/auth0-angular-jwt-3.0.0.tgz
 
 # RUN rm -rf ~/.npm
 # # In the project folder:
@@ -26,6 +24,7 @@ RUN npm install ./src/assets/marengo-packages/auth0-angular-jwt-3.0.0.tgz
 # Necesario para correr PWA
 # RUN npm install http-server
 # Paquetes propios de siemens marengo
+RUN npm install ./src/assets/marengo-packages/auth0-angular-jwt-3.0.0.tgz
 RUN npm install ./src/assets/marengo-packages/marengo-ng-14.0.1.tgz
 RUN npm install ./src/assets/marengo-packages/fonts-3.1.0.tgz
 RUN npm install ./src/assets/marengo-packages/marengo-icons-3.4.0.tgz
