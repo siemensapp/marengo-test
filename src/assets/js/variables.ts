@@ -1,4 +1,4 @@
-export var url:string = 'http://3.226.137.144:3000';
+export var url:string = 'http://192.168.99.101:3000';
 
 export var empresasLogos = {
     'ACERIAS DE COLOMBIA S.A.S': 'Acesco',
