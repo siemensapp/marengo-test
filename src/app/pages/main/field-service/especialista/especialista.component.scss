@@ -16,6 +16,7 @@
   .styledInput {
     position: relative;
     width: 95%;
+    
   }
   
   /* input */
@@ -52,6 +53,7 @@
   .styledInput input:not(:placeholder-shown)~label {
     transform: translateY(-30px);
     font-size: 0.9rem;
+    
   }
   
   .styledInput textarea {
@@ -150,7 +152,7 @@
     font-size: 14px;
     margin-bottom: 4%;
   }
-  
+   
   .campos {
     height: 30px;
     width: 85%;

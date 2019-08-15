@@ -119,7 +119,10 @@ export class CronogramaComponent implements OnInit {
                   if (result.value) {
                     pdf.createPDF(this.infoReporte[0]);
                     this.excelService.exportAsExcelFile(String(this.infoReporte[0]['Consecutivo'] + '-Liquidacion'), JSON.parse(this.infoReporte[0]['HojaTiempo']), this.infoReporte[0]['CostoServicio'], this.infoReporte[0]['CostoViaje']);
-                    
+                  }
+                  if(result.value){
+                    this.excelService.exportAsExcelFile(String(this.infoReporte[0]['Consecutivo'] + '-Liquidacion'), JSON.parse(this.infoReporte[0]['HojaTiempo']), this.infoReporte[0]['CostoServicio'], this.infoReporte[0]['CostoViaje']);
+                  
                   }
                 }))
               }
