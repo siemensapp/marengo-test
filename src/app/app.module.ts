@@ -12,6 +12,8 @@ import { SharedModule } from './shared';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { JwtModule } from '@auth0/angular-jwt';
+
+
 const routes: Routes = [
   {
     path: 'landing',
@@ -39,6 +41,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     LandingComponent
+    
   ],
   imports: [
     JwtModule.forRoot({

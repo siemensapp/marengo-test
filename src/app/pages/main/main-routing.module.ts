@@ -19,6 +19,9 @@ import { AsignacionesEliminadasComponent } from './field-service/asignaciones-el
 import { DetallesComponent } from './equipment/detalles/detalles.component';
 import { ConsultaContentComponent } from './equipment/consulta-content/consulta-content.component';
 import { EquipoComponent } from './equipment/equipo/equipo.component';
+import { NewUserComponent} from './new-user/new-user.component';
+
+
 
 import {AuthGuardService as AuthGuard} from '../main/services/auth-services/auth-guard.service';
 
@@ -48,6 +51,13 @@ const routes: Routes = [
           {path: 'nuevoEquipo', component:EquipoComponent, canActivate:[AuthGuard]},
           {path: 'detalles/:searchTerm', component: DetallesComponent, canActivate:[AuthGuard]},
           {path: 'editarEquipo/:searchTerm', component: EquipoComponent, canActivate:[AuthGuard]}
+        ]
+      },
+      {
+        path: 'nuevoUsuario',
+        children: [
+          {path: '',pathMatch: 'full', redirectTo: 'nuevoUsuario', canActivate:[AuthGuard]},
+          {path: 'nuevoUsuario', component: NewUserComponent, canActivate:[AuthGuard]}
         ]
       },
       {

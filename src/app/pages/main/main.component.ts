@@ -21,8 +21,12 @@ export class MainComponent implements OnInit {
       link: 'field-service/workers'
     },
     {
-      title: 'Consulta Equipos',
+      title: 'Hoja de Vida Equipos',
       link: 'consultaEquipos'
+    },
+    {
+      title: 'Crear Usuarios',
+      link: 'nuevoUsuario'
     }
   ];
 

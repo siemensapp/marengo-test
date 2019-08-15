@@ -25,6 +25,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { EquipoComponent } from './equipment/equipo/equipo.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment.prod';
+import { NewUserComponent } from './new-user/new-user.component';
 
   export function tokenGetter() {
     return localStorage.getItem('access_token');
@@ -39,7 +40,8 @@ import { environment } from 'src/environments/environment.prod';
     SearchComponent,
     DetallesComponent,
     ConsultaContentComponent,
-    EquipoComponent
+    EquipoComponent,
+    NewUserComponent
   ],
   imports: [
 
