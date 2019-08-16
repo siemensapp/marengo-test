@@ -6,7 +6,7 @@
 
 
 
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div id="popup1" class="overlay">
   <div class="popup">
     <h1 id="titulo">Cronograma Asignaciones</h1>
@@ -14,10 +14,10 @@
     <div id="tablas">
       <table class="tablaEspecialistas" id="tablaEspecialistas1">
         <tr id="tituloTablaE">
-          <th>Especialista<br>Técnica</th>
+          <th>Especialista -- <br>Técnica  </th>
         </tr>
         <tr *ngFor="let especialista of resultados" id={{especialista.IdEspecialista}}>
-          <td style="border-top: 1px ridge lightgray; text-align: right; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 0.9em; white-space:nowrap; text-overflow: ellipsis">{{especialista.NombreE}} | {{especialista.NombreT}}</td>
+          <td style="border-top: 1px ridge lightgray; text-align: right; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 0.9em; white-space:nowrap; text-overflow: ellipsis">{{especialista.NombreE}} -- | {{especialista.NombreT}} | ---> </td>
         </tr>
       </table>
       <table class="tablaAsignaciones" id="tablaAsignacionesID">
@@ -64,29 +64,29 @@
     </div>
   </div>
   <div class="linea">
-    <div class="estado" style="border-color: #BB0000">
+    <div class="estadoBajo" style="border-color: #BB0000">
       <div class="servicio"> Incapacidad
         <div class="polig" style="background-color: #BB0000">
     
         </div>
       </div>
     </div>
-    <div class="estado" style="border-color: #5B00BB">
+    <div class="estadoBajo" style="border-color: #5B00BB">
       <div class="servicio"> Permiso
         <div class="polig" style="background-color: #5B00BB">
     
         </div>
       </div>
     </div>
-    <div class="estado" style="border-color: #8B8B8B">
+    <div class="estadoBajo" style="border-color: #8B8B8B">
       <div class="servicio"> Capacitacion
         <div class="polig" style="background-color: #8B8B8B">
     
         </div>
       </div>
     </div>
-    <div class="estado" style="border-color: #06AA00">
-      <div class="servicio"> Disponible Fin de Semana
+    <div class="estadoBajo" style="border-color: #06AA00">
+      <div class="servicio"> Disp. Fin de semana
         <div class="polig" style="background-color: #06AA00">
     
         </div>
