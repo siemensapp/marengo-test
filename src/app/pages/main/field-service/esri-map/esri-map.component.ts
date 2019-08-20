@@ -19,12 +19,8 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import {
-  loadModules
-} from 'esri-loader';
-import {
-  DataRetrieverService
-} from '../../services/data-retriever.service';
+import {loadModules} from 'esri-loader';
+import {DataRetrieverService} from '../../services/data-retriever.service';
 import * as env from '../../../../../assets/js/variables';
 import esri = __esri; // Esri TypeScript Types
 import { stringify } from '@angular/core/src/util';
@@ -92,6 +88,8 @@ export class EsriMapComponent implements OnInit {
 
 
   preparePoints(data) {
+    console.log("*********DATA");
+    console.log(data);
     let points = [];
     for (let x of data) {
       // Extract data

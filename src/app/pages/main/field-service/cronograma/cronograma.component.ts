@@ -64,7 +64,8 @@ export class CronogramaComponent implements OnInit {
         confirmButtonColor: "blue",
         cancelButtonColor: "red",
         confirmButtonText: "VER MAS INFORMACION",
-        cancelButtonText: "ELIMINAR"
+        cancelButtonText: "ELIMINAR",
+        
       }).then((result) => {
         if (result.value) {
           var idEspecialista = < HTMLTableElement > document.getElementById('tablaEspecialistas1');
@@ -106,7 +107,63 @@ export class CronogramaComponent implements OnInit {
                   html: contenido,
                   confirmButtonText: "SALIR",
                   confirmButtonColor: "gray",
-                })
+                  showCancelButton: true,
+                  cancelButtonText: "EDITAR",
+                  cancelButtonColor: "green"
+                }).then((result => {
+                  this.infoAsignacion2 = data as JSON;
+                  Swal.fire({
+                    title: 'EDITAR ASIGNACION',
+                    html: '<label for="'+this.infoAsignacion[0]['NombreContacto']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Nombre Contacto'+'</label>'+'<br>'+
+                          '<input type="text"  value="'+this.infoAsignacion[0]['NombreContacto']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold; display: inline">'+'<br><br>'+
+
+                          '<label for="'+this.infoAsignacion[0]['EmailContacto']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Email Contacto'+'</label>'+'<br>'+
+                          '<input type="text"  value="'+this.infoAsignacion[0]['EmailContacto']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold;">'+'<br><br>'+
+                          
+                          '<label for="'+this.infoAsignacion[0]['NombrePlanta']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Nombre Planta'+'</label>'+'<br>'+
+                          '<input type="text"  value="'+this.infoAsignacion[0]['NombrePlanta']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold;">'+'<br><br>'+
+
+                          '<label for="'+this.infoAsignacion[0]['NombreS']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Status Servicio'+'</label>'+'<br>'+
+                          '<select name="servicio" value="'+this.infoAsignacion[0]['NombreS']+'"'+'>'+
+                          '<option value="1">En Servicio</option>'+
+                          '<option value="2">Compensatorio</option>'+
+                          '<option value="3">Vacaciones</option>'+
+                          '<option value="4">Disponible</option>'+
+                          '<option value="5">Incapacidad</option>'+
+                          '<option value="6">Permiso</option>'+
+                          '<option value="7">Capacitacion</option>'+
+                          '<option value="8">Disponible fin de semana</option>'+
+                          '</select> <br><br>'+
+
+                          '<label for="'+this.infoAsignacion[0]['PCFSV']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Modificar Servicio'+'</label>'+'<br>'+
+                          '<select name="servicio" + value="'+this.infoAsignacion[0]['PCFSV']+'"'+'>'+
+                          '<option value="1">Preventivo Planeado</option>'+
+                          '<option value="2">Correctivo Planeado</option>'+
+                          '<option value="3">Pruebas FAT</option>'+
+                          '<option value="4">Puesta en Servicio</option>'+
+                          '<option value="5">Soporte Ventas</option>'+
+                          '<option value="6">Otro</option>'+
+                          '</select> <br><br>'+
+
+
+                          '<p style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Modificar Fechas</p>' +
+                          'Desde <input id="desde" type="date" min="' + this.infoAsignacion[0]['FechaInicio'].split("T")[0] + '" max="' + this.infoAsignacion[0]['FechaFin'].split("T")[0] + '"><br><br>Hasta <input id="hasta" type="date" min="' + this.infoAsignacion[0]['FechaInicio'].split("T")[0] + '" max="' + this.infoAsignacion[0]['FechaFin'].split("T")[0] + '">',
+                    showCancelButton: true,
+                    cancelButtonText: "Cancelar",
+                    showConfirmButton: true,
+                    confirmButtonText: "CONFIRMAR",
+                    confirmButtonColor: "green"
+                  }).then((result => {
+                    var idEspecialista = < HTMLTableElement > document.getElementById('tablaEspecialistas1');
+                    var IdEspecialista = idEspecialista.rows[fila].id;
+                    //console.log(IdEspecialista);
+                    var infoAsignacion = data as JSON;
+                    //console.log("INFO ASIGACION");
+                    //console.log(infoAsignacion);
+                    var empresa = < HTMLInputElement > document.getElementById('empresa');
+                  }))
+                }))
+              
               } else {
                 Swal.fire({
                   title: 'Informacion Asignacion',
