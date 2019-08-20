@@ -14,6 +14,8 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit() {
     this.DataRetriever.infoEspecialista.subscribe(infoEspecialista => this.infoEspecialista = infoEspecialista);
+    console.log("*****************");
+    console.log(this.infoEspecialista['id']);
     document.getElementById('fecha').innerHTML=this.infoEspecialista['FechaNacimiento'].split("T")[0];
   }
 

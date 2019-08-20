@@ -12,6 +12,7 @@ import { PushNotificationsService } from '../../services/push-notifications.serv
   templateUrl: './workers.component.html',
   styleUrls: ['./workers.component.scss']
 })
+
 export class WorkersComponent implements OnInit {
 
   private VAPID_PUBLIC = "BEwOkuB14wZmYFcToortGXoFqc6HO_aXhhn_3mOU-h8B9x_z92pZ_WUpCExXt0cbCo61F1mJZ_D_vRgncaHvbSs";
@@ -43,9 +44,14 @@ export class WorkersComponent implements OnInit {
   getInfoEspecialista(resultado: JSON){
 
     this.dataRetriever.getEspecialista(resultado);
+    
+    console.log(resultado);
   }
+
   
   borrar(IdEspecialista: number, NombreE: string){
+    
+    console.log(IdEspecialista);
     
     Swal.fire({
       type: "warning",
@@ -59,7 +65,7 @@ export class WorkersComponent implements OnInit {
       html: NombreE
     }).then((result) => {
         if(result.value){
-          var url= env.url+'/api/deleteWorker/'+IdEspecialista;
+          var url= env.url+'/api/deleteWorker/'+NombreE; //elimina el especialista por medio del no,bre y no por el id como esta en el back
           this.dataRetriever.borrarEspecialista(url).then((respuesta) => {
             console.log(respuesta);
             if(respuesta == "true"){
