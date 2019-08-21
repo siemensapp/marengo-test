@@ -115,16 +115,21 @@ export class CronogramaComponent implements OnInit {
                   Swal.fire({
                     title: 'EDITAR ASIGNACION',
                     html: '<label for="'+this.infoAsignacion[0]['NombreContacto']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Nombre Contacto'+'</label>'+'<br>'+
-                          '<input type="text"  value="'+this.infoAsignacion[0]['NombreContacto']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold; display: inline">'+'<br><br>'+
+                          '<input id="nombreC" type="text"  value="'+this.infoAsignacion[0]['NombreContacto']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold; display: inline">'+'<br><br>'+
 
                           '<label for="'+this.infoAsignacion[0]['EmailContacto']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Email Contacto'+'</label>'+'<br>'+
-                          '<input type="text"  value="'+this.infoAsignacion[0]['EmailContacto']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold;">'+'<br><br>'+
+                          '<input id="mail" type="text"  value="'+this.infoAsignacion[0]['EmailContacto']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold;">'+'<br><br>'+
+                          
+                          '<label for="'+this.infoAsignacion[0]['TelefonoContacto']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Telefono Contacto'+'</label>'+'<br>'+
+                          '<input id="telefono" type="text"  value="'+this.infoAsignacion[0]['TelefonoContacto']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold;">'+'<br><br>'+
                           
                           '<label for="'+this.infoAsignacion[0]['NombrePlanta']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Nombre Planta'+'</label>'+'<br>'+
-                          '<input type="text"  value="'+this.infoAsignacion[0]['NombrePlanta']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold;">'+'<br><br>'+
+                          '<input id="planta" type="text"  value="'+this.infoAsignacion[0]['NombrePlanta']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold;">'+'<br><br>'+
+
+
 
                           '<label for="'+this.infoAsignacion[0]['NombreS']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Status Servicio'+'</label>'+'<br>'+
-                          '<select name="servicio" value="'+this.infoAsignacion[0]['NombreS']+'"'+'>'+
+                          '<select id="servicio" name="servicio" value="'+this.infoAsignacion[0]['NombreS']+'"'+'>'+
                           '<option value="1">En Servicio</option>'+
                           '<option value="2">Compensatorio</option>'+
                           '<option value="3">Vacaciones</option>'+
@@ -136,31 +141,97 @@ export class CronogramaComponent implements OnInit {
                           '</select> <br><br>'+
 
                           '<label for="'+this.infoAsignacion[0]['PCFSV']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Modificar Servicio'+'</label>'+'<br>'+
-                          '<select name="servicio" + value="'+this.infoAsignacion[0]['PCFSV']+'"'+'>'+
-                          '<option value="1">Preventivo Planeado</option>'+
-                          '<option value="2">Correctivo Planeado</option>'+
-                          '<option value="3">Pruebas FAT</option>'+
-                          '<option value="4">Puesta en Servicio</option>'+
-                          '<option value="5">Soporte Ventas</option>'+
-                          '<option value="6">Otro</option>'+
+                          '<select id="PCFSV" name="servicio" + value="'+this.infoAsignacion[0]['PCFSV']+'"'+'>'+
+                          '<option value="P">Preventivo Planeado</option>'+
+                          '<option value="C">Correctivo Planeado</option>'+
+                          '<option value="F">Pruebas FAT</option>'+
+                          '<option value="S">Puesta en Servicio</option>'+
+                          '<option value="V">Soporte Ventas</option>'+
+                          '<option value="O">Otro</option>'+
                           '</select> <br><br>'+
 
 
                           '<p style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Modificar Fechas</p>' +
-                          'Desde <input id="desde" type="date" min="' + this.infoAsignacion[0]['FechaInicio'].split("T")[0] + '" max="' + this.infoAsignacion[0]['FechaFin'].split("T")[0] + '"><br><br>Hasta <input id="hasta" type="date" min="' + this.infoAsignacion[0]['FechaInicio'].split("T")[0] + '" max="' + this.infoAsignacion[0]['FechaFin'].split("T")[0] + '">',
+                          'Desde <input id="desde" value="'+this.infoAsignacion[0]['FechaInicio'].split("T")[0]+'" type="date" ><br><br>Hasta <input id="hasta"  value="'+this.infoAsignacion[0]['FechaFin'].split("T")[0]+'" type="date" ">'+
+
+                          '<textarea id="descripcion" placeholder="'+this.infoAsignacion[0]['Descripcion']+'" maxlength="255"  autocomplete="off" style="height: 60px; width:80%; margin-top:5%;font-family: Verdana, Geneva, Tahoma, sans-serif;"></textarea>',
                     showCancelButton: true,
-                    cancelButtonText: "Cancelar",
+                    cancelButtonText: "CANCELAR",
                     showConfirmButton: true,
                     confirmButtonText: "CONFIRMAR",
                     confirmButtonColor: "green"
                   }).then((result => {
                     var idEspecialista = < HTMLTableElement > document.getElementById('tablaEspecialistas1');
                     var IdEspecialista = idEspecialista.rows[fila].id;
-                    //console.log(IdEspecialista);
                     var infoAsignacion = data as JSON;
-                    //console.log("INFO ASIGACION");
-                    //console.log(infoAsignacion);
-                    var empresa = < HTMLInputElement > document.getElementById('empresa');
+                    var nombreC = < HTMLInputElement > document.getElementById('nombreC');
+                    var nombreContacto = nombreC.value;
+                    var emailC = < HTMLInputElement > document.getElementById('mail');
+                    var emailContacto = emailC.value;
+                    var planta = < HTMLInputElement > document.getElementById('planta');
+                    var Planta = planta.value;
+                    var servicio = < HTMLInputElement > document.getElementById('servicio');
+                    var Servicio = servicio.value;
+                    var idsta = 0;
+                    if(Servicio == '1'){idsta = 1;}//en servicio
+                    else if(Servicio == '2'){idsta = 2;}//compensatorio
+                    else if(Servicio == '3'){idsta = 3;}//vacaciones
+                    else if(Servicio == '4'){idsta = 4;}//disponible
+                    else if(Servicio == '5'){idsta = 5;}//incapacidad
+                    else if(Servicio == '6'){idsta = 6;}//permiso
+                    else if(Servicio == '7'){idsta = 7;}//capacitacion
+                    else if(Servicio == '8'){idsta = 8;}//disp fin semana
+                    var pcfsv = < HTMLInputElement > document.getElementById('PCFSV');
+                    var PCFSV = pcfsv.value;
+                    var desde = < HTMLInputElement > document.getElementById('desde');
+                    var DESDE = desde.value;
+                    //DESDE = String(DESDE);
+                    var hasta = < HTMLInputElement > document.getElementById('hasta');
+                    var HASTA = hasta.value;
+                    var telefono = < HTMLInputElement > document.getElementById('telefono');
+                    var Telefono = telefono.value;
+                    var descripcion = <HTMLInputElement > document.getElementById('descripcion');
+                    var Descripcion = descripcion.value;
+                    var datos = {
+                      'IdEspecialista': this.infoAsignacion[0]['IdEspecialista'],
+                      'IdStatus': idsta,
+                      'IdAsignacion': this.infoAsignacion2[0]['IdAsignacion'],
+                      'PCFSV': PCFSV,
+                      'IdEmpresa': this.infoAsignacion[0]['IdEmpresa'],
+                      'NombrePlanta': Planta,
+                      'CiudadPlanta': this.infoAsignacion[0]['CiudadPlanta'],
+                      'StatusAsignacion': Servicio,
+                      'TiempoInicio': this.infoAsignacion[0]['TiempoInicio'],
+                      'TiempoFinal': this.infoAsignacion[0]['TiempoFinal'],
+                      'FechaInicio': DESDE,
+                      'FechaFin': HASTA,
+                      'CoordenadasSitio': this.infoAsignacion[0]['CoordenadasSitio'],
+                      'CoordenadasEspecialista': this.infoAsignacion[0]['CoordenadasEspecialista'],
+                      'NombreSitio': this.infoAsignacion[0]['NombreSitio'],
+                      'NombreContacto': nombreContacto,
+                      'TelefonoContacto': Telefono,
+                      'EmailContacto': emailContacto,
+                      'Descripcion': Descripcion
+                    };
+                    console.log(datos);
+                    var url = env.url + '/api/updateAssignment/';
+                    this.httpService.post(url, datos).toPromise()
+                      .then((res) => {
+                        console.log(res);
+                        if (idsta != 0) {
+                          Swal.fire(
+                            'Asignacion Editada',
+                            '',
+                            'success'
+                          ).then(() => location.reload())
+                        } else {
+                          Swal.fire(
+                            'Error al editar asignacion',
+                            'No se pudo completar la accion',
+                            'error'
+                          )
+                        }
+                      })
                   }))
                 }))
               
