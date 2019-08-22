@@ -54,10 +54,17 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'nuevoUsuario',
+        path: 'nuevoUsuario',  //terminar para crear usuario
         children: [
           {path: '',pathMatch: 'full', redirectTo: 'nuevoUsuario', canActivate:[AuthGuard]},
           {path: 'nuevoUsuario', component: NewUserComponent, canActivate:[AuthGuard]}
+        ]
+      },
+      {
+        path: 'modificarTarifa', //terminar para modificar tarifas de cobro
+        children: [
+          {path: '',pathMatch: 'full', redirectTo: 'modificarTarifa', canActivate:[AuthGuard]},
+          {path: 'modificarTarifa', component: NewUserComponent, canActivate:[AuthGuard]}
         ]
       },
       {
