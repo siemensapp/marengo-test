@@ -65,7 +65,7 @@ export class WorkersComponent implements OnInit {
       html: NombreE
     }).then((result) => {
         if(result.value){
-          var url= env.url+'/api/deleteWorker/'+NombreE; //elimina el especialista por medio del no,bre y no por el id como esta en el back
+          var url= env.url+'/api/deleteWorker/'+NombreE; //elimina el especialista por medio del nombre y no por el id como esta en el back
           this.dataRetriever.borrarEspecialista(url).then((respuesta) => {
             console.log(respuesta);
             if(respuesta == "true"){
@@ -75,8 +75,7 @@ export class WorkersComponent implements OnInit {
                   'success'
                 ).then(()=> location.reload())
                 
-            }
-          else{
+            }else{
             Swal.fire(
               'Error al borrar a',
               NombreE,
@@ -88,6 +87,27 @@ export class WorkersComponent implements OnInit {
         }
     });
   }
+  
+
+  borrarUserApp(CedulaCiudadania: string){
+    var url = env.url+'/api/deleteUserApp/'+CedulaCiudadania;
+    this.httpService.get(url).toPromise().then((res) => {// borrado de especialista en app movil
+      /*if (res == "true") {
+        Swal.fire(
+          'Asignacion Editada', 
+          '',
+          'success'
+        ).then(() => location.reload())
+      } else {
+        Swal.fire(
+          'Error al editar asignacion',
+          'No se pudo completar la accion',
+          'error'
+        )
+      }*/
+    })
+  }
+
 
   verCambioFecha(){
     let fechaCambio=new Date().toISOString().split("T")[0];

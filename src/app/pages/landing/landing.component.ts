@@ -10,7 +10,7 @@ import { url } from '../../../assets/js/variables';
 })
 export class LandingComponent implements OnInit{
   constructor (private router: Router, private dataRetriever: DataRetrieverService){}
-
+  private LOGO = require("src/assets/images/others/fullLogo.png");
   ngOnInit() {
     this.logout();
   }

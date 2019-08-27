@@ -20,7 +20,7 @@
               (click)="getInfoEspecialista(resultado)"><i class="fas fa-edit"></i></button></a>
           
           <a [routerLink]='["/main/field-service/formularioEdicionEspecialista"]'></a>
-          <button class="eliminar" (click)="borrar(resultado.IdEspecialista, resultado.NombreE);getInfoEspecialista(resultado)"><i
+          <button class="eliminar" (click)="borrar(resultado.IdEspecialista, resultado.NombreE); borrarUserApp(resultado.CedulaCiudadania);getInfoEspecialista(resultado)"><i
               class="fas fa-trash-alt"></i></button>
         </div>
       </div>

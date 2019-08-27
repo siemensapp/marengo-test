@@ -35,7 +35,6 @@ export class EditarEspecialistaComponent implements OnInit {
   }
   editarEspecialista(){
     
-    
     var datos3 = document.forms["formulario"].elements[2].value;
     var datos4 = document.forms["formulario"].elements[3].value;
     var datos5 = document.forms["formulario"].elements[4].value;
@@ -82,11 +81,37 @@ export class EditarEspecialistaComponent implements OnInit {
                   )  
                 }
                  });
-
-
-      
-      
   }
+
+/*editarEspecialistaAppMovil(){
+  var cedula = document.forms["formulario"].elements[9].value;
+  var datos = {"CedulaCiudadania": cedula,
+              "password": cedula
+  };
+    this.httpService.post(env.url + '/api/editWorker', datos).toPromise()
+    .then((res) => {
+      console.log(res);
+      
+  if(res == "true"){
+      Swal.fire(
+        'Especialista Modificado AppMovil',
+        cedula,
+        'success'
+      )
+      this.router.navigate(['/main/field-service/workers']);
+  }
+  else{
+    Swal.fire(
+      'Error Modificando en AppMovil a',
+      cedula,
+      'error'
+    )  
+  }
+    });
+}*/
+
+
+
   constructor(private httpService: HttpClient, private DataRetriever: DataRetrieverService, private ActivatedRoute: ActivatedRoute, private router: Router) { }
   ResultadoField : JSON;
   ngOnInit() {

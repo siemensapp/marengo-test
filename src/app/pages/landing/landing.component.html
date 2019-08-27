@@ -1,6 +1,8 @@
 <!-- title="{{ 'APP.NAME' | translate }}"
   subtitle="{{ 'APP.CLAIM' | translate }}" -->
 
+  
+
 <si-landing-page 
   title="{{ 'SERVICE MANAGER PLATFORM ' }}"
   subtitle="{{ 'Sistema para la gestion de field service'  }}"
@@ -11,7 +13,9 @@
   ]"
   
 > 
-
+<div class="logo">
+  <img class="imgLogo" [src]="LOGO" alt="industry customer service" style="width: 100%; height: 150%; padding-top: -100%; padding-left: -20%;"/>
+</div>
   <form>
     <div class="form-group">
       <label for="username">Correo (sin @siemens.com)</label>
@@ -25,11 +29,14 @@
       Login
     </button>
   </form>
+
+  
+
   <!-- <button type="submit" class="btn btn-primary" style="width: 100%;"
     routerLink="/main/field-service/">
     Entrar
   </button> -->
-
+ <!-- subtitle="{{ 'Sistema para la gestion de field service'  }}" -->
 </si-landing-page>
 
 

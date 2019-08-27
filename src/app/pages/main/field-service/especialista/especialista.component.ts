@@ -92,6 +92,33 @@ export class EspecialistaComponent implements OnInit {
               }
   }
 
+  agregarEspecialistaAppMovil(){
+    var cedula = document.forms["formulario"].elements[9].value;
+
+    var datos = {"cedula": cedula,
+                "password": cedula
+    };
+
+    this.httpService.post(env.url + '/api/registerApp', datos).toPromise()
+                .then((res) => {
+                  if(res == "true"){
+                      Swal.fire(
+                       'Especialista Agregado App Movil',
+                       cedula,
+                       'success'
+                      )
+                      this.router.navigate(['/main/field-service']);
+                  }
+                  else{
+                    Swal.fire(
+                      'Error agregando AppMovil',
+                      cedula,
+                      'error'
+                    )  
+                  }
+                });
+  }
+
   ngOnInit() {
     this.fechaMinima = new Date().toISOString().split("T")[0];
   }

@@ -64,6 +64,8 @@ export class DataRetrieverService {
         })
     })
   }
+  
+  
 
   getEspecialista(info: JSON){
     this.especialistaSource.next(info);
