@@ -61,6 +61,7 @@ export class EditarEspecialistaComponent implements OnInit {
                  "Foto" : this.fotoNueva
                 };
     console.log(datos);
+   
      this.httpService.post(env.url + '/api/editWorker', datos).toPromise()
                  .then((res) => {
                    console.log(res);
@@ -81,6 +82,10 @@ export class EditarEspecialistaComponent implements OnInit {
                   )  
                 }
                  });
+
+
+      
+      
   }
   constructor(private httpService: HttpClient, private DataRetriever: DataRetrieverService, private ActivatedRoute: ActivatedRoute, private router: Router) { }
   ResultadoField : JSON;

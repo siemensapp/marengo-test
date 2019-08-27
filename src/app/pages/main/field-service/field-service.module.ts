@@ -22,9 +22,10 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 import { AsignacionesEliminadasComponent } from './asignaciones-eliminadas/asignaciones-eliminadas.component';
 import { ExcelService } from 'src/app/shared/excel.service';
+import { TarifasComponent } from './tarifas/tarifas.component';
 
 @NgModule({
-  declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent, EditarEspecialistaComponent, AsignacionComponent, EspecialistaComponent, CronogramaComponent, PerfilComponent, EstadisticasComponent, AsignacionesEliminadasComponent],
+  declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent, EditarEspecialistaComponent, AsignacionComponent, EspecialistaComponent, CronogramaComponent, PerfilComponent, EstadisticasComponent, AsignacionesEliminadasComponent, TarifasComponent],
   imports: [
     CommonModule,
     // Ngx Bootstrap

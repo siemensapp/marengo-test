@@ -16,6 +16,7 @@ import { SearchComponent } from './equipment/search/search.component';
 import { PerfilComponent } from './field-service/perfil/perfil.component';
 import { EstadisticasComponent } from './field-service/estadisticas/estadisticas.component';
 import { AsignacionesEliminadasComponent } from './field-service/asignaciones-eliminadas/asignaciones-eliminadas.component';
+import { TarifasComponent } from './field-service/tarifas/tarifas.component';
 import { DetallesComponent } from './equipment/detalles/detalles.component';
 import { ConsultaContentComponent } from './equipment/consulta-content/consulta-content.component';
 import { EquipoComponent } from './equipment/equipo/equipo.component';
@@ -81,7 +82,8 @@ const routes: Routes = [
           {path: 'cronograma', component: CronogramaComponent, canActivate:[AuthGuard]},
           {path: 'perfil', component: PerfilComponent, canActivate:[AuthGuard]},
           {path: 'estadisticas', component: EstadisticasComponent, canActivate:[AuthGuard]},
-          {path: 'asignacionesEliminadas', component: AsignacionesEliminadasComponent, canActivate:[AuthGuard]}
+          {path: 'asignacionesEliminadas', component: AsignacionesEliminadasComponent, canActivate:[AuthGuard]},
+          {path: 'modificarTarifa', component: TarifasComponent, canActivate:[AuthGuard]}
         ]
       },
       {

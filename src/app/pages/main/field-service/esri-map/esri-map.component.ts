@@ -97,6 +97,8 @@ export class EsriMapComponent implements OnInit {
       let nombre = x.NombreE;
       let iniciales = nombre.split(" ");
       let coords = x.CoordenadasEspecialista.split(",");
+      //let coords1 = "-75.69369999999999,4.805060000000014";
+      //let coords = coords1.split(",");
       let latitude = coords[1];
       let longitude = coords[0];
       auxJson["nombre"] = {nombre: nombre};

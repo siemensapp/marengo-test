@@ -1,10 +1,13 @@
 <div id="animacion">
-  <div id="titulo">
-    <h1>REGISTRO DE NUEVOS USUARIOS</h1>
-  </div>
-
-
-  <form>
+  
+  <form class="allForm">
+      <div id="titulo">
+          <h1>REGISTRO DE NUEVOS USUARIOS</h1>
+        </div>
+      <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" class="form-control" id="name">
+      </div>
     <div class="form-group">
       <label for="username">Correo (sin @siemens.com)</label>
       <input type="email" class="form-control" id="user">
@@ -13,8 +16,11 @@
       <label for="password">Contraseña</label>
       <input type="password" class="form-control" id="password">
     </div>
-    <button type="submit" class="btn btn-primary" style="width: 100%;" (click)="login()">
-      Login
+    <button type="submit" class="btn-primary" style="width: 100%;" (click)="crearUsuario()">
+      Crear Usuario
     </button>
   </form>
+  <div class="logo">
+    <img src="src/assets/images/others/logo.jpg" alt="industry customer service">
+  </div>
 </div>
