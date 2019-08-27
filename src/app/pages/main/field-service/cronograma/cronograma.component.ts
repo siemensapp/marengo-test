@@ -236,7 +236,7 @@ export class CronogramaComponent implements OnInit {
                                     }
                                   })
                               }else{
-                                location.reload();//si le da cancelar edicion se recarga la pagina 
+                                //location.reload();//si le da cancelar edicion se recarga la pagina 
                               }
                           }))
                   }else{
