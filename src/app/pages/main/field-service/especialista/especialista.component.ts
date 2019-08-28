@@ -60,14 +60,56 @@ export class EspecialistaComponent implements OnInit {
                  "TarjetaIngresoArgos" : datos12,
                  "Foto" : document.getElementById("resultadoImagen").innerHTML
                 };
-
-    if(datos3=="" || datos8=="" || datos4=="" || datos5=="" || datos9=="" || datos10=="" || datos11=="" || datos7==""){
+              
+    if(datos3==""){
       Swal.fire(
         'Campos requeridos',
-        'Asegurese de llenar toda la información para poder agregar al especialista',
+        'Debe completar el campo Id Especialista',
         'warning'
        )
-    }            
+    }else if(datos8==""){
+      Swal.fire(
+        'Campos requeridos',
+        'Debe completar el campo CeCo',
+        'warning'
+       )
+    }else if(datos4==""){
+      Swal.fire(
+        'Campos requeridos',
+        'Debe completar el campo Nombre Especialista',
+        'warning'
+       )
+    }else if(datos5==""){
+      Swal.fire(
+        'Campos requeridos',
+        'Debe completar el campo Celular',
+        'warning'
+       )            
+    }else if(datos9==""){
+      Swal.fire(
+        'Campos requeridos',
+        'Debe completar el campo GID',
+        'warning'
+       )
+    }else if(datos10==""){
+      Swal.fire(
+        'Campos requeridos',
+        'Debe completar el campo Cedula Ciudadania',
+        'warning'
+       )
+    }else if(datos11==""){
+      Swal.fire(
+        'Campos requeridos',
+        'Debe completar el campo Lugar Expedicion Cedula',
+        'warning'
+       )
+    }else if(datos7==""){
+      Swal.fire(
+        'Campos requeridos',
+        'Debe completar el campo Fecha Nacimiento',
+        'warning'
+       )
+    }
     else{
     this.httpService.post(env.url + '/api/createWorker', datos).toPromise()
                 .then((res) => {
