@@ -31,9 +31,29 @@ export class NewUserComponent implements OnInit {
                  "password": Pass
     };
 
-    console.log(datos);
+    if(Nombre == ""){
+      Swal.fire(
+        'Campos requeridos',
+        'Debe completar el campo Nombre',
+        'warning'
+       )
+    }else if(Email == "@siemens.com"){
+      Swal.fire(
+        'Campos requeridos',
+        'Debe completar el campo Email',
+        'warning'
+       )
+    }else if(Pass == ""){
+      Swal.fire(
+        'Campos requeridos',
+        'Debe completar el campo password',
+        'warning'
+       )
+    }
 
-    this.httpService.post(env.url + '/api/registerDesktop', datos).toPromise()
+    console.log(datos);
+    if(Nombre != "" && Email != "@siemens.com" && Pass != ""){
+      this.httpService.post(env.url + '/api/registerDesktop', datos).toPromise()
                 .then((res) => {
                   if(res == "true"){
                       Swal.fire(
@@ -51,6 +71,8 @@ export class NewUserComponent implements OnInit {
                     )  
                   }
                 });
+    }
+    
   }
  
   ngOnInit() {
