@@ -80,8 +80,13 @@ export class EspecialistaComponent implements OnInit {
                        'success'
                       )
                       this.router.navigate(['/main/field-service']);
-                  }
-                  else{
+                  }else if(res == "duplicated"){
+                      Swal.fire(
+                        'ERROR: Id Especialista duplicado',
+                        datos3,
+                        'error'
+                      )
+                  }else{
                     Swal.fire(
                       'Error agregando a',
                       datos4,
@@ -94,9 +99,11 @@ export class EspecialistaComponent implements OnInit {
 
   agregarEspecialistaAppMovil(){
     var cedula = document.forms["formulario"].elements[9].value;
+    var IdEspecialista = document.forms["formulario"].elements[2].value;
 
     var datos = {"cedula": cedula,
-                "password": cedula
+                "password": cedula,
+                'IdEspecialista':IdEspecialista
     };
 
     this.httpService.post(env.url + '/api/registerApp', datos).toPromise()
@@ -108,8 +115,13 @@ export class EspecialistaComponent implements OnInit {
                        'success'
                       )
                       this.router.navigate(['/main/field-service']);
-                  }
-                  else{
+                  }else if(res == "duplicated"){
+                    Swal.fire(
+                      'ERROR: Id Especialista duplicado',
+                      cedula,
+                      'error'
+                    )
+                  }else{
                     Swal.fire(
                       'Error agregando AppMovil',
                       cedula,
