@@ -83,12 +83,11 @@ export class EditarEspecialistaComponent implements OnInit {
                  });
   }
 
-/*editarEspecialistaAppMovil(){
+editarEspecialistaAppMovil(){
   var cedula = document.forms["formulario"].elements[9].value;
-  var datos = {"CedulaCiudadania": cedula,
-              "password": cedula
-  };
-    this.httpService.post(env.url + '/api/editWorker', datos).toPromise()
+  var IdEspecialista = document.forms["formulario"].elements[2].value;
+  var datos = {"CedulaCiudadania": cedula};
+    this.httpService.post(env.url + '/api/editUserApp/' + IdEspecialista, datos).toPromise()
     .then((res) => {
       console.log(res);
       
@@ -108,7 +107,7 @@ export class EditarEspecialistaComponent implements OnInit {
     )  
   }
     });
-}*/
+}
 
 
 
