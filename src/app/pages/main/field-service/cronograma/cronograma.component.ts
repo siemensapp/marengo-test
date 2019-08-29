@@ -87,9 +87,11 @@ export class CronogramaComponent implements OnInit {
                 status = "Asignación Aceptada";
               } else if (this.infoAsignacion[0]['StatusAsignacion'] == 2) {
                 status = "Asignación Iniciada";
-              } else {
+              } else if(this.infoAsignacion[0]['StatusAsignacion'] == 3) {
                 status = "Asignación Terminada";
-              }
+              } else if(this.infoAsignacion[0]['StatusAsignacion'] == 4) {
+                status = "Asignación Rechazada";
+              } 
               if(this.infoAsignacion[0]['IdStatus']==1){
               var contenido = this.infoAsignacion[0]['NombreE'] + ' (' + this.infoAsignacion[0]['NombreT'] + ') - ' + this.infoAsignacion[0]['NombreS'] + '<br>' +
                 this.infoAsignacion[0]['NombreSitio'] + '<br><br>' +
@@ -276,6 +278,7 @@ export class CronogramaComponent implements OnInit {
           var fecha = Fecha.value + "-" + columna;
           this.dataRetriever.getData(env.url + '/api/getInfoAssignment/' + IdEspecialista + '/' + fecha).then(data => {
             this.infoAsignacion2 = data as JSON;
+            console.log("LO QUE DA INFO2:", this.infoAsignacion2);
             console.log(this.infoAsignacion2);
             Swal.fire({
               type: "warning",
