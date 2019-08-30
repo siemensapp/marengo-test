@@ -47,6 +47,7 @@ export class EspecialistaComponent implements OnInit {
     var datos10 = document.forms["formulario"].elements[9].value;
     var datos11 = document.forms["formulario"].elements[10].value;
     var datos12 = document.forms["formulario"].elements[11].value;
+    var datos13 = document.forms["formulario"].elements[12].value;
 
     var datos = {"IdEspecialista" : datos3,
                  "NombreE" : datos4,
@@ -58,6 +59,7 @@ export class EspecialistaComponent implements OnInit {
                  "CedulaCiudadania" : datos10,
                  "LugarExpedicion" : datos11,
                  "TarjetaIngresoArgos" : datos12,
+                 "email": datos13,
                  "Foto" : document.getElementById("resultadoImagen").innerHTML
                 };
               
@@ -109,8 +111,13 @@ export class EspecialistaComponent implements OnInit {
         'Debe completar el campo Fecha Nacimiento',
         'warning'
        )
-    }
-    else{
+    }else if(datos13==""){
+      Swal.fire(
+        'Campos requeridos',
+        'Debe completar el campo email del especialista',
+        'warning'
+       )
+      }else{
     this.httpService.post(env.url + '/api/createWorker', datos).toPromise()
                 .then((res) => {
                   console.log(datos);

@@ -260,6 +260,11 @@
     display: flex;
     margin-top: 8%;
   }
+
+  #cuartaLinea {
+    display: flex;
+    margin-top: 8%;
+  }
   
   #headerLugarE {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -283,8 +288,24 @@
     width: 100%;
     float: right;
   }
+
+  #headerEmail {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+    height: 20px;
+    width: 100%;
+    float: left;
+  }
   
   #tarjetaIA {
+    height: 28px;
+    width: 100%;
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom: 10%;
+  }
+
+  #email {
     height: 28px;
     width: 100%;
     font-size: 14px;

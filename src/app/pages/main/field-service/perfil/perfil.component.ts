@@ -16,6 +16,7 @@ export class PerfilComponent implements OnInit {
     this.DataRetriever.infoEspecialista.subscribe(infoEspecialista => this.infoEspecialista = infoEspecialista);
     console.log("*****************");
     console.log(this.infoEspecialista['id']);
+    console.log(this.infoEspecialista['email']);
     document.getElementById('fecha').innerHTML=this.infoEspecialista['FechaNacimiento'].split("T")[0];
   }
 

@@ -1,3 +1,55 @@
-<p>
-  tarifas works!
-</p>
+<div id="animacion">
+    <div id="titulo">
+      <br>
+      <p>MODIFICAR TARIFAS</p>
+      <br>
+    </div>
+    <form id="formulario">
+      <div id="IdNombreTecnica">
+          <div id="subtitulo">
+            <label >Tecnica</label>
+          </div>
+          <select id="comboTecnica">
+            <option value=1>Variadores de Frecuencia</option>
+            <option value=2>Baja Tensión</option>
+            <option value=3>Automatización</option>
+            <option value=4>AOS</option>
+            <option value=5>Motores</option>
+          </select><br>
+      </div>
+      <div id="demasDatos">
+        <div id="segundaLinea">
+          <div id=headerGID>
+            <div class="styledInput">
+              <input type="number" id="CostoServicio" placeholder=" " autocomplete="off" />
+              <label>Costo Servicio</label>
+            </div>
+          </div>
+          <div id="headerCedula">
+            <div class="styledInput">
+              <input type="number" name="cedula" id="cedulaC" placeholder=" " autocomplete="off">
+              <label>Costo Viaje</label>
+            </div>
+          </div>
+        </div>
+        <div id="terceraLinea">
+          <div id="headerLugarE">
+            <div class="styledInput">
+              <input type="text" name="lugar" id="lugarE" placeholder=" " autocomplete="off">
+              <label>Lugar Expedicion C.C.</label>
+            </div>
+          </div>
+          <div id="headerTarjetaIA">
+            <div class="styledInput">
+              <input type="text" name="tarjetaIA" id="tarjetaIA" placeholder=" " autocomplete="off">
+              <label>Tarjeta Ingreso Argos</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div id="botones">
+      <button (click)="agregarEspecialista(); agregarEspecialistaAppMovil();" id="enviar">Crear Especialista</button><br>
+      <button routerLink='/main/field-service' id="cancelar">Cancelar</button><br>
+    </div>
+    <div id="resultadoImagen"></div>

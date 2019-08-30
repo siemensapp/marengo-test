@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./editar-especialista.component.scss']
 })
 export class EditarEspecialistaComponent implements OnInit {
-
   infoEspecialista={};
   fotoNueva;
   subirArchivo(){
@@ -45,6 +44,7 @@ export class EditarEspecialistaComponent implements OnInit {
     var datos10 = document.forms["formulario"].elements[9].value;
     var datos11 = document.forms["formulario"].elements[10].value;
     var datos12 = document.forms["formulario"].elements[11].value;
+    var datos13 = document.forms["formulario"].elements[12].value;
     
 
     var datos = {"IdEspecialista" : datos3,
@@ -57,6 +57,7 @@ export class EditarEspecialistaComponent implements OnInit {
                  "CedulaCiudadania" : datos10,
                  "LugarExpedicion" : datos11,
                  "TarjetaIngresoArgos" : datos12,
+                 "email": datos13,
                  "Foto" : this.fotoNueva
                 };
     console.log(datos);

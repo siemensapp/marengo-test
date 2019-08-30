@@ -267,10 +267,22 @@
     margin-top: 8%;
   }
   
+  #cuartaLinea {
+    display: flex;
+    margin-top: 7%;
+  }
+
   #headerLugarE {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 14px;
     height: 20px;
+    width: 100%;
+  }
+
+  #headerEmail {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+    height: 23px;
     width: 100%;
   }
   
