@@ -78,33 +78,41 @@ export class AsignacionComponent implements OnInit {
       )  
     }
     else{
-    this.httpService.post(env.url+'/api/setAssignment', datos).toPromise()
-                .then((res) => {
-                  console.log(res);
-                  if(res == "true"){
+      this.httpService.post(env.url+'/api/setAssignment', datos).toPromise()
+                  .then((res) => {
+                    console.log(res);
+                    if(res == "true"){
+                      Swal.fire(
+                      'Asignacion Creada',
+                      this.infoUbicacion.split(",")[2],
+                      'success'
+                      )
+                      this.router.navigate(['/main/field-service']);
+                  }
+                  else if(res == "existe"){
                     Swal.fire(
-                     'Asignacion Creada',
-                     this.infoUbicacion.split(",")[2],
-                     'success'
-                    )
-                    this.router.navigate(['/main/field-service']);
-                }
-                else if(res == "existe"){
-                  Swal.fire(
-                    'Error Creando Asignacion',
-                    'Otra asignacion para este especialista ya existe en esas fechas. Verifique el cronograma',
-                    'error'
-                  )  
-                }
-                else{
-                  Swal.fire(
-                    'Error Creando Asignacion',
-                    'Hubo un error creando la asignacion',
-                    'error'
-                  ) 
-                }
-                 });
-                }
+                      'Error Creando Asignacion',
+                      'Otra asignacion para este especialista ya existe en esas fechas. Verifique el cronograma',
+                      'error'
+                    )  
+                  }
+                  else{
+                    Swal.fire(
+                      'Error Creando Asignacion',
+                      'Hubo un error creando la asignacion',
+                      'error'
+                    ) 
+                  }
+                  });
+     this.httpService.post(env.url+'/api/sendMail',datos).toPromise()
+                  .then((res) => {
+                      if(res == "true"){
+                        console.log("mail sent");
+                      }else{
+                        console.log("error mailing");
+                      }
+                  });
+    }
   }
   constructor(private httpService: HttpClient, private DataRetriever: DataRetrieverService, private router: Router) { }
   ResultadosEmpresas : JSON[];
