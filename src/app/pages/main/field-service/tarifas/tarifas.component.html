@@ -4,8 +4,8 @@
         <table>
           <tr>
             <th>TECNICA</th>
-            <th>COSTO VIAJE</th> 
-            <th>COSTO SERVICIO</th>
+            <th>COSTO VIAJE (hora)</th> 
+            <th>COSTO SERVICIO (hora)</th>
           </tr>
           <tr>
             <td>Variadores de Frecuencia (VFD)</td>
@@ -49,16 +49,18 @@
           </select><br>
       </div>
       <div id="demasDatos">
-        <div id="segundaLinea">
+        <div id="primeraLinea">
           <div id=headerServicio>
             <div class="styledInput">
               <input type="number" id="CostoServicio" placeholder=" " autocomplete="off" />
               <label>Costo Servicio</label>
             </div>
           </div>
-          <div id="headerViaje">
+        </div>
+        <div id="segundaLinea">
+          <div id=headerViaje>
             <div class="styledInput">
-              <input type="number" name="CostoViaje"  placeholder=" " autocomplete="off">
+              <input type="number" id="CostoViaje" placeholder=" " autocomplete="off" />
               <label>Costo Viaje</label>
             </div>
           </div>
@@ -66,7 +68,7 @@
       </div>  
     </form>
     <div id="botones">
-      <button (click)="agregarEspecialista(); agregarEspecialistaAppMovil();" id="enviar">Modificar Tarifa</button><br>
+      <button (click)="editarTarifas()" id="enviar">Modificar Tarifa</button><br>
       <button routerLink='/main/field-service' id="cancelar">Cancelar</button><br>
     </div>
     <div id="resultadoImagen"></div>

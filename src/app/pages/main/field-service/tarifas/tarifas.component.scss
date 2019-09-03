@@ -96,18 +96,6 @@
     font-family: 'Courier New', Courier, monospace;
   }
   
-
-  
-  
-  #fileInput {
-    height: 0px;
-    visibility: hidden;
-    overflow: hidden;
-    color: white;
-    background-color: white;
-    border: ridge 0px white;
-    width: 0%;
-  }
   
  .subtitulo{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -160,27 +148,7 @@
     width: 125%;
     float: left;
   }
-  
-  #fechaN {
-    height: 30px;
-    width: 100%;
-    font-size: 14px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin-bottom: 10%;
-  }
-  
-  #fechaN:before {
-    content: attr(placeholder) !important;
-    color: #aaa;
-    margin-right: 0.5em;
-  }
-  
-  #fechaN:focus:before,
-  #fechaN:valid:before {
-    content: "";
-  }
-
-  
+ 
   #segundaLinea {
     display: flex;
     margin-top: 8%;
@@ -205,7 +173,7 @@
 
   #CostoViaje {
     height: 35px;
-    width: 110%;
+    width: 100%;
     font-size: 14px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin-bottom: 10%;
@@ -229,49 +197,12 @@
     float: left;
   }
   
-  #cedulaC {
-    height: 30px;
-    width: 100%;
-    font-size: 14px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin-bottom: 10%;
-  }
   
   #terceraLinea {
     display: flex;
     margin-top: 8%;
   }
   
-  #headerLugarE {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 14px;
-    height: 20px;
-    width: 100%;
-  }
-  
-  #lugarE {
-    height: 29px;
-    width: 100%;
-    font-size: 14px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin-bottom: 10%;
-  }
-  
-  #headerTarjetaIA {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 14px;
-    height: 20px;
-    width: 100%;
-    float: right;
-  }
-  
-  #tarjetaIA {
-    height: 28px;
-    width: 100%;
-    font-size: 14px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin-bottom: 10%;
-  }
   
   #botones {
     display: flex;
