@@ -6,7 +6,7 @@ const holidays = require('colombia-holidays');
 //const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 
 var workbook = XLSX.utils.book_new();
-var dayNames = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'];
+var dayNames = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
 
 var f;
 var cellFecha;
