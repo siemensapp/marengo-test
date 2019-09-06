@@ -35,6 +35,76 @@ export class EspecialistaComponent implements OnInit {
     };
   }
 
+  processFile1(documentInput: any){
+    //  debugger;
+    //console.log("******************estoy adentro 1*****************");
+      var doc : File = documentInput.files[0];
+      var reader = new FileReader();
+  
+      reader.addEventListener('load',function(a:any){
+             
+        document.getElementById("resultadoCertificadoA").innerHTML = a.target.result;
+        
+     })
+     reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
+    }
+  
+    processFile2(documentInput: any){
+      //  debugger;
+      //console.log("******************estoy adentro 2*****************");
+        var doc : File = documentInput.files[0];
+        var reader = new FileReader();
+    
+        reader.addEventListener('load',function(a:any){
+               
+          document.getElementById("resultadoCertificadoMD").innerHTML = a.target.result;
+          
+       })
+       reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
+      }
+  
+      processFile3(documentInput: any){
+        //  debugger;
+        //console.log("******************estoy adentro 3*****************");
+          var doc : File = documentInput.files[0];
+          var reader = new FileReader();
+      
+          reader.addEventListener('load',function(a:any){
+                 
+            document.getElementById("resultadoVacunas").innerHTML = a.target.result;
+            
+         })
+         reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
+        }
+  
+        processFile4(documentInput: any){
+          //  debugger;
+          //console.log("******************estoy adentro 4*****************");
+            var doc : File = documentInput.files[0];
+            var reader = new FileReader();
+        
+            reader.addEventListener('load',function(a:any){
+                   
+              document.getElementById("resultadoTprofesional").innerHTML = a.target.result;
+              
+           })
+           reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
+          }
+  
+          processFile5(documentInput: any){
+            //  debugger;
+            //console.log("******************estoy adentro 5*****************");
+              var doc : File = documentInput.files[0];
+              var reader = new FileReader();
+          
+              reader.addEventListener('load',function(a:any){
+                     
+                document.getElementById("resultadoConte").innerHTML = a.target.result;
+                
+             })
+             reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
+            }
+
   agregarEspecialista(){
   
     var datos3 = document.forms["formulario"].elements[2].value;
@@ -48,6 +118,8 @@ export class EspecialistaComponent implements OnInit {
     var datos11 = document.forms["formulario"].elements[10].value;
     var datos12 = document.forms["formulario"].elements[11].value;
     var datos13 = document.forms["formulario"].elements[12].value;
+    var datos14 = document.forms["formulario"].elements[14].value;
+    var datos15 = document.forms["formulario"].elements[16].value;
 
     var datos = {"IdEspecialista" : datos3,
                  "NombreE" : datos4,
@@ -60,8 +132,16 @@ export class EspecialistaComponent implements OnInit {
                  "LugarExpedicion" : datos11,
                  "TarjetaIngresoArgos" : datos12,
                  "email": datos13,
-                 "Foto" : document.getElementById("resultadoImagen").innerHTML
+                 "Foto" : document.getElementById("resultadoImagen").innerHTML,
+                 "CertificadodeAlturas" : document.getElementById("resultadoCertificadoA").innerHTML,
+                 "CertificadoMD" : document.getElementById("resultadoCertificadoMD").innerHTML,
+                 "Vacunas" : document.getElementById("resultadoVacunas").innerHTML, 
+                 "Tprofesional" : document.getElementById("resultadoTprofesional").innerHTML,
+                 "Conte": document.getElementById("resultadoConte").innerHTML,               
+                 "FechaVA": datos14,
+                 "FechaVM": datos15
                 };
+              
               
     if(datos3==""){
       Swal.fire(
