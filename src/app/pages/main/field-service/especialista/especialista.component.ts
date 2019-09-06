@@ -128,7 +128,7 @@ export class EspecialistaComponent implements OnInit {
                        datos4,
                        'success'
                       )
-                      this.router.navigate(['/main/field-service']);
+                        this.router.navigate(['/main/field-service']);
                   }else if(res == "duplicated"){
                       Swal.fire(
                         'ERROR: Id Especialista duplicado',
