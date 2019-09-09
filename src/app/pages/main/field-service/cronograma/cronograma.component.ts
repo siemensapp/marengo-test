@@ -349,7 +349,7 @@ export class CronogramaComponent implements OnInit {
                 };
                 var url = env.url + '/api/deleteAssignment';
                 var urlMailDel = env.url + '/api/sendMailDelete';
-                console.log("NOMBRE CLIENTE",datos);
+                //console.log("NOMBRE CLIENTE",datos);
                 this.httpService.post(url, datos).toPromise()
                   .then((res) => {
                     console.log(res);

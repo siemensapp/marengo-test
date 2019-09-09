@@ -15,7 +15,7 @@
   
   .styledInput {
     position: relative;
-
+    padding-right: 10px;
   }
   
   /* input */
@@ -24,7 +24,7 @@
     border-top: none;
     border-right: none;
     border-left: none;
-    font-size: 25px;
+    font-size: 17px;
   }
   
   .styledInput input:focus {
@@ -118,22 +118,24 @@
       text-align: center;
   }
 
-  #clientImput{
-      font-size: 17px;
-      width: 60%;
+  #clienteInput{
+      font-size: 16px;
+      width: 250%;
+      height: 40px;
   }
 
   #entradaCliente{
       padding-left: 20px;
-    
+      
   }
 
   #botones {
     width: 30%;
+    margin-left: 10px;
   }
   
   #enviar {
-    margin-left: 5%;
+    margin-left: 80%;
     width: 60%;
     height: 35px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
