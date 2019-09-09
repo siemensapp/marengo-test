@@ -228,7 +228,7 @@ export class CronogramaComponent implements OnInit {
                                         'Asignacion Editada', //si se establece la conexion, backend manda res=true, si da error manda res=false
                                         '',
                                         'success'
-                                      )//.then(() => location.reload())
+                                      ).then(() => location.reload())
                                       var mailUrl = env.url + '/api/sendMailEdit/';
                                       this.httpService.post(mailUrl,datos).toPromise().then((res) => {
                                         if(res == "true"){
@@ -336,6 +336,7 @@ export class CronogramaComponent implements OnInit {
                   'Hasta': Hasta
                 };
                 var url = env.url + '/api/deleteAssignment';
+                var urlMailDel = env.url + '/api/sendMailDelete';
                 this.httpService.post(url, datos).toPromise()
                   .then((res) => {
                     console.log(res);
@@ -345,6 +346,13 @@ export class CronogramaComponent implements OnInit {
                         '',
                         'success'
                       ).then(() => location.reload())
+                      this.httpService.post(urlMailDel, datos).toPromise().then((res) => {
+                        if(res == "true"){
+                          console.log("delete mail sent");
+                        }else{
+                          console.log("erro sending delete mail");
+                        }
+                      })
                     } else {
                       Swal.fire(
                         'Error al borrar asignacion',
