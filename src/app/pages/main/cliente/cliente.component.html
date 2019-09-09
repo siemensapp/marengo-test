@@ -1,0 +1,28 @@
+<div id="animacion">
+    <h3 id="headerAddCliente">Añadir cliente</h3>
+    <hr>
+    <div class="flex">
+      <div class="styledInput">
+        <input  type="text" id="clienteInput" placeholder=" " autocomplete="off" />
+        <label>Cliente</label>
+      </div>
+    
+      <div id="botones">
+        <button id="enviar">Añadir</button>
+      </div>
+    <hr>
+    </div> 
+  <h3 id="headerTabla">Listado Clientes</h3>
+  <div id="tablaClientes">
+    <table>
+      <tr>
+        <th>No</th>
+        <th>CLIENTE</th>
+      </tr>
+      <tr *ngFor="let cliente of ResultadosClientes">
+        <td>{{cliente.IdEmpresa}}</td> 
+        <td>{{cliente.NombreEmpresa}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -12,7 +12,8 @@ export class AjusteAdicionComponent implements OnInit {
 
   secondaryNavItems = [
     {title: 'Modificar Tarifas', link: 'modificarTarifa'},
-    {title: '+ UsuarioDesktop', link: 'nuevoUsuario'}
+    {title: '+ UsuarioDesktop', link: 'nuevoUsuario'},
+    {title: '+ Cliente', link: 'cliente'}
   ]
 
   ngOnInit() {

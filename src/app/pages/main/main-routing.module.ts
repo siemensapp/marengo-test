@@ -22,10 +22,9 @@ import { ConsultaContentComponent } from './equipment/consulta-content/consulta-
 import { EquipoComponent } from './equipment/equipo/equipo.component';
 import { NewUserComponent} from './new-user/new-user.component';
 
-
-
 import {AuthGuardService as AuthGuard} from '../main/services/auth-services/auth-guard.service';
 import { AjusteAdicionComponent } from './ajuste-adicion/ajuste-adicion.component';
+import { ClienteComponent } from './cliente/cliente.component';
 
 const routes: Routes = [
   {
@@ -80,7 +79,8 @@ const routes: Routes = [
         children: [
           {path: '',pathMatch: 'full', redirectTo: 'modificarTarifas'},
           {path: 'modificarTarifa', component: TarifasComponent, canActivate:[AuthGuard] },
-          {path: 'nuevoUsuario', component: NewUserComponent, canActivate:[AuthGuard]}
+          {path: 'nuevoUsuario', component: NewUserComponent, canActivate:[AuthGuard]},
+          {path: 'cliente', component: ClienteComponent, canActivate:[AuthGuard]}
         ]
       },
       {
