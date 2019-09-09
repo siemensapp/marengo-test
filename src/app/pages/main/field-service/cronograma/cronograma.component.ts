@@ -134,6 +134,7 @@ export class CronogramaComponent implements OnInit {
 
                               '<label for="'+this.infoAsignacion[0]['NombreS']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Status Servicio'+'</label>'+'<br>'+
                               '<select id="servicio" name="servicio" value="'+this.infoAsignacion[0]['NombreS']+'"'+'>'+
+                              '<option value="0">Seleccionar</option>'+
                               '<option value="1">En Servicio</option>'+
                               '<option value="2">Compensatorio</option>'+
                               '<option value="3">Vacaciones</option>'+
@@ -180,6 +181,11 @@ export class CronogramaComponent implements OnInit {
                                 var Servicio = servicio.value;
                                 var idsta = 4;//para poner el color del status
 
+                                if(Servicio == '0'){
+                                  idsta = this.infoAsignacion[0]['IdStatus'];
+                                  console.log("idsta",idsta);
+                                }
+
                                 if(Servicio == '1'){idsta = 1;}//en servicio
                                 else if(Servicio == '2'){idsta = 2;}//compensatorio
                                 else if(Servicio == '3'){idsta = 3;}//vacaciones
@@ -188,6 +194,7 @@ export class CronogramaComponent implements OnInit {
                                 else if(Servicio == '6'){idsta = 6;}//permiso
                                 else if(Servicio == '7'){idsta = 7;}//capacitacion
                                 else if(Servicio == '8'){idsta = 8;}//disp fin semana
+                                
                                 
                                 var pcfsv = < HTMLInputElement > document.getElementById('PCFSV');
                                 var PCFSV = pcfsv.value;
@@ -201,7 +208,7 @@ export class CronogramaComponent implements OnInit {
                                 var Descripcion = descripcion.value;
 
                                 if(Descripcion == ""){
-                                  Descripcion = this.infoAsignacion[0]['Descripcion'];
+                                  Descripcion = this.infoAsignacion[0]['Descripcion'];//para asegurar que se mantiene la anterior descripcion si no se hacen cambios en el
                                 }
 
                                 var datos = {
