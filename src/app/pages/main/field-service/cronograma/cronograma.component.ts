@@ -115,7 +115,7 @@ export class CronogramaComponent implements OnInit {
                   cancelButtonColor: "gray"
                 }).then((result => {
                   if(String(result.dismiss) != 'cancel'){//como el cancel button es editar, aca va lo que entra al dar clic en editar
-                    console.log("ENTRA POR NO SER CANCEL");
+                    //console.log("ENTRA POR NO SER CANCEL");
                       Swal.fire({
                         title: 'EDITAR ASIGNACION',
                         html: '<label for="'+this.infoAsignacion[0]['NombreContacto']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Nombre Contacto'+'</label>'+'<br>'+
@@ -228,7 +228,15 @@ export class CronogramaComponent implements OnInit {
                                         'Asignacion Editada', //si se establece la conexion, backend manda res=true, si da error manda res=false
                                         '',
                                         'success'
-                                      ).then(() => location.reload())
+                                      )//.then(() => location.reload())
+                                      var mailUrl = env.url + '/api/sendMailEdit/';
+                                      this.httpService.post(mailUrl,datos).toPromise().then((res) => {
+                                        if(res == "true"){
+                                          console.log("Mail sent");
+                                        }else{
+                                          console.log("Error sending mail");
+                                        }
+                                      })
                                     } else {
                                       Swal.fire(
                                         'Error al editar asignacion',

@@ -117,6 +117,7 @@ export class AsignacionComponent implements OnInit {
   constructor(private httpService: HttpClient, private DataRetriever: DataRetrieverService, private router: Router) { }
   ResultadosEmpresas : JSON[];
   ResultadosField : JSON[];
+  ResultadosStatus: JSON[];
   ngOnInit() {
     document.getElementById('fechaI').addEventListener("change", (event) => {
       this.fechaMinima = (<HTMLDataElement>document.getElementById('fechaI')).value;
@@ -141,6 +142,11 @@ export class AsignacionComponent implements OnInit {
         this.ResultadosEmpresas = data as JSON[];
         console.log(this.ResultadosEmpresas);
       })
+
+      /*this.DataRetriever.getData(env.url + '/api/statusList').then(data => {
+        this.ResultadosStatus = data as JSON[];
+        console.log(this.ResultadosStatus);
+      })*/
     // this.httpService.get(env.url+'/api/workersList').subscribe(
     //   data => {
     //     this.ResultadosField = data as JSON[];
