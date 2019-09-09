@@ -329,7 +329,7 @@ export class CronogramaComponent implements OnInit {
                   'IdEmpresa': this.infoAsignacion2[0]['IdEmpresa'],
                   'PCFSV': this.infoAsignacion2[0]['PCFSV'],
                   'IdAsignacion': this.infoAsignacion2[0]['IdAsignacion'],
-                  'NombreCliente': this.infoAsignacion2[0]['NombreCliente'],
+                  'NombreEmpresa': this.infoAsignacion2[0]['NombreEmpresa'],
                   'NombrePlanta': this.infoAsignacion2[0]['NombrePlanta'],
                   'CiudadPlanta': this.infoAsignacion2[0]['CiudadPlanta'],
                   'FechaInicio': this.infoAsignacion2[0]['FechaInicio'].split("T")[0],
@@ -349,6 +349,7 @@ export class CronogramaComponent implements OnInit {
                 };
                 var url = env.url + '/api/deleteAssignment';
                 var urlMailDel = env.url + '/api/sendMailDelete';
+                console.log("NOMBRE CLIENTE",datos);
                 this.httpService.post(url, datos).toPromise()
                   .then((res) => {
                     console.log(res);
