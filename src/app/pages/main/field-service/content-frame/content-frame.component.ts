@@ -12,8 +12,7 @@ export class ContentFrameComponent implements OnInit {
     {title: '+ Asignación', link: 'formularioAsignacion'},
     {title: '+ Field Service', link: 'formularioEspecialista'},
     {title: 'Cronograma', link: 'cronograma'},
-    {title: 'Asignaciones Eliminadas', link: 'asignacionesEliminadas'},
-    {title: 'Modificar Tarifas', link: 'modificarTarifa'}
+    {title: 'Asignaciones Eliminadas', link: 'asignacionesEliminadas'}
   ]
 
   mapCenter = [-74, 4.2];

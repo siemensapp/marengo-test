@@ -25,6 +25,7 @@ import { NewUserComponent} from './new-user/new-user.component';
 
 
 import {AuthGuardService as AuthGuard} from '../main/services/auth-services/auth-guard.service';
+import { AjusteAdicionComponent } from './ajuste-adicion/ajuste-adicion.component';
 
 const routes: Routes = [
   {
@@ -54,20 +55,8 @@ const routes: Routes = [
           {path: 'editarEquipo/:searchTerm', component: EquipoComponent, canActivate:[AuthGuard]}
         ]
       },
-      {
-        path: 'nuevoUsuario',  //terminar para crear usuario
-        children: [
-          {path: '',pathMatch: 'full', redirectTo: 'nuevoUsuario', canActivate:[AuthGuard]},
-          {path: 'nuevoUsuario', component: NewUserComponent, canActivate:[AuthGuard]}
-        ]
-      },
-      {
-        path: 'modificarTarifa', //terminar para modificar tarifas de cobro
-        children: [
-          {path: '',pathMatch: 'full', redirectTo: 'modificarTarifa', canActivate:[AuthGuard]},
-          {path: 'modificarTarifa', component: NewUserComponent, canActivate:[AuthGuard]}
-        ]
-      },
+      
+      
       {
         path: 'field-service',
         component: ContentFrameComponent,
@@ -83,7 +72,15 @@ const routes: Routes = [
           {path: 'perfil', component: PerfilComponent, canActivate:[AuthGuard]},
           {path: 'estadisticas', component: EstadisticasComponent, canActivate:[AuthGuard]},
           {path: 'asignacionesEliminadas', component: AsignacionesEliminadasComponent, canActivate:[AuthGuard]},
-          {path: 'modificarTarifa', component: TarifasComponent, canActivate:[AuthGuard]}
+        ]
+      },
+      {
+        path: 'ajustes-adiciones',
+        component: AjusteAdicionComponent,
+        children: [
+          {path: '',pathMatch: 'full', redirectTo: 'modificarTarifas'},
+          {path: 'modificarTarifa', component: TarifasComponent, canActivate:[AuthGuard] },
+          {path: 'nuevoUsuario', component: NewUserComponent, canActivate:[AuthGuard]}
         ]
       },
       {

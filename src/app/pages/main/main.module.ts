@@ -26,6 +26,7 @@ import { EquipoComponent } from './equipment/equipo/equipo.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment.prod';
 import { NewUserComponent } from './new-user/new-user.component';
+import { AjusteAdicionComponent } from './ajuste-adicion/ajuste-adicion.component';
 
   export function tokenGetter() {
     return localStorage.getItem('access_token');
@@ -41,7 +42,8 @@ import { NewUserComponent } from './new-user/new-user.component';
     DetallesComponent,
     ConsultaContentComponent,
     EquipoComponent,
-    NewUserComponent
+    NewUserComponent,
+    AjusteAdicionComponent
   ],
   imports: [
 

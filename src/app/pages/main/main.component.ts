@@ -25,8 +25,8 @@ export class MainComponent implements OnInit {
       link: 'consultaEquipos'
     },
     {
-      title: 'Crear Usuarios',
-      link: 'nuevoUsuario'
+      title: 'Ajustes/Adiciones',
+      link: 'ajustes-adiciones/modificarTarifa'
     }
   ];
 
