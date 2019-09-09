@@ -199,6 +199,11 @@ export class CronogramaComponent implements OnInit {
                                 var Telefono = telefono.value;
                                 var descripcion = <HTMLInputElement > document.getElementById('descripcion');
                                 var Descripcion = descripcion.value;
+
+                                if(Descripcion == ""){
+                                  Descripcion = this.infoAsignacion[0]['Descripcion'];
+                                }
+
                                 var datos = {
                                   'IdEspecialista': this.infoAsignacion[0]['IdEspecialista'],
                                   'IdStatus': idsta,
