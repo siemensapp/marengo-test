@@ -12,7 +12,7 @@ import * as env from 'src/assets/js/variables';
 })
 export class NewUserComponent implements OnInit {   
     
-  private LOGO = require("src/assets/images/others/fullLogo.png");
+  private LOGO = require("src/assets/images/others/logo.jpg");
   constructor(private httpService: HttpClient, private router: Router) { }
 
   crearUsuario(){

@@ -33,6 +33,8 @@ export class AsignacionComponent implements OnInit {
     var datos10 = document.forms["formulario"].elements[9].value;
     var datos11 = document.forms["formulario"].elements[10].value;
 
+    //console.log(datos5);
+
     var datos = {"IdEspecialista" : datos3,
                  "IdStatus" : datos4,
                  "NombreCliente" : datos1,
@@ -48,7 +50,7 @@ export class AsignacionComponent implements OnInit {
                  "EmailContacto" : datos10,
                  "Descripcion" : datos11,
                 };
-    console.log(datos);
+    //console.log(datos);
     if(this.infoUbicacion == ""){
       Swal.fire(
         'Debe elegir una ubicación para la asignación',

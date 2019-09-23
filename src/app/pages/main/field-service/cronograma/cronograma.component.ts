@@ -73,9 +73,12 @@ export class CronogramaComponent implements OnInit {
           var Fecha = < HTMLInputElement > document.getElementById('fecha');
           var fecha = Fecha.value + "-" + columna;
           var url = env.url + '/api/getInfoAssignment/' + IdEspecialista + '/' + fecha;
+          //console.log("GET INFO ASSIGMENT: ", url);
           this.dataRetriever.getData(url).then(data => {
             this.infoAsignacion = data as JSON;
+            //console.log("JSON DATA", data);
             var id = this.infoAsignacion[0]['IdAsignacion'];
+            //console.log("ID ASSIGNACION: ",id);
             var url2 = env.url + '/api/getReportByAssignment/' + id;
             this.dataRetriever.getData(url2).then(reportData => {
               this.infoReporte = reportData as JSON;
@@ -107,7 +110,6 @@ export class CronogramaComponent implements OnInit {
                 Swal.fire({
                   title: 'Informacion Asignacion',
                   html: contenido,
-                  showCloseButton: true,
                   confirmButtonText: "EDITAR",
                   confirmButtonColor: "green",
                   showCancelButton: true,
@@ -152,6 +154,8 @@ export class CronogramaComponent implements OnInit {
                               '<option value="F">Pruebas FAT</option>'+
                               '<option value="S">Puesta en Servicio</option>'+
                               '<option value="V">Soporte Ventas</option>'+
+                              '<option value="E">Emergencia</option>'+
+                              '<option value="CN">Correctivo No Planeado</option>'+
                               '<option value="O">Otro</option>'+
                               '</select> <br><br>'+
 
@@ -161,7 +165,7 @@ export class CronogramaComponent implements OnInit {
 
                               '<textarea id="descripcion" placeholder="'+this.infoAsignacion[0]['Descripcion']+'" maxlength="255"  autocomplete="off" style="height: 60px; width:80%; margin-top:5%;font-family: Verdana, Geneva, Tahoma, sans-serif;"></textarea>',
                         
-                        showCloseButton: true,
+                      
                         showCancelButton: true,
                         showConfirmButton: true,
                         cancelButtonText: "CANCELAR",
