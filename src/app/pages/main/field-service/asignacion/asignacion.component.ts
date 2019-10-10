@@ -120,6 +120,7 @@ export class AsignacionComponent implements OnInit {
   ResultadosEmpresas : JSON[];
   ResultadosField : JSON[];
   ResultadosStatus: JSON[];
+
   ngOnInit() {
     document.getElementById('fechaI').addEventListener("change", (event) => {
       this.fechaMinima = (<HTMLDataElement>document.getElementById('fechaI')).value;
@@ -142,7 +143,7 @@ export class AsignacionComponent implements OnInit {
 
       this.DataRetriever.getData(env.url + '/api/clientList').then(data => {
         this.ResultadosEmpresas = data as JSON[];
-        console.log(this.ResultadosEmpresas);
+        //console.log(this.ResultadosEmpresas);
       })
 
       /*this.DataRetriever.getData(env.url + '/api/statusList').then(data => {

@@ -26,8 +26,9 @@ import { EquipoComponent } from './equipment/equipo/equipo.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment.prod';
 import { NewUserComponent } from './new-user/new-user.component';
-import { AjusteAdicionComponent } from './ajuste-adicion/ajuste-adicion.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import { AjusteAdicionComponent } from './field-service/ajuste-adicion/ajuste-adicion.component';
+import { EditAsignacionComponent } from './field-service/edit-asignacion/edit-asignacion.component';
 
   export function tokenGetter() {
     return localStorage.getItem('access_token');
@@ -42,9 +43,9 @@ import { ClienteComponent } from './cliente/cliente.component';
     SearchComponent,
     DetallesComponent,
     ConsultaContentComponent,
+    AjusteAdicionComponent,
     EquipoComponent,
     NewUserComponent,
-    AjusteAdicionComponent,
     ClienteComponent
   ],
   imports: [

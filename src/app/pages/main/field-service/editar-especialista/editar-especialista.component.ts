@@ -119,7 +119,7 @@ editarEspecialistaAppMovil(){
     var combo = <HTMLSelectElement> document.getElementById('comboTecnica');
     combo.options[this.infoEspecialista['IdTecnica']-1].selected = true;
     });
-    console.log(this.infoEspecialista);
+    //console.log(this.infoEspecialista);
   }
 
 }

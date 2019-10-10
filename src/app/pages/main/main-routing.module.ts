@@ -23,8 +23,10 @@ import { EquipoComponent } from './equipment/equipo/equipo.component';
 import { NewUserComponent} from './new-user/new-user.component';
 
 import {AuthGuardService as AuthGuard} from '../main/services/auth-services/auth-guard.service';
-import { AjusteAdicionComponent } from './ajuste-adicion/ajuste-adicion.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import { AjusteAdicionComponent } from './field-service/ajuste-adicion/ajuste-adicion.component';
+import { EditAsignacionComponent } from './field-service/edit-asignacion/edit-asignacion.component';
+
 
 const routes: Routes = [
   {
@@ -71,8 +73,10 @@ const routes: Routes = [
           {path: 'perfil', component: PerfilComponent, canActivate:[AuthGuard]},
           {path: 'estadisticas', component: EstadisticasComponent, canActivate:[AuthGuard]},
           {path: 'asignacionesEliminadas', component: AsignacionesEliminadasComponent, canActivate:[AuthGuard]},
+          {path: 'edit-asignacion/:id', component: EditAsignacionComponent, canActivate: [AuthGuard]}
         ]
       },
+      
       {
         path: 'ajustes-adiciones',
         component: AjusteAdicionComponent,
@@ -86,7 +90,8 @@ const routes: Routes = [
       {
         path: '**',
         redirectTo: 'field-service'
-      }
+      },
+      
     ]
   }
 ];

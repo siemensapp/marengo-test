@@ -1,31 +1,27 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  HttpClient
-} from '@angular/common/http';
+import {Component,OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import * as env from '../../../../../assets/js/variables';
 import Swal from 'sweetalert2';
 import 'rxjs/add/operator/map';
-import {
-  DataRetrieverService
-} from '../../services/data-retriever.service';
+import {DataRetrieverService} from '../../services/data-retriever.service';
 import * as jsPDF from 'jspdf';
-import {
-  ExcelService
-} from '../../../../shared/excel.service';
+import {ExcelService} from '../../../../shared/excel.service';
 import * as auxExcel from '../../../../../assets/js/createExcel';
 import * as pdf from '../../../../../assets/js/createReportPdf';
+import { worker } from 'cluster';
+import { Routes, RouterModule, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-cronograma',
   templateUrl: './cronograma.component.html',
   styleUrls: ['./cronograma.component.scss']
 })
+
+
 export class CronogramaComponent implements OnInit {
 
-  constructor(private httpService: HttpClient, private dataRetriever: DataRetrieverService, private excelService: ExcelService) {}
+  constructor(private httpService: HttpClient, private dataRetriever: DataRetrieverService, private excelService: ExcelService, private router: Router) {}
   private holidays = require('colombia-holidays');
   festivos = {};
   Asignaciones;
@@ -54,6 +50,7 @@ export class CronogramaComponent implements OnInit {
       })
     })
   }
+
 
   menuAsignacion(columna, fila, estiloCelda) {
     if (estiloCelda.style.backgroundColor !== "") {
@@ -107,6 +104,7 @@ export class CronogramaComponent implements OnInit {
                 this.infoAsignacion[0]['FechaInicio'].split("T")[0] + '  <i class="fas fa-long-arrow-alt-right"></i>  ' + this.infoAsignacion[0]['FechaFin'].split("T")[0] + '<br>';  
               }
               if (reportData == 'false') {
+                let idAsignacion = id;
                 Swal.fire({
                   title: 'Informacion Asignacion',
                   html: contenido,
@@ -114,157 +112,12 @@ export class CronogramaComponent implements OnInit {
                   confirmButtonColor: "green",
                   showCancelButton: true,
                   cancelButtonText: "SALIR",
+                  allowOutsideClick: false,
                   cancelButtonColor: "gray"
                 }).then((result => {
                   if(String(result.dismiss) != 'cancel'){//como el cancel button es editar, aca va lo que entra al dar clic en editar
-                    //console.log("ENTRA POR NO SER CANCEL");
-                      Swal.fire({
-                        title: 'EDITAR ASIGNACION',
-                        html: '<label for="'+this.infoAsignacion[0]['NombreContacto']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Nombre Contacto'+'</label>'+'<br>'+
-                              '<input id="nombreC" type="text"  value="'+this.infoAsignacion[0]['NombreContacto']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold; display: inline">'+'<br><br>'+
-
-                              '<label for="'+this.infoAsignacion[0]['EmailContacto']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Email Contacto'+'</label>'+'<br>'+
-                              '<input id="mail" type="text"  value="'+this.infoAsignacion[0]['EmailContacto']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold;">'+'<br><br>'+
-                              
-                              '<label for="'+this.infoAsignacion[0]['TelefonoContacto']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Telefono Contacto'+'</label>'+'<br>'+
-                              '<input id="telefono" type="text"  value="'+this.infoAsignacion[0]['TelefonoContacto']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold;">'+'<br><br>'+
-                              
-                              '<label for="'+this.infoAsignacion[0]['NombrePlanta']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Nombre Planta'+'</label>'+'<br>'+
-                              '<input id="planta" type="text"  value="'+this.infoAsignacion[0]['NombrePlanta']+'" style="height: 50%; width: 50%; font-family:courier; font-weight: bold;">'+'<br><br>'+
-
-
-
-                              '<label for="'+this.infoAsignacion[0]['NombreS']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Status Servicio'+'</label>'+'<br>'+
-                              '<select id="servicio" name="servicio" value="'+this.infoAsignacion[0]['NombreS']+'"'+'>'+
-                              '<option value="0">Seleccionar</option>'+
-                              '<option value="1">En Servicio</option>'+
-                              '<option value="2">Compensatorio</option>'+
-                              '<option value="3">Vacaciones</option>'+
-                              '<option value="4">Disponible</option>'+
-                              '<option value="5">Incapacidad</option>'+
-                              '<option value="6">Permiso</option>'+
-                              '<option value="7">Capacitacion</option>'+
-                              '<option value="8">Disponible fin de semana</option>'+
-                              '</select> <br><br>'+
-
-                              '<label for="'+this.infoAsignacion[0]['PCFSV']+'  style="font-weight: bold; font-family: courier-sans; font-size: 30%; display: inline; ">'+'Modificar Servicio'+'</label>'+'<br>'+
-                              '<select id="PCFSV" name="servicio" + value="'+this.infoAsignacion[0]['PCFSV']+'"'+'>'+
-                              '<option value="P">Preventivo Planeado</option>'+
-                              '<option value="C">Correctivo Planeado</option>'+
-                              '<option value="F">Pruebas FAT</option>'+
-                              '<option value="S">Puesta en Servicio</option>'+
-                              '<option value="V">Soporte Ventas</option>'+
-                              '<option value="E">Emergencia</option>'+
-                              '<option value="CN">Correctivo No Planeado</option>'+
-                              '<option value="O">Otro</option>'+
-                              '</select> <br><br>'+
-
-
-                              '<p style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Modificar Fechas</p>' +
-                              'Desde <input id="desde" value="'+this.infoAsignacion[0]['FechaInicio'].split("T")[0]+'" type="date" ><br><br>Hasta <input id="hasta"  value="'+this.infoAsignacion[0]['FechaFin'].split("T")[0]+'" type="date" ">'+
-
-                              '<textarea id="descripcion" placeholder="'+this.infoAsignacion[0]['Descripcion']+'" maxlength="255"  autocomplete="off" style="height: 60px; width:80%; margin-top:5%;font-family: Verdana, Geneva, Tahoma, sans-serif;"></textarea>',
-                        
-                      
-                        showCancelButton: true,
-                        showConfirmButton: true,
-                        cancelButtonText: "CANCELAR",
-                        confirmButtonText: "CONFIRMAR",
-                        confirmButtonColor: "green"
-                        
-                      }).then((result => {
-                          var infoAsignacion = data as JSON;
-                          if(String(result.dismiss) != 'cancel'){
-                                var nombreC = < HTMLInputElement > document.getElementById('nombreC');
-                                var nombreContacto = nombreC.value;
-                                var emailC = < HTMLInputElement > document.getElementById('mail');
-                                var emailContacto = emailC.value;
-                                var planta = < HTMLInputElement > document.getElementById('planta');
-                                var Planta = planta.value;
-                                var servicio = < HTMLInputElement > document.getElementById('servicio');
-                                var Servicio = servicio.value;
-                                var idsta = 4;//para poner el color del status
-
-                                if(Servicio == '0'){
-                                  idsta = this.infoAsignacion[0]['IdStatus'];
-                                  console.log("idsta",idsta);
-                                }
-
-                                if(Servicio == '1'){idsta = 1;}//en servicio
-                                else if(Servicio == '2'){idsta = 2;}//compensatorio
-                                else if(Servicio == '3'){idsta = 3;}//vacaciones
-                                else if(Servicio == '4'){idsta = 4;}//disponible
-                                else if(Servicio == '5'){idsta = 5;}//incapacidad
-                                else if(Servicio == '6'){idsta = 6;}//permiso
-                                else if(Servicio == '7'){idsta = 7;}//capacitacion
-                                else if(Servicio == '8'){idsta = 8;}//disp fin semana
-                                
-                                
-                                var pcfsv = < HTMLInputElement > document.getElementById('PCFSV');
-                                var PCFSV = pcfsv.value;
-                                var desde = < HTMLInputElement > document.getElementById('desde');
-                                var DESDE = desde.value;
-                                var hasta = < HTMLInputElement > document.getElementById('hasta');
-                                var HASTA = hasta.value;
-                                var telefono = < HTMLInputElement > document.getElementById('telefono');
-                                var Telefono = telefono.value;
-                                var descripcion = <HTMLInputElement > document.getElementById('descripcion');
-                                var Descripcion = descripcion.value;
-
-                                if(Descripcion == ""){
-                                  Descripcion = this.infoAsignacion[0]['Descripcion'];//para asegurar que se mantiene la anterior descripcion si no se hacen cambios en el
-                                }
-
-                                var datos = {
-                                  'IdEspecialista': this.infoAsignacion[0]['IdEspecialista'],
-                                  'IdStatus': idsta,
-                                  'IdAsignacion': this.infoAsignacion[0]['IdAsignacion'],
-                                  'PCFSV': PCFSV,
-                                  'IdEmpresa': this.infoAsignacion[0]['IdEmpresa'],
-                                  'NombrePlanta': Planta,
-                                  'CiudadPlanta': this.infoAsignacion[0]['CiudadPlanta'],
-                                  'StatusAsignacion': Servicio,
-                                  'TiempoInicio': this.infoAsignacion[0]['TiempoInicio'],
-                                  'TiempoFinal': this.infoAsignacion[0]['TiempoFinal'],
-                                  'FechaInicio': DESDE,
-                                  'FechaFin': HASTA,
-                                  'CoordenadasSitio': this.infoAsignacion[0]['CoordenadasSitio'],
-                                  'CoordenadasEspecialista': this.infoAsignacion[0]['CoordenadasEspecialista'],
-                                  'NombreSitio': this.infoAsignacion[0]['NombreSitio'],
-                                  'NombreContacto': nombreContacto,
-                                  'TelefonoContacto': Telefono,
-                                  'EmailContacto': emailContacto,
-                                  'Descripcion': Descripcion
-                                };
-                                
-                                var url = env.url + '/api/updateAssignment/';
-                                this.httpService.post(url, datos).toPromise().then((res) => {// envia el post al backend
-                                    if (res == "true") {
-                                      Swal.fire(
-                                        'Asignacion Editada', //si se establece la conexion, backend manda res=true, si da error manda res=false
-                                        '',
-                                        'success'
-                                      ).then(() => location.reload())
-                                      var mailUrl = env.url + '/api/sendMailEdit/';
-                                      this.httpService.post(mailUrl,datos).toPromise().then((res) => {
-                                        if(res == "true"){
-                                          console.log("Mail sent");
-                                        }else{
-                                          console.log("Error sending mail");
-                                        }
-                                      })
-                                    } else {
-                                      Swal.fire(
-                                        'Error al editar asignacion',
-                                        'No se pudo completar la accion',
-                                        'error'
-                                      )
-                                    }
-                                  })
-                              }else{
-                                //location.reload();//si le da cancelar edicion se recarga la pagina 
-                              }
-                          }))
+                    console.log("ID ASIGNACION",idAsignacion);
+                    this.router.navigateByUrl("/main/field-service/edit-asignacion/"+idAsignacion);
                   }else{
                     console.log("SALIDA POR CANCEL");
                     /*opcion else para salir por dar clic en cancel en ventana popup de editar*/
@@ -388,6 +241,8 @@ export class CronogramaComponent implements OnInit {
     }
   }
 
+
+
   setColor(option: number) {
     switch (option) {
       case 1:
@@ -415,6 +270,7 @@ export class CronogramaComponent implements OnInit {
 
   ngOnInit() {
     
+  
     //Obtener las asignaciones del mes y año de la fecha de HOY 
     var fechaH = new Date();
     var fechaHoy = fechaH.toISOString();
