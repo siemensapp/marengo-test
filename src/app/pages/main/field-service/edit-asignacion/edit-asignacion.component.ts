@@ -30,13 +30,7 @@ export class EditAsignacionComponent implements OnInit {
     return url[url.length - 1];
   }
 
-  getInfoAsignacion(idAsignacion){
-    return new Promise(resolve => {
-      this.httpService.get(env.url + '/api/getInfoAssignment/' + idAsignacion).map(result => result).subscribe(data => {
-        resolve(data);
-      })
-    })
-  }
+  
 
   getEditData(){
     var datos1 = document.forms["formulario"].elements[0].value;
@@ -50,8 +44,6 @@ export class EditAsignacionComponent implements OnInit {
     var datos9 = document.forms["formulario"].elements[8].value;
     var datos10 = document.forms["formulario"].elements[9].value;
     var datos11 = document.forms["formulario"].elements[10].value;
-
-    //console.log(datos5);
 
     var datos = {"IdEspecialista" : datos3,
                  "IdStatus" : datos4,
@@ -70,6 +62,43 @@ export class EditAsignacionComponent implements OnInit {
                 };
 
     //console.log(datos);
+    if(this.infoUbicacion == ""){
+      Swal.fire(
+        'Debe elegir una ubicación para la asignación',
+        'Indique una ubicación en el mapa',
+        'warning'
+      )  
+    }
+    else if(datos1 == "" || datos2==""){
+      Swal.fire(
+        'Debe indicar el cliente y la planta',
+        'Elija el cliente al cual se le brindará el servicio',
+        'warning'
+      )  
+    }
+    else if(datos6 == "" || datos7 == ""){
+      Swal.fire(
+        'Debe indicar las fechas de la asignación',
+        'Verifique que tanto la fecha de inicio como la fecha de fin estén especificadas',
+        'warning'
+      )  
+    }
+    else if(datos10==""){
+      Swal.fire(
+        'Información de contacto incompleta',
+        'Debe indicar por lo menos el Email del contacto',
+        'warning'
+      )  
+    }else{
+      this.httpService.post(env.url+'/api/sendMailEdit/',datos).toPromise()
+                  .then((res) => {
+                      if(res == "true"){
+                        console.log("mail sent");
+                      }else{
+                        console.log("error mailing");
+                      }
+                  });
+    }
   }
 
   sendEditData(datos){
@@ -78,11 +107,6 @@ export class EditAsignacionComponent implements OnInit {
 
 
   ngOnInit() {
-
-    this.idAsignacion = this.getIdAsignacion(this.router.url);
-    this.getInfoAsignacion(this.idAsignacion).then(data => {
-      console.log(data);
-    });
   
     document.getElementById('fechaI').addEventListener("change", (event) => {
       this.fechaMinima = (<HTMLDataElement>document.getElementById('fechaI')).value;
