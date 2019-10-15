@@ -10,11 +10,12 @@
 <div id="popup1" class="overlay">
   <div class="popup">
     <h1 id="titulo">Cronograma Asignaciones</h1>
+    <br>
     <div id="fechaEleccion">Seleccionar Mes <input type="month" id="fecha"></div>
     <div id="tablas">
       <table class="tablaEspecialistas" id="tablaEspecialistas1">
         <tr id="tituloTablaE">
-          <th>Especialista -- <br>Técnica  </th>
+          <th>________   ESPECIALISTAS ______<br>___________________________________</th>
         </tr>
         <tr *ngFor="let especialista of resultados" id={{especialista.IdEspecialista}}>
           <td style="border-top: 1px ridge lightgray; text-align: right; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 0.9em; white-space:nowrap; text-overflow: ellipsis">{{especialista.NombreE}} -- | {{especialista.NombreT}} | ---> </td>
@@ -87,7 +88,7 @@
       </div>
     </div>
     <div class="estadoBajo" style="border-color: #06AA00">
-      <div class="servicio"> Disp. Fin de semana
+      <div class="servicio"> Disp Fin de semana
         <div class="polig" style="background-color: #06AA00">
     
         </div>

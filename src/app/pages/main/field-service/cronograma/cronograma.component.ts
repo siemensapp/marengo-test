@@ -54,8 +54,23 @@ export class CronogramaComponent implements OnInit {
 
   menuAsignacion(columna, fila, estiloCelda) {
     if (estiloCelda.style.backgroundColor !== "") {
+      var idEspecialista = < HTMLTableElement > document.getElementById('tablaEspecialistas1');
+      var IdEspecialista = idEspecialista.rows[fila].id;
+      var Fecha = < HTMLInputElement > document.getElementById('fecha');
+      var fecha = Fecha.value + "-" + columna;
+      var urlData = env.url + '/api/getInfoAssignment/' + IdEspecialista + '/' + fecha;
+      this.dataRetriever.getData(urlData).then(data => {
+        this.infoAsignacion = data as JSON;
+      })
       Swal.fire({
         title: "Asignacion",
+        html: '<h5> <strong> Nombre Empresa </strong></h5>'+
+              '<h5>'+this.infoAsignacion[0]['NombreEmpresa']+'</h5>'+
+              '<h5> <strong> Nombre Planta </strong></h5>'+
+              '<h5>'+this.infoAsignacion[0]['NombrePlanta']+'</h5>'+
+              '<h5><strong> Ciudad Planta </strong> </h5>'+
+              '<h5>'+this.infoAsignacion[0]['CiudadPlanta']+'</h5>',
+              
         showCloseButton: true,
         showCancelButton: true,
         confirmButtonColor: "blue",

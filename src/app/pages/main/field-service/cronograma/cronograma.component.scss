@@ -11,8 +11,8 @@
 
 #fechaEleccion {
   text-align: center;
-  margin-left: 21%;
-  margin-bottom: 1%;
+  margin-left: 1%;
+  margin-bottom: 2%;
   font-size: 20px;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
@@ -65,8 +65,8 @@
   margin: 70px auto;
   padding: 20px;
   background: lightgray;
-  border-radius: 20px;
-  width: 30%;
+  border-radius: 5px;
+  width: 1%;
   position: relative;
   transition: all 5s ease-in-out;
 }
@@ -190,7 +190,7 @@
 
 .tablaEspecialistas {
   background-color: white;
-  border-radius: 8px;
+  border-radius: 4px;
   border-color: lightgray;
   // border: 2px inset lightgray;
   width: 25%;
@@ -212,12 +212,12 @@
 }
 
 .tablaAsignaciones {
-  margin-left: 1%;
+  margin-left: 0.5%;
   background-color: white;
   // border: 2px inset lightgray;
   border-radius: 8px;
   border-color: lightgray;
-  width: 60em;
+  width: 90%;
   height: 15%;
 }
 
@@ -249,27 +249,27 @@
 }
 
 .estado {
-  margin-left: 1%;
+  margin-left: 7%;
   margin-right: 1%;
   margin-bottom: 0.4%;
-  margin-top: 3.2%;
+  margin-top: 1.2%;
   border: 4px ridge white;
-  border-radius: 10px;
+  border-radius: 8px;
   height: 3.5em;
-  width: 15em;
+  width: 20em;
   background-color: whitesmoke;
   
 }
 
 .estadoBajo {
-  margin-left: 1%;
+  margin-left: 7%;
   margin-right: 1%;
   margin-bottom: 0.4%;
   margin-top: 0.2%;
   border: 4px ridge white;
-  border-radius: 10px;
+  border-radius: 8px;
   height: 3.5em;
-  width: 15em;
+  width: 20em;
   background-color: whitesmoke;
   
 }
@@ -339,7 +339,7 @@
   border-radius: 6px;
   padding: 5px 0;
   position: absolute;
-  font-size: 16px;
+  font-size: 14px;
   z-index: 1;
   bottom: 125%;
   left: 50%;
@@ -351,7 +351,7 @@
 .info .tooltiptext::after {
   content: "";
   position: absolute;
-  top: 100%;
+  top: 120%;
   left: 50%;
   margin-left: -5px;
   border-width: 5px;
@@ -373,11 +373,11 @@
   border-radius: 6px;
   padding: 5px 0;
   position: absolute;
-  font-size: 16px;
+  font-size: 15px;
   z-index: 1;
   bottom: 125%;
   left: 50%;
-  margin-left: -80px;
+  margin-left: -65px;
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -400,18 +400,18 @@
 
 .eliminadas .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 100px;
   background-color: whitesmoke;
   color: black;
   text-align: center;
-  border-radius: 6px;
+  border-radius: 1px;
   padding: 5px 0;
   position: absolute;
-  font-size: 16px;
+  font-size: 14px;
   z-index: 1;
-  bottom: 125%;
+  bottom: 100%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -53px;
   opacity: 0;
   transition: opacity 0.3s;
 }
