@@ -336,7 +336,7 @@ export class CronogramaComponent implements OnInit {
         for (var i = 0; i < this.resultados.length; i++) {
           tableA = document.getElementById("tablaAsignacionesID");
           fila = tableA.insertRow(i + 1);
-          fila.style.borderTop = "1px ridge lightgray";
+          fila.style.borderTop = "1px ridge gray";
           for (var j = 0; j < diasDelMes; j++) {
             celda = fila.insertCell(j);
             celda.style.height = "1.3em";
