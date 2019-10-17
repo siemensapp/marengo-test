@@ -348,28 +348,46 @@ export class CronogramaComponent implements OnInit {
           var fechaF = new Date(this.Asignaciones[i]['FechaFin'].split("T")[0].split("-")[0], this.Asignaciones[i]['FechaFin'].split("T")[0].split("-")[1],this.Asignaciones[i]['FechaFin'].split("T")[0].split("-")[2]);
           var ids = ( < HTMLTableRowElement > document.getElementById(this.Asignaciones[i]['IdEspecialista'])).rowIndex;
           x = tableA.rows[ids].cells;
+          var counterCell = (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2]));
           if (fechaI.getMonth() == fechaF.getMonth() && fechaI.getFullYear() == fechaF.getFullYear()) {
             for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
               x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
+              x[j].style.borderTop = 'solid';
+              x[j].style.borderBottom = 'solid';
             }
+            x[counterCell - 1].style.borderRight = 'solid';
+            
           } else {
             var añosDifIH = fechaI.getFullYear()-fechaH.getFullYear();
             var mesesDifIH = (fechaI.getMonth()-fechaH.getMonth())+(12*añosDifIH);
             var añosDifFH = fechaF.getFullYear()-fechaH.getFullYear();
             var mesesDifFH = (fechaF.getMonth()-fechaH.getMonth())+(12*añosDifFH);
             if (mesesDifIH<0 && mesesDifFH ==0) {
-
+              var counterCell = (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2]));
               for (var j = 0; j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
+                x[j].style.borderTop = 'solid';
+                x[j].style.borderBottom = 'solid';
               }
+              x[counterCell - 1].style.borderRight = 'solid';
+
             } else if (mesesDifFH>0 && mesesDifIH == 0) {
+              var counterCell = diasDelMes;
               for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < diasDelMes; j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
+                x[j].style.borderTop = 'solid';
+                x[j].style.borderBottom = 'solid';
               }
+              x[counterCell - 1].style.borderRight = 'solid';
+
             } else if (mesesDifIH<0 && mesesDifFH>0) {
+              var counterCell = diasDelMes;
               for (var j = 0; j < diasDelMes; j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
+                x[j].style.borderTop = 'solid';
+                x[j].style.borderBottom = 'solid';
               }
+              x[counterCell - 1].style.borderRight = 'solid';
             }
 
           }
@@ -424,7 +442,7 @@ export class CronogramaComponent implements OnInit {
           for (let i = 0; i < this.resultados.length; i++) {
             tableA = document.getElementById("tablaAsignacionesID");
             fila = tableA.insertRow(i + 1);
-            fila.style.borderTop = "1px ridge lightgray";
+            fila.style.borderTop = "1px ridge gray";
             for (var j = 0; j < diasDelMesN; j++) {
               celda = fila.insertCell(j);
               celda.style.height = "1.3em";
@@ -437,28 +455,46 @@ export class CronogramaComponent implements OnInit {
             var ids = ( < HTMLTableRowElement > document.getElementById(this.Asignaciones[i]['IdEspecialista'])).rowIndex;
             x = tableA.rows[ids].cells;
             if (fechaI.getMonth() == fechaF.getMonth() && fechaI.getFullYear() == fechaF.getFullYear()) {
+              var counterCell = (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2]));
               for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
+                x[j].style.borderTop = 'solid';
+                x[j].style.borderBottom = 'solid';
               }
+              x[counterCell - 1].style.borderRight = 'solid';
+
             } else {
               var añosDifIN = fechaI.getFullYear()-fechaNueva.getFullYear();
               var mesesDifIN = (fechaI.getMonth()-fechaNueva.getMonth())+(12*añosDifIN);
               var añosDifFN = fechaF.getFullYear()-fechaNueva.getFullYear();
               var mesesDifFN = (fechaF.getMonth()-fechaNueva.getMonth())+(12*añosDifFN);
               if (mesesDifIN<0 && mesesDifFN ==0) {
-
+                var counterCell = (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2]));
                 for (var j = 0; j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
                   x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
+                  x[j].style.borderTop = 'solid';
+                  x[j].style.borderBottom = 'solid';
                 }
+                x[counterCell - 1].style.borderRight = 'solid';
+
               } else if (mesesDifFN>0 && mesesDifIN == 0) {
+                var counterCell = diasDelMesN;
                 for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < diasDelMesN; j++) {
                   console.log(j);
                   x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
+                  x[j].style.borderTop = 'solid';
+                  x[j].style.borderBottom = 'solid';
                 }
+                x[counterCell - 1].style.borderRight = 'solid';
+
               } else if (mesesDifIN<0 && mesesDifFN>0) {
+                var counterCell = diasDelMesN;
                 for (var j = 0; j < diasDelMesN; j++) {
                   x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
+                  x[j].style.borderTop = 'solid';
+                  x[j].style.borderBottom = 'solid';
                 }
+                x[counterCell - 1].style.borderRight = 'solid';
               }
             }
 

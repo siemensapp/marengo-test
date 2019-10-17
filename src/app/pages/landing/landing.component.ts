@@ -25,18 +25,18 @@ export class LandingComponent implements OnInit{
     var user = (<HTMLInputElement>document.getElementById("user")).value;
     var password = (<HTMLInputElement>document.getElementById("password")).value;
     var data = JSON.stringify({user: user, password: password});
-    Swal.showLoading();
+    //Swal.showLoading();
     this.dataRetriever.postData( url + '/api/loginDesktop', data ).then(result => {
+      
       if(!result.hasOwnProperty('token')) Swal.fire({type: 'error', title: 'Error', text: String(result)})
       else {
-        Swal.fire({type: 'success', title: 'Exito!', text: 'Inicio de sesión exitoso.'})
-          .then(() => { 
-            console.log('Result: ', result);
-            Swal.showLoading();
-            localStorage.setItem('name', result['nombre']);
-            localStorage.setItem('authToken', result['token']);
-            this.router.navigate(['/main/field-service/workers']);            
-          });
+        Swal.fire({type: 'success', title: 'Exito!', showCancelButton: false, showConfirmButton: false,timer: 500})
+        .then(() => { 
+          console.log('Result: ', result);
+          localStorage.setItem('name', result['nombre']);
+          localStorage.setItem('authToken', result['token']);
+          this.router.navigate(['/main/field-service/workers']);            
+        });          
       }
     })
   }
