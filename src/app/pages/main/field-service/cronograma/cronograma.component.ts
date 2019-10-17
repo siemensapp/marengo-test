@@ -64,10 +64,13 @@ export class CronogramaComponent implements OnInit {
       })
       Swal.fire({
         title: "Asignacion",
-        html: '<h5> <strong> Nombre Empresa </strong></h5>'+
+        html: '<hr>'+
+              '<h5> <strong> Nombre Empresa </strong></h5>'+
               '<h5>'+this.infoAsignacion[0]['NombreEmpresa']+'</h5>'+
+              '<hr>'+
               '<h5> <strong> Nombre Planta </strong></h5>'+
               '<h5>'+this.infoAsignacion[0]['NombrePlanta']+'</h5>'+
+              '<hr>'+
               '<h5><strong> Ciudad Planta </strong> </h5>'+
               '<h5>'+this.infoAsignacion[0]['CiudadPlanta']+'</h5>',
               

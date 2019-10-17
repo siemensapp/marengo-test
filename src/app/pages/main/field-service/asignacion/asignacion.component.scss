@@ -16,6 +16,7 @@
   .styledInput {
     position: relative;
     width: 95%;    
+    border-block-color: 1px gray;
   }
   
   /* input */
@@ -228,22 +229,24 @@
   
   #nContacto {
     height: 30px;
-    width: 130%;
+    width: 100%;
     font-size: 14px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
   }
   
   #cel {
-    margin-left: 12%;
+    margin-left: 18%;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 14px;
   }
   
   #tContacto {
     height: 30px;
-    width: 110%;
+    width: 100%;
     font-size: 15px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
   }
   
   #email {

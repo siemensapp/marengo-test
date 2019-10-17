@@ -15,24 +15,30 @@
   
   .styledInput {
     position: relative;
-    width: 95%;
+    width: 108%;
+    padding-left: 7%;
+    border-top: 0.3px;
+    border-right: 0.3px;
+    border-left: 0.3px;
     
   }
   
   /* input */
   .styledInput input {
-    /* border-bottom: 1px solid #757575; */
-    border-top: none;
-    border-right: none;
-    border-left: none;
+    border-bottom: 1px solid #757575; 
+    border-top: 0.3px;
+    border-right: 0.3px;
+    border-left: 0.3px;
     font-size: 1.2rem;
+    padding-left: 7%;
   }
   
   .styledInput input:focus {
-    border-top: none;
-    border-right: none;
-    border-left: none;
+    border-top: 0.3px;
+    border-right: 0.3px;
+    border-left: 0.3px;
     border-bottom: 2px solid #0077FF;
+    padding-left: 7%;
   }
   
   .styledInput input~label {
@@ -42,6 +48,10 @@
     /* z-index: -1; */
     transition: 0.2s;
     color: #757575;
+    border-top: 0.3px;
+    border-right: 0.3px;
+    border-left: 0.3px;
+    padding-left: 5.5%;
   }
   
   .styledInput input:focus~label {
