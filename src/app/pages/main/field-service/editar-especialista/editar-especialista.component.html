@@ -80,7 +80,7 @@
           </div>
         </div>
       </div>
-      <div id="cuartaLinea">
+      <div id="CuartaLinea">
         <div id="headerEmail">
           <div class="styledInput">
             <input type="text" name="email" id="email" placeholder=" " autocomplete="off" value="{{infoEspecialista['email']}}">
@@ -88,11 +88,40 @@
           </div>
         </div>
       </div>
+    
+    <div id="CuartaLinea">
+      <div id="headerCertificadoA">
+        <div class="styledInput">
+          <input #documentInput type="file" class="form-control" id="CertificadoA" (change)="processFile1(documentInput)" name="CertificadoA" accept=".pdf" />
+          <label>Certificado de Alturas</label>
+        </div>
+      </div>
+      <div id="headerFecha">
+          <div class="styledInput">
+            <input type="date" name="Alturas" id="Alturas" placeholder="Fecha vencimiento" autocomplete="off" value="{{infoEspecialista['fechaVA'].split('T')[0]}}">
+            <label>Vencimiento Certificado Alturas</label>
+          </div>
+        </div>
     </div>
+    <div id="QuintaLinea">
+        <div id="headerCertificadoMD">
+            <div class="styledInput">
+              <input #documentInput type="file" class="form-control" id="CertificadoMD" (change)="processFile2(documentInput)" name="CertificadoMD" accept=".pdf"/>
+              <label>Certificado Manejo Defensivo</label>
+            </div>
+        </div>
+        <div id="headerCertificadoA">
+            <div class="styledInput">
+              <input type="date" name="Manejo" id="Manejo" placeholder=" " autocomplete="off" value="{{infoEspecialista['fechavm'].split('T')[0]}}">
+              <label>Vencimiento Certificado Manejo</label>
+            </div>
+          </div>
+    </div>
+  </div>
   </form>
   <div id="botones">
   <button (click)=" editarEspecialista();" id="enviar">Modificar Especialista</button><br>
   <button routerLink='/main/field-service' id="cancelar">Cancelar</button><br>
   </div>
 </div>
-<div id="resultadoImagen"></div>
+

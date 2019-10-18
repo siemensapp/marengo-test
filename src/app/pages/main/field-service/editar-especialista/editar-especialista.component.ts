@@ -32,6 +32,35 @@ export class EditarEspecialistaComponent implements OnInit {
         fileReader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
     };
   }
+
+  processFile1(documentInput: any){
+    //  debugger;
+    console.log("******************estoy adentro 1*****************");
+      var doc : File = documentInput.files[0];
+      var reader = new FileReader();
+  
+      reader.addEventListener('load',function(a:any){
+             
+        document.getElementById("resultadoCertificadoA").innerHTML = a.target.result;
+        
+     })
+     reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
+    }
+  
+    processFile2(documentInput: any){
+      //  debugger;
+      console.log("******************estoy adentro 2*****************");
+        var doc : File = documentInput.files[0];
+        var reader = new FileReader();
+    
+        reader.addEventListener('load',function(a:any){
+               
+          document.getElementById("resultadoCertificadoMD").innerHTML = a.target.result;
+          
+       })
+       reader.readAsDataURL((<HTMLInputElement>event.target).files[0]);
+      }
+
   editarEspecialista(){
     
     var datos3 = document.forms["formulario"].elements[2].value;
