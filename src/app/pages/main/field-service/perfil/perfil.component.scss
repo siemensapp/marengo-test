@@ -55,6 +55,43 @@
     display: flex;
 }
 
+.indicator{
+    width: 10%;
+    height: 30%;
+    border-radius: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 20%;
+    padding:3%
+}
+
+.circulo {
+    width: 10%;
+    height: 30%;
+    border-radius: 30%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 20%;
+    padding:3%
+}
+
+.circulo1 {
+    width: 10%;
+    height: 30%;
+    border-radius: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 40%;
+    padding:3%
+}
+
 .headers{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 14px;

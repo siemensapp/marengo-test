@@ -42,5 +42,16 @@
       </div>
       <hr class="divisor">
     </div>
+    <div id="fila3">
+      <div class="FechaCecoGidTarjetah">
+        <div class="headers"> Días para el vencimiento Cetificado Alturas </div>
+        <div class="headers"> Días para el vencimiento Cetificado Manejo </div>
+      </div>
+      <div class="FechaCecoGidTarjetav">
+        <label class="circulo" id="fechaVA" [ngStyle]="{'background-color': indicatorColor()}">{{infoEspecialista['fechaVA']}}</label>
+        <label class="circulo1" id="fechavm" [ngStyle]="{'background-color': indicatorColor1()}">{{infoEspecialista['fechavm']}}</label>
+      </div>
+      <hr class="divisor">
+  </div>
     <button routerLink='/main/field-service' id="volver">Volver</button><br>
   </div>
