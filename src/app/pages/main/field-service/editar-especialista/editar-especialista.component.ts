@@ -74,7 +74,26 @@ export class EditarEspecialistaComponent implements OnInit {
     var datos11 = document.forms["formulario"].elements[10].value;
     var datos12 = document.forms["formulario"].elements[11].value;
     var datos13 = document.forms["formulario"].elements[12].value;
-    
+    var datos14 = document.forms["formulario"].elements[14].value;
+    var datos15 = document.forms["formulario"].elements[16].value;
+
+    console.log(datos14);
+    var certificadoAl = document.getElementById("resultadoCertificadoA").innerHTML;
+    var certificadoManejo = document.getElementById("resultadoCertificadoMD").innerHTML;
+
+    if (certificadoAl != '' && certificadoAl.split(';base64,').pop() != 
+        this.infoEspecialista['CertificadoAlturas']){
+        certificadoAl = document.getElementById("resultadoCertificadoA").innerHTML;
+    }else {
+      certificadoAl = "data:application/pdf;base64,"+ this.infoEspecialista['CertificadoAlturas'];
+    }
+
+    if (certificadoManejo != '' && certificadoManejo.split(';base64,').pop() != 
+        this.infoEspecialista['CertificadoMD']){
+        certificadoManejo = document.getElementById("resultadoCertificadoMD").innerHTML;
+    }else {
+      certificadoManejo = "data:application/pdf;base64,"+ this.infoEspecialista['CertificadoManejo'];
+    }
 
     var datos = {"IdEspecialista" : datos3,
                  "NombreE" : datos4,
@@ -87,7 +106,11 @@ export class EditarEspecialistaComponent implements OnInit {
                  "LugarExpedicion" : datos11,
                  "TarjetaIngresoArgos" : datos12,
                  "email": datos13,
-                 "Foto" : this.fotoNueva
+                 "fechaVA": datos14,
+                 "fechavm": datos15,
+                 "Foto" : this.fotoNueva,
+                 "CertificadoAlturas" : certificadoAl,
+                 "CertificadoMD" : certificadoManejo
                 };
     console.log(datos);
    
