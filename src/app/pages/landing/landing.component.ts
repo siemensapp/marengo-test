@@ -30,7 +30,7 @@ export class LandingComponent implements OnInit{
       
       if(!result.hasOwnProperty('token')) Swal.fire({type: 'error', title: 'Error', text: String(result)})
       else {
-        Swal.fire({type: 'success', title: 'Exito!', showCancelButton: false, showConfirmButton: false,timer: 500})
+        Swal.fire({type: 'success', title: 'Exito!', showCancelButton: false, showConfirmButton: false,timer: 1500})
         .then(() => { 
           console.log('Result: ', result);
           localStorage.setItem('name', result['nombre']);
