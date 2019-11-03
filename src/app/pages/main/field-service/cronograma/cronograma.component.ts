@@ -296,6 +296,7 @@ export class CronogramaComponent implements OnInit {
     var diasDelMes = new Date(parseInt(fechaHoy.split("-")[0]), parseInt(fechaHoy.split("-")[1]), 0).getDate();
     this.setFecha(fechaHoyMA + "-" + "01");
     var tabla = < HTMLTableElement > document.getElementById("tablaAsignacionesID");
+
     tabla.addEventListener("click", (event: any) => {
       var columna = ( < HTMLTableDataCellElement > event.target.attributes[0].ownerElement).cellIndex + 1;
       console.log(columna);
@@ -303,6 +304,7 @@ export class CronogramaComponent implements OnInit {
       var estiloCelda = ( < HTMLTableCellElement > event.target).attributes[0].ownerElement;
       this.menuAsignacion(columna, fila, estiloCelda);
     });
+    
     var header = tabla.createTHead();
     var row = header.insertRow(0);
     var diaSemana = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'];
@@ -507,7 +509,7 @@ export class CronogramaComponent implements OnInit {
 
 
     });
-
+    
   }
 
 }
