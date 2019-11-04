@@ -30,6 +30,7 @@ export class CronogramaComponent implements OnInit {
   infoAsignacion: {};
   infoAsignacion2: {};
   infoReporte: {};
+
   daysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
   }
@@ -288,7 +289,6 @@ export class CronogramaComponent implements OnInit {
 
   ngOnInit() {
     
-  
     //Obtener las asignaciones del mes y año de la fecha de HOY 
     var fechaH = new Date();
     var fechaHoy = fechaH.toISOString();
@@ -304,17 +304,20 @@ export class CronogramaComponent implements OnInit {
       var estiloCelda = ( < HTMLTableCellElement > event.target).attributes[0].ownerElement;
       this.menuAsignacion(columna, fila, estiloCelda);
     });
-    
+
     var header = tabla.createTHead();
     var row = header.insertRow(0);
     var diaSemana = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'];
     row.style.fontSize = "1.1em";
     let auxFestivos = this.holidays.getColombiaHolidaysByYear(parseInt(fechaHoy.split("-")[0]));
+    
     for (let festivos of auxFestivos) this.festivos[festivos['holiday']] = "";
+    
     for (var i = 0; i < diasDelMes; i++) {
       var dia = diaSemana[new Date(parseInt(fechaHoy.split("-")[0]), parseInt(fechaHoy.split("-")[1])-1, i+1).getDay()];
       var cell = row.insertCell(i);
       var diaFestivo = String(fechaHoy.split("-")[0] +'-'+fechaHoy.split("-")[1]+ '-' + (i + 1 < 10 ? '0' + (i + 1): (i + 1)));
+      
       if(dia=="Do" || dia=="Sa" || this.festivos.hasOwnProperty(diaFestivo)){
         cell.style.color = 'red';
       }
@@ -347,6 +350,7 @@ export class CronogramaComponent implements OnInit {
             celda.style.height = "1.3em";
           }
         }
+
         var x;
         for (var i = 0; i < this.Asignaciones.length; i++) {
           var fechaI = new Date(this.Asignaciones[i]['FechaInicio'].split("T")[0].split("-")[0], this.Asignaciones[i]['FechaInicio'].split("T")[0].split("-")[1],this.Asignaciones[i]['FechaInicio'].split("T")[0].split("-")[2]);
@@ -354,6 +358,7 @@ export class CronogramaComponent implements OnInit {
           var ids = ( < HTMLTableRowElement > document.getElementById(this.Asignaciones[i]['IdEspecialista'])).rowIndex;
           x = tableA.rows[ids].cells;
           var counterCell = (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2]));
+          
           if (fechaI.getMonth() == fechaF.getMonth() && fechaI.getFullYear() == fechaF.getFullYear()) {
             for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
               x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
@@ -367,6 +372,7 @@ export class CronogramaComponent implements OnInit {
             var mesesDifIH = (fechaI.getMonth()-fechaH.getMonth())+(12*añosDifIH);
             var añosDifFH = fechaF.getFullYear()-fechaH.getFullYear();
             var mesesDifFH = (fechaF.getMonth()-fechaH.getMonth())+(12*añosDifFH);
+            
             if (mesesDifIH<0 && mesesDifFH ==0) {
               var counterCell = (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2]));
               for (var j = 0; j < (parseInt((this.Asignaciones[i]['FechaFin'].split("T")[0]).split("-")[2])); j++) {
@@ -378,6 +384,7 @@ export class CronogramaComponent implements OnInit {
 
             } else if (mesesDifFH>0 && mesesDifIH == 0) {
               var counterCell = diasDelMes;
+              
               for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < diasDelMes; j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
                 x[j].style.borderTop = 'solid';
@@ -387,6 +394,7 @@ export class CronogramaComponent implements OnInit {
 
             } else if (mesesDifIH<0 && mesesDifFH>0) {
               var counterCell = diasDelMes;
+              
               for (var j = 0; j < diasDelMes; j++) {
                 x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
                 x[j].style.borderTop = 'solid';
@@ -414,14 +422,18 @@ export class CronogramaComponent implements OnInit {
       var row = header.insertRow(0);
       var diaSemana = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'];
       row.style.fontSize = "1.1em";
+      
       for (let festivos of auxFestivos) this.festivos[festivos['holiday']] = "";
+      
       for (var i = 0; i < diasDelMesN; i++) {
         var dia = diaSemana[new Date(parseInt(fecha.split("-")[0]), parseInt(fecha.split("-")[1])-1, i+1).getDay()];
         var cell = row.insertCell(i);
         var diaFestivo = String(fecha.split("-")[0] +'-'+fecha.split("-")[1]+ '-' + (i + 1 < 10 ? '0' + (i + 1): (i + 1)));
+        
         if(dia=="Do" || dia=="Sa" || this.festivos.hasOwnProperty(diaFestivo)){
           cell.style.color = 'red';
         }
+        
         if (i < 9) {
           cell.innerHTML = dia +"<br><b>" + "0" + (i + 1) + "</b>";
         } else {
@@ -453,6 +465,7 @@ export class CronogramaComponent implements OnInit {
               celda.style.height = "1.3em";
               }
           }
+
           var x;
           for (let i = 0; i < this.Asignaciones.length; i++) {
             var fechaI = new Date(this.Asignaciones[i]['FechaInicio'].split("T")[0].split("-")[0], this.Asignaciones[i]['FechaInicio'].split("T")[0].split("-")[1],this.Asignaciones[i]['FechaInicio'].split("T")[0].split("-")[2]);
