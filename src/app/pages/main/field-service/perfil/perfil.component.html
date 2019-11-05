@@ -6,13 +6,13 @@
       <hr class="divisor">
       <div class="IdCelularCedulaLugarh">
         <div class="headers"> ID Especialista </div>
-        <div class="headers"> Celular </div>
+        
         <div class="headers"> Cedula C. </div>
         <div class="headers"> Lugar Exp. C.C. </div>
       </div>
       <div class="IdCelularCedulaLugarv">
         <label class="campos">{{infoEspecialista['id']}}</label>
-        <label class="campos">{{infoEspecialista['Celular']}}</label>
+        
         <label class="campos">{{infoEspecialista['CedulaCiudadania']}}</label>
         <label class="campos">{{infoEspecialista['LugarExpedicion']}}</label>
       </div>
@@ -21,13 +21,13 @@
     <div id="fila2">
       <div class="FechaCecoGidTarjetah">
         <div class="headers"> Fecha Nacimiento </div>
-        <div class="headers"> CeCo </div>
+        
         <div class="headers"> GID </div>
         <div class="headers"> Tarjeta Ing. Argos </div>
       </div>
       <div class="FechaCecoGidTarjetav">
         <label class="campos" id="fecha"> {{infoEspecialista['FechaNacimiento']}} </label>
-        <label class="campos"> {{infoEspecialista['CeCo']}} </label>
+        
         <label class="campos"> {{infoEspecialista['GID']}} </label>
         <label class="campos"> {{infoEspecialista['TarjetaIngresoArgos']}} </label>
       </div>
@@ -36,22 +36,38 @@
     <div id="fila2">
       <div class="FechaCecoGidTarjetah">
         <div class="headers"> EMAIL </div>
+        <div class="headers"> Celular </div>
+        <div class="headers"> CeCo </div>
       </div>
       <div class="FechaCecoGidTarjetav">
         <label class="campos" id="fecha"> {{infoEspecialista['email']}} </label>
+        <label class="campos" id="fecha">{{infoEspecialista['Celular']}}</label>
+        <label class="campos"> {{infoEspecialista['CeCo']}} </label>
       </div>
       <hr class="divisor">
     </div>
     <div id="fila3">
       <div class="FechaCecoGidTarjetah">
         <div class="headers"> Días para el vencimiento Cetificado Alturas </div>
-        <div class="headers"> Días para el vencimiento Cetificado Manejo </div>
+        
       </div>
       <div class="FechaCecoGidTarjetav">
-        <label class="circulo" id="fechaVA" [ngStyle]="{'background-color': indicatorColor()}">{{infoEspecialista['fechaVA']}}</label>
-        <label class="circulo1" id="fechavm" [ngStyle]="{'background-color': indicatorColor1()}">{{infoEspecialista['fechavm']}}</label>
+        <label class="circuloAlturas" id="fechaVA" [ngStyle]="{'background-color': indicatorColor()}">{{infoEspecialista['fechaVA']}}</label>
+        
       </div>
       <hr class="divisor">
   </div>
+  <div id="fila4">
+    <div class="FechaCecoGidTarjetah">
+      
+      <div class="headers"> Días para el vencimiento Cetificado Manejo </div>
+    </div>
+    <div class="FechaCecoGidTarjetav">
+      
+      <label class="circuloManejo" id="fechavm" [ngStyle]="{'background-color': indicatorColor1()}">{{infoEspecialista['fechavm']}}</label>
+    </div>
+    <hr class="divisor">
+  </div>
+  
     <button routerLink='/main/field-service' id="volver">Volver</button><br>
   </div>

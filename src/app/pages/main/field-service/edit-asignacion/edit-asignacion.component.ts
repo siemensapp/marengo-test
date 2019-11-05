@@ -44,8 +44,23 @@ export class EditAsignacionComponent implements OnInit {
     var datos9 = document.forms["formulario"].elements[8].value;
     var datos10 = document.forms["formulario"].elements[9].value;
     var datos11 = document.forms["formulario"].elements[10].value;
+    var IdEmpresa = this.asignacionData[0]['IdEmpresa'];
+    var IdAsignacion = this.idAsignacion;
+    var StatusAsignacion;
+    var sameEspecialista;
+    
+    
+    if(this.asignacionData[0]['IdEspecialista'] == datos3){
+      StatusAsignacion = this.asignacionData[0]['StatusAsignacion'];
+      sameEspecialista = true;
+    }else{
+      StatusAsignacion = 0;
+    }
 
     var datos = {"IdEspecialista" : datos3,
+                 "StatusAsignacion": StatusAsignacion,
+                 "IdAsignacion" : IdAsignacion,
+                 "IdEmpresa" : IdEmpresa,
                  "IdStatus" : datos4,
                  "NombreCliente" : datos1,
                  "NombrePlanta" : datos2, 
@@ -59,9 +74,10 @@ export class EditAsignacionComponent implements OnInit {
                  "TelefonoContacto" : datos9,
                  "EmailContacto" : datos10,
                  "Descripcion" : datos11,
+                 "sameEspecialista" : sameEspecialista
                 };
 
-    //console.log(datos);
+    console.log(datos);
     if(this.infoUbicacion == ""){
       Swal.fire(
         'Debe elegir una ubicación para la asignación',
@@ -90,6 +106,32 @@ export class EditAsignacionComponent implements OnInit {
         'warning'
       )  
     }else{
+      this.httpService.post(env.url+'/api/updateAssignment/',datos).toPromise()
+                  .then((res) => {
+                      if(res == "true"){
+                        //console.log("updated assignment");
+                        Swal.fire(
+                          'Asignacion Editada',
+                          this.infoUbicacion.split(",")[2]+" - "+datos1,
+                          'success'
+                          )
+                          this.router.navigate(['/main/field-service']);
+                      }else if(res == "existe"){
+                        Swal.fire(
+                          'Ya existe una asignacion en esa fecha',
+                          "POR FAVOR, VERIFIQUE EN EL CRONOGRAMA",
+                          'error'
+                          )
+                      }
+                    else{
+                        //console.log("error updating");
+                        Swal.fire(
+                          'Error al editar asignacion',
+                          this.infoUbicacion.split(",")[2],
+                          'error'
+                          )
+                      }
+                  });
       this.httpService.post(env.url+'/api/sendMailEdit/',datos).toPromise()
                   .then((res) => {
                       if(res == "true"){
@@ -101,9 +143,6 @@ export class EditAsignacionComponent implements OnInit {
     }
   }
 
-  sendEditData(datos){
-
-  }
 
 
   ngOnInit() {
@@ -133,6 +172,8 @@ export class EditAsignacionComponent implements OnInit {
       this.DataRetriever.getData(env.url + '/api/getInfoAssignment/' + this.getIdAsignacion(this.router.url)).then(data => {
         this.asignacionData = data as JSON;
       })
+
+      this.idAsignacion = this.getIdAsignacion(this.router.url);
   }
 
 }

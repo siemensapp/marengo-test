@@ -31,7 +31,7 @@
   border-top: none;
   border-right: none;
   border-left: none;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
 .styledInput input:focus {
@@ -53,12 +53,12 @@
 .styledInput input:focus~label {
   color: #0077FF;
   transform: translateY(-30px);
-  font-size: 0.9rem;
+  font-size: 1.5rem;
 }
 
 .styledInput input:not(:placeholder-shown)~label {
   transform: translateY(-30px);
-  font-size: 0.9rem;
+  font-size: 1.5rem;
   
 }
 
@@ -85,12 +85,12 @@
 .styledInput textarea:focus~label {
   color: #0077FF;
   transform: translateY(-15px);
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .styledInput textarea:not(:placeholder-shown)~label {
   transform: translateY(-30px);
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 #titulo {
@@ -280,8 +280,10 @@
 
 #emailLinea {
   display: flex;
-  margin-top: 7%;
+  margin-top: 8%;
 }
+
+
 
 #QuintaLinea {
   display: flex;
@@ -295,6 +297,19 @@
   padding-bottom: 3%;
 }
 
+#SeptimaLinea {
+  display: flex;
+  margin-top: 8%;
+  padding-top: 2.5%;
+  padding-bottom: 3%;
+}
+
+#OctavaLinea {
+  display: flex;
+  margin-top: 8%;
+  padding-top: 2.5%;
+  padding-bottom: 3%;
+}
 
 #headerLugarE {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -420,7 +435,7 @@
   display: flex;
   margin-right: 10%;
   margin-left: 5%;
-  padding-top: 4%;
+  padding-top: 60%;
 }
 
 #enviar {
