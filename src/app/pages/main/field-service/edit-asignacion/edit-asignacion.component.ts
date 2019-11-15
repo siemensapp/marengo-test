@@ -47,10 +47,12 @@ export class EditAsignacionComponent implements OnInit {
     var IdEmpresa = this.asignacionData[0]['IdEmpresa'];
     var IdAsignacion = this.idAsignacion;
     var StatusAsignacion;
-    console.log(IdAsignacion);
-
+    var sameEspecialista;
+    
+    
     if(this.asignacionData[0]['IdEspecialista'] == datos3){
       StatusAsignacion = this.asignacionData[0]['StatusAsignacion'];
+      sameEspecialista = true;
     }else{
       StatusAsignacion = 0;
     }
@@ -71,7 +73,8 @@ export class EditAsignacionComponent implements OnInit {
                  "NombreContacto" : datos8,
                  "TelefonoContacto" : datos9,
                  "EmailContacto" : datos10,
-                 "Descripcion" : datos11
+                 "Descripcion" : datos11,
+                 "sameEspecialista" : sameEspecialista
                 };
 
     console.log(datos);
@@ -109,11 +112,18 @@ export class EditAsignacionComponent implements OnInit {
                         //console.log("updated assignment");
                         Swal.fire(
                           'Asignacion Editada',
-                          this.infoUbicacion.split(",")[2],
+                          this.infoUbicacion.split(",")[2]+" - "+datos1,
                           'success'
                           )
                           this.router.navigate(['/main/field-service']);
-                      }else{
+                      }else if(res == "existe"){
+                        Swal.fire(
+                          'Ya existe una asignacion en esa fecha',
+                          "POR FAVOR, VERIFIQUE EN EL CRONOGRAMA",
+                          'error'
+                          )
+                      }
+                    else{
                         //console.log("error updating");
                         Swal.fire(
                           'Error al editar asignacion',
