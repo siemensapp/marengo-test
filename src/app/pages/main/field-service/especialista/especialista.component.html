@@ -37,6 +37,7 @@
         <option value=5>Motores</option>
       </select>
     </div>
+    <br>
     <div id="demasDatos">
       <div id="primeraLinea">
         <div id="headerFecha">
@@ -51,7 +52,7 @@
           </div>
         </div>
       </div>
-
+      <br>
       <div id="segundaLinea">
         <div id=headerGID>
           <div class="styledInput">
@@ -66,6 +67,7 @@
           </div>
         </div>
       </div>
+      <br>
       <div id="terceraLinea">
         <div id="headerLugarE">
           <div class="styledInput">
@@ -80,6 +82,8 @@
           </div>
         </div>
       </div>
+      <br>
+  
       <div id="emailLinea">
         <div id="headerEmail">
           <div class="styledInput">
@@ -89,6 +93,7 @@
         </div>
       </div>
       <hr>
+      
       <div id="CuartaLinea">
         <div id="headerCertificadoA">
           <div class="styledInput">
@@ -103,6 +108,7 @@
             </div>
           </div>
       </div>
+      <br>
       <div id="QuintaLinea">
           <div id="headerCertificadoMD">
               <div class="styledInput">
@@ -117,6 +123,7 @@
               </div>
             </div>
       </div>
+      <br>
       <div id="SextaLinea">
         <div id="headerProfesional">
           <div class="styledInput">
@@ -124,12 +131,18 @@
             <label id="labelCertificado">Tarjeta Profesional</label>
           </div>
         </div>
+      </div>
+      <br>
+      <div id = "SeptimaLinea">
         <div id="headerVacunas">
             <div class="styledInput">
               <input #documentInput type="file" class="form-control" id="Vacunas" (change)="processFile3(documentInput)" name="Vacunas" accept=".pdf"/>
               <label id="labelCertificado">Carné vacunas</label>
             </div>
           </div>
+      </div>
+      <br>
+      <div id=OctavaLinea>
           <div id="headerConte">
             <div class="styledInput">
               <input #documentInput type="file" class="form-control" id="Conte" (change)="processFile5(documentInput)" name="Conte" accept=".pdf"/>

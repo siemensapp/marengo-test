@@ -79,20 +79,15 @@ export class EditAsignacionComponent implements OnInit {
 
     console.log(datos);
     if(this.infoUbicacion == ""){
-      Swal.fire(
-        'Debe elegir una ubicación para la asignación',
-        'Indique una ubicación en el mapa',
-        'warning'
-      )  
+      datos["CiudadPlanta"] = this.asignacionData[0]["CoordenadasSitio"];
     }
-    else if(datos1 == "" || datos2==""){
-      Swal.fire(
-        'Debe indicar el cliente y la planta',
-        'Elija el cliente al cual se le brindará el servicio',
-        'warning'
-      )  
+
+    if(datos1==""){
+      datos["NombreCliente"] = this.asignacionData[0]["NombreCliente"];
     }
-    else if(datos6 == "" || datos7 == ""){
+    console.log(datos);
+
+    if(datos6 == "" || datos7 == ""){
       Swal.fire(
         'Debe indicar las fechas de la asignación',
         'Verifique que tanto la fecha de inicio como la fecha de fin estén especificadas',
