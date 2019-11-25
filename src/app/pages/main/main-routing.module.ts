@@ -26,6 +26,7 @@ import {AuthGuardService as AuthGuard} from '../main/services/auth-services/auth
 import { ClienteComponent } from './cliente/cliente.component';
 import { AjusteAdicionComponent } from './field-service/ajuste-adicion/ajuste-adicion.component';
 import { EditAsignacionComponent } from './field-service/edit-asignacion/edit-asignacion.component';
+import { NuevoPMComponent } from './field-service/nuevo-pm/nuevo-pm.component';
 
 
 const routes: Routes = [
@@ -84,7 +85,8 @@ const routes: Routes = [
           {path: '',pathMatch: 'full', redirectTo: 'modificarTarifas'},
           {path: 'modificarTarifa', component: TarifasComponent, canActivate:[AuthGuard] },
           {path: 'nuevoUsuario', component: NewUserComponent, canActivate:[AuthGuard]},
-          {path: 'cliente', component: ClienteComponent, canActivate:[AuthGuard]}
+          {path: 'cliente', component: ClienteComponent, canActivate:[AuthGuard]},
+          {path: 'newPM', component: NuevoPMComponent, canActivate:[AuthGuard]}
         ]
       },
       {

@@ -62,7 +62,7 @@ export class SearchComponent implements OnInit {
     this.resultados.next(null);
     this.loading = true;
     this.firstSearch.next(false);
-    console.log(event);
+    //console.log(event);
     var params = {tipo: "", nombre: "", mlfb: "", serial: ""};
     for(let x of event['criteria']) { 
       if( x['name'] == 'equipment-type' ) params['tipo'] = String(this.translateTipoEquipoNumero(x['value']));
@@ -73,7 +73,7 @@ export class SearchComponent implements OnInit {
     this.dataRetriever.postData(env.url + '/api/getEquipmentsBy/', JSON.stringify(params)).then( data => {
       this.loading = false;
       this.resultados.next(data);
-      console.log(this.resultados)      
+      //console.log(this.resultados)      
     } );
   }
 

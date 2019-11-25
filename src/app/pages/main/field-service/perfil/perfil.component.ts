@@ -14,14 +14,14 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit() {
     this.DataRetriever.infoEspecialista.subscribe(infoEspecialista => this.infoEspecialista = infoEspecialista);
-    console.log("*****************");
-    console.log(this.infoEspecialista['id']);
-    console.log(this.infoEspecialista['email']);
+    //console.log("*****************");
+    //console.log(this.infoEspecialista['id']);
+    //console.log(this.infoEspecialista['email']);
     document.getElementById('fecha').innerHTML=this.infoEspecialista['FechaNacimiento'].split("T")[0];
-    console.log(this.infoEspecialista);
+    //console.log(this.infoEspecialista);
     var today = new Date().toISOString();
     var fechaHoy = today.split("T")[0]; 
-    console.log(fechaHoy);
+    //console.log(fechaHoy);
     var fechaVA= this.infoEspecialista['fechaVA'].split("T")[0];
     var fechavm= this.infoEspecialista['fechavm'].split("T")[0];
     var fechaVA1= new Date(fechaVA).getTime();

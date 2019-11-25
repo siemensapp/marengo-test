@@ -38,7 +38,7 @@ export class DetallesComponent implements OnInit {
   }
 
   showReport( jsonReport ) {
-    console.log(jsonReport);
+    //console.log(jsonReport);
     pdf.createPDF(jsonReport);
   }
 
@@ -56,7 +56,7 @@ export class DetallesComponent implements OnInit {
     this.dataRetriever.getData(env.url + '/api/getEquipmentBySerial/' + this.searchTerm).then( results => {
       this.cv = results[0];
       this.cv['AnnosOperacion'] = this.cv['AñosOperacion'];
-      console.log(this.cv);
+      //console.log(this.cv);
     });
   }
 

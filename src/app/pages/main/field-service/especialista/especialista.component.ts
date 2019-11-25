@@ -200,8 +200,8 @@ export class EspecialistaComponent implements OnInit {
       }else{
     this.httpService.post(env.url + '/api/createWorker', datos).toPromise()
                 .then((res) => {
-                  console.log(datos);
-                  console.log(res);
+                  //console.log(datos);
+                  //console.log(res);
                   if(res == "true"){
                       Swal.fire(
                        'Especialista Agregado',

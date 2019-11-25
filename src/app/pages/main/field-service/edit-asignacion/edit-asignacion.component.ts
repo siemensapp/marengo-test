@@ -77,7 +77,7 @@ export class EditAsignacionComponent implements OnInit {
                  "sameEspecialista" : sameEspecialista
                 };
 
-    console.log(datos);
+    //console.log(datos);
     if(this.infoUbicacion == ""){
       datos["CiudadPlanta"] = this.asignacionData[0]["CoordenadasSitio"];
     }
@@ -85,7 +85,7 @@ export class EditAsignacionComponent implements OnInit {
     if(datos1==""){
       datos["NombreCliente"] = this.asignacionData[0]["NombreCliente"];
     }
-    console.log(datos);
+    //console.log(datos);
 
     if(datos6 == "" || datos7 == ""){
       Swal.fire(
@@ -130,9 +130,9 @@ export class EditAsignacionComponent implements OnInit {
       this.httpService.post(env.url+'/api/sendMailEdit/',datos).toPromise()
                   .then((res) => {
                       if(res == "true"){
-                        console.log("mail sent");
+                        //console.log("mail sent");
                       }else{
-                        console.log("error mailing");
+                        //console.log("error mailing");
                       }
                   });
     }
@@ -149,7 +149,7 @@ export class EditAsignacionComponent implements OnInit {
     this.DataRetriever.finalCoords.subscribe(finalCoords => {this.finalCoords = finalCoords
       var nombreS = document.getElementById('ubicacion').textContent;
       if(nombreS == ''){
-        console.log(nombreS);
+        //console.log(nombreS);
         document.getElementById('ubicacion').textContent = '*Buscar Ubicacion en el Mapa*';
       }
       else

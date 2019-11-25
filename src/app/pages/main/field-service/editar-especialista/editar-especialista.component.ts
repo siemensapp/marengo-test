@@ -35,7 +35,7 @@ export class EditarEspecialistaComponent implements OnInit {
 
   processFile1(documentInput: any){
     //  debugger;
-    console.log("******************estoy adentro 1*****************");
+    //console.log("******************estoy adentro 1*****************");
       var doc : File = documentInput.files[0];
       var reader = new FileReader();
   
@@ -49,7 +49,7 @@ export class EditarEspecialistaComponent implements OnInit {
   
     processFile2(documentInput: any){
       //  debugger;
-      console.log("******************estoy adentro 2*****************");
+      //console.log("******************estoy adentro 2*****************");
         var doc : File = documentInput.files[0];
         var reader = new FileReader();
     
@@ -77,7 +77,7 @@ export class EditarEspecialistaComponent implements OnInit {
     var datos14 = document.forms["formulario"].elements[14].value;
     var datos15 = document.forms["formulario"].elements[16].value;
 
-    console.log(datos14);
+    //console.log(datos14);
     var certificadoAl = document.getElementById("resultadoCertificadoA").innerHTML;
     var certificadoManejo = document.getElementById("resultadoCertificadoMD").innerHTML;
 
@@ -112,7 +112,7 @@ export class EditarEspecialistaComponent implements OnInit {
                  "CertificadoAlturas" : certificadoAl,
                  "CertificadoMD" : certificadoManejo
                 };
-    console.log(datos);
+    //console.log(datos);
    
      this.httpService.post(env.url + '/api/editWorker', datos).toPromise()
                  .then((res) => {
@@ -142,7 +142,7 @@ editarEspecialistaAppMovil(){
   var datos = {"CedulaCiudadania": cedula};
     this.httpService.post(env.url + '/api/editUserApp/' + IdEspecialista, datos).toPromise()
     .then((res) => {
-      console.log(res);
+      //console.log(res);
       
   if(res == "true"){
       Swal.fire(

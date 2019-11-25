@@ -29,7 +29,7 @@ editarTarifas(){
       "CostoServicio": datos2,
       "CostoViaje": datos3
   };
-  console.log(datos);
+  //console.log(datos);
 
   if(datos1 == ""){
     Swal.fire(
@@ -46,7 +46,7 @@ editarTarifas(){
   }else{
     this.httpService.post(env.url+'/api/editTarifas', datos).toPromise()
                   .then((res) => {
-                    console.log(res);
+                    //console.log(res);
                     if(res == "true"){
                       Swal.fire(
                       'Tarifa editada',

@@ -32,6 +32,16 @@
       </select>
     </div>
     <div class="headerCombo">
+      Seleccionar Project Manager
+    </div>
+    <div class="espacioCombo">
+      <select class="combo">
+        <option *ngFor="let resultado of ResultadosPM" value={{resultado.NombrePM}}>{{resultado.NombrePM}}
+        </option>
+      </select>
+    </div>
+    
+    <div class="headerCombo">
       Seleccionar Status
     </div>
     <div class="espacioCombo">

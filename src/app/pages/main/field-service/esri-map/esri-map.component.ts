@@ -88,8 +88,8 @@ export class EsriMapComponent implements OnInit {
 
 
   preparePoints(data) {
-    console.log("*********DATA");
-    console.log(data);
+    //console.log("*********DATA");
+    //console.log(data);
     let points = [];
     for (let x of data) {
       // Extract data
@@ -179,7 +179,7 @@ export class EsriMapComponent implements OnInit {
       let points = await this.prepareWorkers("");
       for (let x of points) {
         if(x.pointMap.longitude !== ""){
-        console.log(x);
+        //console.log(x);
         view.graphics.add(
           new Graphic({
             geometry: x.pointMap,
@@ -220,7 +220,7 @@ export class EsriMapComponent implements OnInit {
       return view;
 
     } catch (error) {
-      console.log('EsriLoader: ', error);
+      //console.log('EsriLoader: ', error);
     }
 
   }

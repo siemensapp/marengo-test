@@ -24,7 +24,7 @@ export class AsignacionesEliminadasComponent implements OnInit {
       if(texto == ''){
         texto = "'null'";
       }
-      console.log(fecha, texto);
+      //console.log(fecha, texto);
       this.dataRetriever.getData(env.url+'/api/getDeletedAssignments/'+fecha+'/'+texto).then(data => {
         this.resultados = data as JSON[];
         })  

@@ -44,7 +44,7 @@ export class ObjectViewComponent {
   }
 
   treeItemClicked(event: TreeItem) {
-    console.log('Clicked on tree item ' + event.label);
+    //console.log('Clicked on tree item ' + event.label);
   }
 
   loadChildren(event: LoadChildrenEventArgs) {

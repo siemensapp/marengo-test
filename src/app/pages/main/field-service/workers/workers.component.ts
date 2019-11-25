@@ -45,13 +45,13 @@ export class WorkersComponent implements OnInit {
 
     this.dataRetriever.getEspecialista(resultado);
     
-    console.log(resultado);
+    //console.log(resultado);
   }
 
   
   borrar(IdEspecialista: number, NombreE: string){
     
-    console.log(IdEspecialista);
+    //console.log(IdEspecialista);
     
     Swal.fire({
       type: "warning",
@@ -67,7 +67,7 @@ export class WorkersComponent implements OnInit {
         if(result.value){
           var url= env.url+'/api/deleteWorker/'+NombreE; //elimina el especialista por medio del nombre y no por el id como esta en el back
           this.dataRetriever.borrarEspecialista(url).then((respuesta) => {
-            console.log(respuesta);
+            //console.log(respuesta);
             if(respuesta == "true"){
                 Swal.fire(
                   'Especialista borrado',
@@ -132,16 +132,16 @@ export class WorkersComponent implements OnInit {
   cadena3 : string;
   ngOnInit() {
     this.notificationsCheck();
-    console.log(this);
+    //console.log(this);
      var today = new Date().toISOString();
      var fechaHoy = today.split("T")[0]; 
-     console.log(fechaHoy);    
+     //console.log(fechaHoy);    
      document.getElementById('pickDate').setAttribute("value", fechaHoy);
      this.verCambioFecha();
      this.httpService.get(env.url + '/api/workersList/'+fechaHoy).subscribe(
       data => {
         this.Resultados = data as JSON[];
-        console.log(this.Resultados);
+        //console.log(this.Resultados);
         var longitud = Object.keys(this.Resultados).length;
         var i;
         var j=0,k=0;
@@ -185,8 +185,8 @@ export class WorkersComponent implements OnInit {
         }
         
         if (j>0||k>0){
-          console.log(j);
-          console.log(k);
+          //console.log(j);
+          //console.log(k);
           var todos; // = "["+this.cadena1+","+this.cadena3+"]";
           if (j>0){
             todos = "["+this.cadena1+"]";
@@ -200,19 +200,19 @@ export class WorkersComponent implements OnInit {
           }
     
        this.trabajadoresCer = JSON.parse(todos);
-       console.log(this.trabajadoresCer);
+       //console.log(this.trabajadoresCer);
        this.httpService.post(env.url + '/api/sendMailCertification', this.trabajadoresCer).toPromise()
                  .then((res) => {
-                   console.log(res);
+                   //console.log(res);
                    
                 if(res == "true"){
-                    console.log("Datos enviados");
+                    //console.log("Datos enviados");
                 }
                 else{
-                  console.log("No se environ los datos");
+                  //console.log("No se environ los datos");
                 }
                  });}else{
-                   console.log("Lista vacia")
+                   //console.log("Lista vacia")
                  }
       }
     )

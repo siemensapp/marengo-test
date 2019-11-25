@@ -51,7 +51,7 @@ export class NewUserComponent implements OnInit {
        )
     }
 
-    console.log(datos);
+    //console.log(datos);
     if(Nombre != "" && Email != "@siemens.com" && Pass != ""){
       this.httpService.post(env.url + '/api/registerDesktop', datos).toPromise()
                 .then((res) => {

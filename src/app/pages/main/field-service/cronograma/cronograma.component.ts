@@ -47,7 +47,7 @@ export class CronogramaComponent implements OnInit {
     return new Promise(resolve => {
       this.httpService.get(env.url + '/api/getAssignments/' + fecha).map(result => result).subscribe(data => {
         resolve(data);
-        console.log(data);
+        //console.log(data);
       })
     })
   }
@@ -135,10 +135,10 @@ export class CronogramaComponent implements OnInit {
                   cancelButtonColor: "gray"
                 }).then((result => {
                   if(String(result.dismiss) != 'cancel'){//como el cancel button es editar, aca va lo que entra al dar clic en editar
-                    console.log("ID ASIGNACION",idAsignacion);
+                    //console.log("ID ASIGNACION",idAsignacion);
                     this.router.navigateByUrl("/main/field-service/edit-asignacion/"+idAsignacion);
                   }else{
-                    console.log("SALIDA POR CANCEL");
+                    //console.log("SALIDA POR CANCEL");
                     /*opcion else para salir por dar clic en cancel en ventana popup de editar*/
                   }
                 }))
@@ -174,8 +174,8 @@ export class CronogramaComponent implements OnInit {
           var fecha = Fecha.value + "-" + columna;
           this.dataRetriever.getData(env.url + '/api/getInfoAssignment/' + IdEspecialista + '/' + fecha).then(data => {
             this.infoAsignacion2 = data as JSON;
-            console.log("LO QUE DA INFO2:", this.infoAsignacion2);
-            console.log(this.infoAsignacion2);
+            //console.log("LO QUE DA INFO2:", this.infoAsignacion2);
+            //console.log(this.infoAsignacion2);
             Swal.fire({
               type: "warning",
               title: "Seguro desea borrar esta asignacion?",
@@ -228,7 +228,7 @@ export class CronogramaComponent implements OnInit {
                 //console.log("NOMBRE CLIENTE",datos);
                 this.httpService.post(url, datos).toPromise()
                   .then((res) => {
-                    console.log(res);
+                    //console.log(res);
                     if (res == "true") {
                       Swal.fire(
                         'Asignacion Borrada',
@@ -237,9 +237,9 @@ export class CronogramaComponent implements OnInit {
                       ).then(() => location.reload())
                       this.httpService.post(urlMailDel, datos).toPromise().then((res) => {
                         if(res == "true"){
-                          console.log("delete mail sent");
+                          //console.log("delete mail sent");
                         }else{
-                          console.log("erro sending delete mail");
+                          //console.log("erro sending delete mail");
                         }
                       })
                     } else {
@@ -256,7 +256,7 @@ export class CronogramaComponent implements OnInit {
         }
       });
     } else {
-      console.log("No existe ninguna asignacion en esta fecha");
+      //console.log("No existe ninguna asignacion en esta fecha");
     }
   }
 
@@ -299,7 +299,7 @@ export class CronogramaComponent implements OnInit {
 
     tabla.addEventListener("click", (event: any) => {
       var columna = ( < HTMLTableDataCellElement > event.target.attributes[0].ownerElement).cellIndex + 1;
-      console.log(columna);
+      //console.log(columna);
       var fila = ( < HTMLTableRowElement > event.target.attributes[0].ownerElement.parentNode).rowIndex;
       var estiloCelda = ( < HTMLTableCellElement > event.target).attributes[0].ownerElement;
       this.menuAsignacion(columna, fila, estiloCelda);
@@ -414,7 +414,7 @@ export class CronogramaComponent implements OnInit {
     document.getElementById('fecha').addEventListener("change", (event) => {
       var fecha = ( < HTMLInputElement > event.target).value;
       var diasDelMesN = new Date(parseInt(fecha.split("-")[0]), parseInt(fecha.split("-")[1]), 0).getDate();
-      console.log(diasDelMesN);
+      //console.log(diasDelMesN);
       this.setFecha(fecha + "-" + "01");
       var tabla = < HTMLTableElement > document.getElementById("tablaAsignacionesID");
       tabla.deleteRow(0);
@@ -498,7 +498,7 @@ export class CronogramaComponent implements OnInit {
               } else if (mesesDifFN>0 && mesesDifIN == 0) {
                 var counterCell = diasDelMesN;
                 for (var j = (parseInt((this.Asignaciones[i]['FechaInicio'].split("T")[0]).split("-")[2]) - 1); j < diasDelMesN; j++) {
-                  console.log(j);
+                  //console.log(j);
                   x[j].style.backgroundColor = this.setColor(this.Asignaciones[i]['IdStatus']);
                   x[j].style.borderTop = 'solid';
                   x[j].style.borderBottom = 'solid';

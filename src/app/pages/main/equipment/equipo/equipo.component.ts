@@ -116,7 +116,7 @@ export class EquipoComponent implements OnInit {
       }
       Swal.showLoading();
       let url = this.setLinkGuardado();
-      console.log('url: ', url);
+      //console.log('url: ', url);
       this.dataRetriever.postData(url, JSON.stringify(equipment)).then(res => {
         if(res == "true") {
           Swal.fire({
@@ -141,7 +141,7 @@ export class EquipoComponent implements OnInit {
   getClientsList() {
     this.dataRetriever.getData(env.url + '/api/clientList').then(data => {
       this.listaEmpresas = data as JSON[];
-      console.log(this.listaEmpresas);
+      //console.log(this.listaEmpresas);
     })
 
   }
@@ -171,7 +171,7 @@ export class EquipoComponent implements OnInit {
   }
 
   translateTipoEquipo( tipo ) {
-    console.log(tipo);
+    //console.log(tipo);
     if( Number.isInteger(tipo) ) {
       switch(tipo) {
         case 0:

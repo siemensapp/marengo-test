@@ -24,9 +24,10 @@ import { AsignacionesEliminadasComponent } from './asignaciones-eliminadas/asign
 import { ExcelService } from 'src/app/shared/excel.service';
 import { TarifasComponent } from './tarifas/tarifas.component';
 import { EditAsignacionComponent } from './edit-asignacion/edit-asignacion.component';
+import { NuevoPMComponent } from './nuevo-pm/nuevo-pm.component';
 
 @NgModule({
-  declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent, EditarEspecialistaComponent, AsignacionComponent, EspecialistaComponent, CronogramaComponent, PerfilComponent, EstadisticasComponent, AsignacionesEliminadasComponent, TarifasComponent, EditAsignacionComponent],
+  declarations: [ContentFrameComponent, WorkersComponent, EsriMapComponent, EditarEspecialistaComponent, AsignacionComponent, EspecialistaComponent, CronogramaComponent, PerfilComponent, EstadisticasComponent, AsignacionesEliminadasComponent, TarifasComponent, EditAsignacionComponent, NuevoPMComponent],
   imports: [
     CommonModule,
     // Ngx Bootstrap

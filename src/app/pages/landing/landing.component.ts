@@ -18,7 +18,7 @@ export class LandingComponent implements OnInit{
   logout() {
     localStorage.removeItem('name');
     localStorage.removeItem('authToken');
-    console.log('Token removed ! ');
+    //console.log('Token removed ! ');
   }
 
   login() {
@@ -32,7 +32,7 @@ export class LandingComponent implements OnInit{
       else {
         Swal.fire({type: 'success', title: 'Exito!', showCancelButton: false, showConfirmButton: false,timer: 1500})
         .then(() => { 
-          console.log('Result: ', result);
+          //console.log('Result: ', result);
           localStorage.setItem('name', result['nombre']);
           localStorage.setItem('authToken', result['token']);
           this.router.navigate(['/main/field-service/workers']);            

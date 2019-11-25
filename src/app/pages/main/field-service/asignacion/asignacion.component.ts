@@ -32,6 +32,7 @@ export class AsignacionComponent implements OnInit {
     var datos9 = document.forms["formulario"].elements[8].value;
     var datos10 = document.forms["formulario"].elements[9].value;
     var datos11 = document.forms["formulario"].elements[10].value;
+    var datos12 = document.forms["formulario"].elements[11].value;
 
     //console.log(datos5);
 
@@ -82,7 +83,7 @@ export class AsignacionComponent implements OnInit {
     else{
       this.httpService.post(env.url+'/api/setAssignment', datos).toPromise()
                   .then((res) => {
-                    console.log(res);
+                    //console.log(res);
                     if(res == "true"){
                       Swal.fire(
                       'Asignacion Creada',
@@ -109,9 +110,9 @@ export class AsignacionComponent implements OnInit {
      this.httpService.post(env.url+'/api/sendMail',datos).toPromise()
                   .then((res) => {
                       if(res == "true"){
-                        console.log("mail sent");
+                        //console.log("mail sent");
                       }else{
-                        console.log("error mailing");
+                        //console.log("error mailing");
                       }
                   });
     }
@@ -120,6 +121,7 @@ export class AsignacionComponent implements OnInit {
   ResultadosEmpresas : JSON[];
   ResultadosField : JSON[];
   ResultadosStatus: JSON[];
+  ResultadosPM: JSON[];
 
   ngOnInit() {
     document.getElementById('fechaI').addEventListener("change", (event) => {
@@ -129,7 +131,7 @@ export class AsignacionComponent implements OnInit {
     this.DataRetriever.finalCoords.subscribe(finalCoords => {this.finalCoords = finalCoords
       var nombreS = document.getElementById('ubicacion').textContent;
       if(nombreS == ''){
-        console.log(nombreS);
+        //console.log(nombreS);
         document.getElementById('ubicacion').textContent = '*Buscar Ubicacion en el Mapa*';
       }
       else
@@ -140,6 +142,10 @@ export class AsignacionComponent implements OnInit {
       this.DataRetriever.getData(env.url+'/api/allWorkers').then(data => {
       this.ResultadosField = data as JSON[];
       })
+
+      this.DataRetriever.getData(env.url+'/api/PM').then(data => {
+        this.ResultadosPM = data as JSON[];
+        })
 
       this.DataRetriever.getData(env.url + '/api/clientList').then(data => {
         this.ResultadosEmpresas = data as JSON[];

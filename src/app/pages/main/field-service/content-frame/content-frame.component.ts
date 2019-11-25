@@ -21,7 +21,7 @@ export class ContentFrameComponent implements OnInit {
 
   // See app.component.html
   mapLoadedEvent(status: boolean) {
-    console.log('The map loaded: ' + status);
+    //console.log('The map loaded: ' + status);
   }
 
   
