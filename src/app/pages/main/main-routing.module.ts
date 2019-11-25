@@ -86,7 +86,7 @@ const routes: Routes = [
           {path: 'modificarTarifa', component: TarifasComponent, canActivate:[AuthGuard] },
           {path: 'nuevoUsuario', component: NewUserComponent, canActivate:[AuthGuard]},
           {path: 'cliente', component: ClienteComponent, canActivate:[AuthGuard]},
-          {path: 'newPM', component: NuevoPMComponent, canActivate:[AuthGuard]}
+          {path: 'PM', component: NuevoPMComponent, canActivate:[AuthGuard]}
         ]
       },
       {
