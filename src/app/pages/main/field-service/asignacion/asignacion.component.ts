@@ -34,24 +34,33 @@ export class AsignacionComponent implements OnInit {
     var datos11 = document.forms["formulario"].elements[10].value;
     var datos12 = document.forms["formulario"].elements[11].value;
 
-    //console.log(datos5);
+    //console.log(datos5)
+    //console.log(this.ResultadosPM);
+    var IdPM;
+    for (let i in this.ResultadosPM){
+      if (this.ResultadosPM[i]['NombrePM'] == datos4){
+        IdPM = this.ResultadosPM[i]['IdPM'];
+      }
+
+    }
 
     var datos = {"IdEspecialista" : datos3,
-                 "IdStatus" : datos4,
+                 "IdStatus" : datos5,
+                 "IdPM":IdPM,
                  "NombreCliente" : datos1,
                  "NombrePlanta" : datos2, 
                  "CiudadPlanta" : this.finalCoords[2],
-                 "PCFSV": datos5,
-                 "FechaInicio" : datos6,
-                 "FechaFin" : datos7,
+                 "PCFSV": datos6,
+                 "FechaInicio" : datos7,
+                 "FechaFin" : datos8,
                  "CoordenadasSitio" : this.finalCoords[0],
                  "NombreSitio" : this.infoUbicacion.split(",")[2],
-                 "NombreContacto" : datos8,
-                 "TelefonoContacto" : datos9,
-                 "EmailContacto" : datos10,
-                 "Descripcion" : datos11,
+                 "NombreContacto" : datos9,
+                 "TelefonoContacto" : datos10,
+                 "EmailContacto" : datos11,
+                 "Descripcion" : datos12
                 };
-    //console.log(datos);
+  
     if(this.infoUbicacion == ""){
       Swal.fire(
         'Debe elegir una ubicación para la asignación',
@@ -122,6 +131,7 @@ export class AsignacionComponent implements OnInit {
   ResultadosField : JSON[];
   ResultadosStatus: JSON[];
   ResultadosPM: JSON[];
+  
 
   ngOnInit() {
     document.getElementById('fechaI').addEventListener("change", (event) => {
