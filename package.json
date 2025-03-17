@@ -55,7 +55,7 @@
     "esri-loader": "^2.9.2",
     "file-saver": "^2.0.2",
     "json2csv": "^4.5.1",
-    "jspdf": "^1.5.3",
+    "jspdf": "^3.0.0",
     "ng-circle-progress": "^1.4.0",
     "ng2-charts": "^2.2.3",
     "ngx-bootstrap": "^3.1.1",
